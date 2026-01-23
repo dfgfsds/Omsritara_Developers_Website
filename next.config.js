@@ -10,6 +10,7 @@ const nextConfig = {
       "cdn.prod.website-files.com",
       "example.com", // 👈 add this
     ],
+    unoptimized: true,
   },
 };
 

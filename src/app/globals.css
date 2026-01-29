@@ -314,6 +314,7 @@ body {
   height: 100%;
   /* make each slide fill parent height */
 }
+
 .img_top_animation {
   animation: top-animation 3000ms forwards cubic-bezier(0.4, 0.98, 0.52, 0.99);
   opacity: 0;
@@ -413,17 +414,13 @@ body {
 
 .modal-sidebar-scroll-1 {
   position: fixed;
-  bottom: 10%;
+  bottom: 5%;
   padding: 10px;
   border-radius: 78px;
   transform: translateY(-65%);
   text-align: center;
   z-index: 10;
-  right: 0;
+  right: 10;
   left: auto;
   border-radius: 100%;
 }
-
-
-
-

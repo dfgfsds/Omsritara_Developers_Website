@@ -7,28 +7,29 @@ import { useEffect } from "react";
 const services = [
   {
     id: 1,
-    title: "Buy & Sell Properties",
+    title: "Multi Store Construction",
     image: "/assets/land/image-03.webp",
-    link: "/services-details",
+    //link: "/services-details",
   },
   {
     id: 2,
-    title: "Property Buying Consulting",
+    title: "Individual House Construction",
     image: "/assets/land/image-04.webp",
-    link: "/services-details",
+    //link: "/services-details",
   },
   {
     id: 3,
-    title: "Flats, Land & Farmhouse",
+    title: "Plotted Development",
     image: "/assets/land/image-01.webp",
-    link: "/services-details",
+    //link: "/services-details",
   },
   {
     id: 4,
-    title: "Licensing & Approvals",
+    title: "Buy/Sell Property",
     image: "/assets/land/image-02.webp",
-    link: "/services-details",
+    //link: "/services-details",
   },
+  /*
   {
     id: 5,
     title: "Commercial Leasing",
@@ -36,6 +37,7 @@ const services = [
       "https://cdn.prod.website-files.com/676e863e8c931682a197e8a2/684687bf92e867ed8283e099_how-to-get-out-of-a-commercial-lease-business-guide-2025.webp",
     link: "/services-details",
   },
+  */
 ];
 
 export default function ServicesSlider() {
@@ -81,7 +83,7 @@ export default function ServicesSlider() {
         <div ref={sliderRef} className="keen-slider">
           {services.map((service) => (
             <div key={service.id} className="keen-slider__slide">
-              <div className="shadow-md rounded-2xl overflow-hidden border border-gray-300 hover:shadow-xl transition">
+              <div className="rounded-2xl overflow-hidden border border-gray-300 transition">
                 <div className="relative w-full h-52 md:h-56 lg:h-60">
                   <Image
                     src={service.image}
@@ -92,7 +94,7 @@ export default function ServicesSlider() {
                 </div>
                 <div className="p-5 text-start">
                   <h4 className="text-lg md:text-xl mb-4 text-gray-900">
-                    <a href={service.link} className="hover:text-blue-600">
+                    <a className="hover:text-blue-600">
                       {service.title}
                     </a>
                   </h4>

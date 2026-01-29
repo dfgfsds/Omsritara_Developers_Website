@@ -81,11 +81,13 @@ const Footer = () => {
                 About Us
               </Link>
             </li>
+            {/*
             <li>
               <Link href="/properties" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
                 Properties
               </Link>
             </li>
+            */}
             <li>
               <Link href="blog" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
                 Blog
@@ -121,57 +123,59 @@ const Footer = () => {
           </div>
         </div>
       </div>
-<div className="modal-sidebar-scroll">
-  <ul className="list-none p-2 shadow-md rounded-l-md bg-[#9b0000]">
-    <li>
-      <a
-        href="https://www.facebook.com/profile.php?id=61574589130777"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
-      >
-        <Facebook className="w-6 h-6" />
-      </a>
-    </li>
-    <li>
-      <a
-        href="https://www.instagram.com/omsritara_developers/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
-      >
-        <Instagram className="w-6 h-6" />
-      </a>
-    </li>
-    <li>
-      <a
-        href="https://www.youtube.com/@omsritaradevelopers"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
-      >
-        <Youtube className="w-7 h-7" />
-      </a>
-    </li>
-  </ul>
-</div>
+      {/*
+      <div className="modal-sidebar-scroll">
+        <ul className="list-none p-2 shadow-md rounded-l-md bg-[#9b0000]">
+          <li>
+            <a
+              href="https://www.facebook.com/profile.php?id=61574589130777"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
+            >
+              <Facebook className="w-6 h-6" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/omsritara_developers/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
+            >
+              <Instagram className="w-6 h-6" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/@omsritaradevelopers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-10 h-10 items-center justify-center text-white transition duration-300 hover:opacity-80"
+            >
+              <Youtube className="w-7 h-7" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      */}
 
-  	<div className="modal-sidebar-scroll-1">
-  <ul>
-    <li className="text-center">
-      <a
-        href="tel:+917779958889"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#9b0000] hover:bg-red-700 text-white shadow-md"
-      >
-        <PhoneCall className="w-6 h-6" />
-      </a>
-    </li>
-  </ul>
-</div>
+      <div className="modal-sidebar-scroll-1">
+        <ul>
+          <li className="text-center">
+            <a
+              href="https://wa.me/917779958889"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#9b0000] hover:bg-red-700 text-white shadow-md"
+            >
+              <PhoneCall className="w-6 h-6" />
+            </a>
+          </li>
+        </ul>
+      </div>
 
-   
+
     </footer>
   );
 };

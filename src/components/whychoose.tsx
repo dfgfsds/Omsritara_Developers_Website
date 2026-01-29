@@ -62,12 +62,14 @@ export default function SuccessArea() {
               </h4>
 
               <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                We specialize in buying, selling, and consulting for residential,
-                commercial, and agricultural properties, including flats, farmhouses,
-                and land. Our services cover warehouse construction, licensing, and
-                CMDA/DTCP approvals, ensuring seamless and hassle-free transactions.
-                Trust us for expert guidance, legal assurance, and a smooth real estate
-                experience.
+                We are your all-in-one destination for premium real estate solutions.
+                From <strong>high-quality building construction</strong> and
+                architectural excellence to <strong>strategic plotted developments</strong> in
+                prime locations, we build with precision. Whether you are
+                <strong> buying your dream home or selling a high-value property</strong>,
+                we ensure legal transparency and market-leading returns.
+                Experience a seamless journey from raw land to a fully constructed reality
+                with Om Sritara Developers.
               </p>
 
               <div className="mt-6 flex justify-center lg:justify-start">

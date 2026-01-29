@@ -4,9 +4,27 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, X, Menu, ArrowUpRight } from "lucide-react";
+import { Search, X, Menu, ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
 import Logo from "../../public/assets/logo.png";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
+// ... inside your component
+<div className="flex items-center gap-4 text-white text-sm">
+  <div className="flex items-center gap-2">
+    <FaMapMarkerAlt size={14} />
+    <span>No. 46, Giri Road, T. Nagar, Chennai-600 017.</span>
+  </div>
+
+  <div className="flex items-center gap-2">
+    <FaPhoneAlt size={14} className="rotate-[90deg]" />
+    <span>+ 91 9202 299202</span>
+  </div>
+
+  <div className="flex items-center gap-2">
+    <FaEnvelope size={14} />
+    <span>ambitcrest777@gmail.com</span>
+  </div>
+</div>
 export default function Header() {
   const pathname = usePathname(); // Get current route
 
@@ -17,7 +35,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Properties", href: "/properties" },
+    //{ name: "Properties", href: "/properties" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -32,28 +50,46 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full border-b border-[#e4e4e4] bg-[#9b0000] fixed top-0 left-0 z-50">
-      <div className="mx-auto flex justify-between items-center px-5 md:px-10 py-4">
+    //<header className="w-full border-b border-[#e4e4e4] bg-[#9b0000] fixed top-0 left-0 z-50">
+    <header className="w-full bg-[#9b0000] fixed top-0 left-0 z-50">
+
+      <div className="mx-auto hidden md:flex justify-between items-center px-5 md:px-10 py-2 text-white text-[14px]">
+        <div className="flex items-center gap-2">
+          <FaMapMarkerAlt size={14} />
+          <span className="hidden sm:inline">Second Floor, North Side, 46 Giri Rd, Satyanurthy Nagar, T. Nagar, Chennai, Tamil Nadu, 600001</span>
+        </div>
+        <div className="flex items-center gap-4 md:gap-8">
+          <Link href="tel:+917779958889" className="flex items-center gap-2 hover:text-gray-300 transition">
+            <FaPhoneAlt size={14} />
+            <span className="hidden md:inline">+91 7779958889</span>
+          </Link>
+          <Link href="mailto:info@ftdigitalsolutions.in" className="flex items-center gap-2 hover:text-gray-300 transition">
+            <FaEnvelope size={14} />
+            <span className="hidden md:inline">info@ftdigitalsolutions.in</span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="mx-auto flex justify-between items-center px-5 md:px-10 py-3">
         {/* Logo */}
         <div className="relative z-50">
           <Link href="/" onClick={closeAll}>
-            <Image src={Logo} alt="Logo" width={190} height={60} className="relative z-50" />
+            <Image src={Logo} alt="Logo" width={160} height={60} className="relative z-50" />
           </Link>
         </div>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-10">
-          <ul className="flex gap-8 text-[16px] font-semibold uppercase text-gray-200">
+          <ul className="flex gap-8 text-[15px] font-semibold uppercase text-gray-200">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={closeAll}
-                  className={`transition ${
-                    isActive(link.href)
-                      ? "text-white border-b-2 border-yellow-500"
-                      : "hover:text-white"
-                  }`}
+                  className={`transition ${isActive(link.href)
+                    ? "text-white border-b-2 border-yellow-500"
+                    : "hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -73,7 +109,7 @@ export default function Header() {
             }}
             className="hidden md:block text-gray-200 text-xl"
           >
-            <Search className="w-7 h-7 my-auto font-extrabold" />
+            <Search className="w-6 h-6 my-auto font-extrabold" />
           </button>
 
           {/* CTA Button */}
@@ -83,8 +119,8 @@ export default function Header() {
             className="relative hidden sm:inline-flex items-center justify-center bg-yellow-500 text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
           >
             <span className="relative z-10">GET STARTED</span>
-            <span className="relative z-10 bg-[#9b0000] text-white rounded-full w-[40px] h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-              <ArrowUpRight className="w-7 h-7 font-extrabold" />
+            <span className="relative z-10 bg-[#9b0000] text-white rounded-full w-[36px] h-[36px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+              <ArrowUpRight className="w-6 h-6 font-extrabold" />
             </span>
             <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
           </Link>
@@ -96,7 +132,7 @@ export default function Header() {
               setIsSearchOpen(false);
               setIsMobileMenuOpen(false);
             }}
-            className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow"
+            className="hidden md:flex items-center justify-center w-11 h-11 rounded-full bg-white shadow"
           >
             <Menu className="text-gray-900 w-6 h-6" />
           </button>
@@ -197,11 +233,10 @@ export default function Header() {
                 <Link
                   href={link.href}
                   onClick={closeAll}
-                  className={`transition block ${
-                    isActive(link.href)
-                      ? "text-yellow-400"
-                      : "hover:text-gray-300"
-                  }`}
+                  className={`transition block ${isActive(link.href)
+                    ? "text-yellow-400"
+                    : "hover:text-gray-300"
+                    }`}
                 >
                   {link.name}
                 </Link>

@@ -53,18 +53,27 @@ const Counter = ({
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(0);
+  const videoList = [
+    "/assets/video1.mp4",
+    "/assets/video2.mp4",
+    "/assets/video3.mp4",
+    "/assets/video4.mp4"
+  ];
+
   return (
     <>
       {/* Banner Section */}
       <div
         className="banner__one"
         style={{
-          backgroundImage: "url('assets/banner-shape-home.webp')",
+          //backgroundImage: "url('assets/banner-shape-home.webp')",
           backgroundSize: "cover",
           width: "100%",
           // height: "800px",
         }}
       >
+        {/*
         <div className="max-w-7xl mx-auto">
           <div className="row">
             <div className="col-xl-12 px-4 md:px-8">
@@ -88,10 +97,28 @@ export default function Home() {
             </div>
           </div>
         </div>
+        */}
 
         {/* Video */}
-        <div className="banner__one-image">
-          <div className="video-container">
+        {/*
+        <div className="banner__one-image relative w-full h-[500px] md:h-[700px] overflow-hidden">
+          {videoList.map((src, index) => (
+            <video
+              key={src}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentVideo ? "opacity-100 z-10" : "opacity-0 z-0"
+                }`}
+              autoPlay
+              muted
+              playsInline
+              onEnded={() => setCurrentVideo((prev) => (prev + 1) % videoList.length)}
+              src={index === currentVideo ? src : undefined}
+            />
+          ))}
+          <div className="absolute inset-0 bg-black/30 z-20"></div>
+        </div>
+        */}
+        <div className="banner__one-image w-full h-[500px] md:h-[700px] overflow-hidden">
+          <div>
             <video
               className="w-full h-full object-cover"
               autoPlay
@@ -99,7 +126,7 @@ export default function Home() {
               loop
               playsInline
             >
-              <source src="/assets/video.mp4" type="video/mp4" />
+              <source src="/assets/vid.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -147,7 +174,7 @@ export default function Home() {
 
             {/* Right Image */}
             <div className="lg:col-span-7">
-              <div className="relative w-full h-[200px] md:h-[300px] lg:h-[450px]">
+              <div className="relative w-full h-auto">
                 <Image
                   src="/assets/Myans_Luxury_Villas_1.jpg"
                   alt="Luxury Villa"
@@ -161,31 +188,34 @@ export default function Home() {
 
           {/* Counters */}
           <div className="max-w-7xl">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mt-10 justify-between text-center md:text-start">
+            {/*<div className="grid grid-cols-2 md:grid-cols-4 gap-12 mt-10 justify-between text-center md:text-start">*/}
+            <div className="grid grid-cols-2 md:flex md:flex-row justify-evenly items-center gap-12 mt-10 text-center md:text-start">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={678} duration={3} />+
+                  <CountUp end={300} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Complete Projects</span>
               </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={120} duration={3} />+
+                  <CountUp end={30} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Team Members</span>
               </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={635} duration={3} />+
+                  <CountUp end={120} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Client Reviews</span>
               </div>
+              {/*
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
                   <CountUp end={89} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Winning Awards</span>
               </div>
+              */}
             </div>
           </div>
         </div>

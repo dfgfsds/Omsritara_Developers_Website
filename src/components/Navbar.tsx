@@ -36,6 +36,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     //{ name: "Properties", href: "/properties" },
+    //{ name: "Project", href: "/project" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -63,9 +64,9 @@ export default function Header() {
             <FaPhoneAlt size={14} />
             <span className="hidden md:inline">+91 7779958889</span>
           </Link>
-          <Link href="mailto:info@ftdigitalsolutions.in" className="flex items-center gap-2 hover:text-gray-300 transition">
+          <Link href="mailto:info@omsritaradevelopers.in" className="flex items-center gap-2 hover:text-gray-300 transition">
             <FaEnvelope size={14} />
-            <span className="hidden md:inline">info@ftdigitalsolutions.in</span>
+            <span className="hidden md:inline">info@omsritaradevelopers.in</span>
           </Link>
         </div>
       </div>
@@ -101,6 +102,7 @@ export default function Header() {
         {/* Right Side */}
         <div className="flex items-center gap-4">
           {/* Search */}
+          {/*
           <button
             onClick={() => {
               setIsSearchOpen(true);
@@ -111,8 +113,10 @@ export default function Header() {
           >
             <Search className="w-6 h-6 my-auto font-extrabold" />
           </button>
+          */}
 
           {/* CTA Button */}
+          {/*
           <Link
             href="/contact"
             onClick={closeAll}
@@ -124,6 +128,7 @@ export default function Header() {
             </span>
             <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
           </Link>
+          */}
 
           {/* Sidebar */}
           <button
@@ -132,7 +137,7 @@ export default function Header() {
               setIsSearchOpen(false);
               setIsMobileMenuOpen(false);
             }}
-            className="hidden md:flex items-center justify-center w-11 h-11 rounded-full bg-white shadow"
+            className="hidden md:flex items-center justify-center w-11 h-11 rounded-full bg-white shadow cursor-pointer"
           >
             <Menu className="text-gray-900 w-6 h-6" />
           </button>
@@ -178,7 +183,7 @@ export default function Header() {
         <div className="fixed top-0 right-0 w-96 max-w-full h-full bg-[#a50000] p-10 z-[9999] transition-transform duration-500">
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="absolute top-6 right-6 text-2xl bg-white w-10 h-10 rounded-full flex items-center justify-center"
+            className="absolute top-6 right-6 text-2xl bg-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
           >
             <X className="text-gray-900" />
           </button>

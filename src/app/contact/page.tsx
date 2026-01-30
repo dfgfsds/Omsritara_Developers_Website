@@ -79,7 +79,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 md:w-8 md:h-8 text-red-800 shrink-0" />
                 <p className="text-gray-700 font-medium text-sm md:text-base break-words">
                   <span className="text-lg md:text-xl text-gray-900 block mb-1">Email Address:</span>
-                  info@ftdigitalsolutions.in
+                  info@omsritaradevelopers.in
                 </p>
               </div>
 

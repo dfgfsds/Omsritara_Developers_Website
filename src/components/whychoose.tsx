@@ -47,21 +47,20 @@ const ProgressBar = ({
 
 export default function SuccessArea() {
   return (
-    <div className="success__area py-16">
+    <div className="success__area py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
-          {/* Left Content */}
-          <div className="lg:w-1/2">
-            <div className="success__area-title text-center lg:text-left">
+        <div className="flex items-center">
+          <div className="lg:w-full">
+            <div className="success__area-title text-center">
               <span className="text-xs sm:text-sm uppercase tracking-wide font-semibold border border-gray-300 px-4 py-1 rounded-full">
                 Why Choose Om Sritara Developers
               </span>
 
-              <h4 className="img_left_animation text-2xl sm:text-3xl font-medium my-6">
+              <h4 className="img_left_animation text-3xl md:text-4xl font-medium my-6">
                 Om Sritara Developers – Your Trusted Real Estate Partner
               </h4>
 
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+              <p className="text-gray-600 leading-relaxed text-lg">
                 We are your all-in-one destination for premium real estate solutions.
                 From <strong>high-quality building construction</strong> and
                 architectural excellence to <strong>strategic plotted developments</strong> in
@@ -72,14 +71,14 @@ export default function SuccessArea() {
                 with Om Sritara Developers.
               </p>
 
-              <div className="mt-6 flex justify-center lg:justify-start">
+              <div className="mt-6 flex justify-center">
                 <Link
                   href="/contact"
-                  className="relative max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
+                  className="relative max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 md:gap-4 group overflow-hidden"
                 >
-                  <span className="relative z-10">GET ADVICES</span>
-                  <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[40px] h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-                    <ArrowUpRight className="w-7 h-7 font-extrabold" />
+                  <span className="relative z-10 text-[14px] md:text-[16px]">GET ADVICES</span>
+                  <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[30px] h-[30px] md:w-[40px] md:h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                    <ArrowUpRight className="w-5 h-5 md:w-7 md:h-7 font-extrabold" />
                   </span>
                   <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
                 </Link>
@@ -87,7 +86,7 @@ export default function SuccessArea() {
             </div>
           </div>
 
-          {/* Right Content */}
+          {/*
           <div className="lg:w-1/2 w-full">
             <div className="success__area-right">
               <img
@@ -97,11 +96,11 @@ export default function SuccessArea() {
               />
 
               <div className="mt-8 space-y-6">
-                {/* <ProgressBar
+                <ProgressBar
                   title="Buy & Sell Properties"
                   value={89}
                   color="bg-yellow-400"
-                /> */}
+                />
                 <ProgressBar
                   title="Licensing & Approvals"
                   value={70}
@@ -115,6 +114,7 @@ export default function SuccessArea() {
               </div>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>

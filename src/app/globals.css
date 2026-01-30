@@ -424,3 +424,10 @@ body {
   left: auto;
   border-radius: 100%;
 }
+
+@media (max-width: 574px) {
+  .modal-sidebar-scroll-1 {
+    bottom: 30px;
+    right: 13px;
+  }
+}

@@ -117,32 +117,65 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/30 z-20"></div>
         </div>
         */}
-        <div className="banner__one-image w-full h-[500px] md:h-[700px] overflow-hidden">
-          <div>
-            <video
-              className="w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src="/assets/vid.mp4" type="video/mp4" />
-            </video>
-          </div>
+        <div className="banner__one-image relative w-full min-h-screen md:h-[700px] overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/assets/vid2.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
+      {/* About Section */}
+      <section className="bg-gray-50 py-10 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="text-left">
+              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-6">
+                About Omsritara Developer
+              </h2>
+              <p className="text-lg text-gray-600 mb-4">
+                Omsritara Developer is a trusted name in real estate, dedicated to
+                providing expert property solutions that cater to the unique needs
+                of our clients. With years of experience in property buying,
+                selling, and management, we ensure seamless and transparent services
+                for residential and commercial properties.
+              </p>
+              <p className="text-lg text-gray-600">
+                Our team of skilled professionals offers personalized consultation,
+                market insights, and end-to-end support, making property transactions
+                smooth and hassle-free. At Omsritara Developer, we combine innovation,
+                integrity, and commitment to deliver the best value for your
+                investment, helping you achieve your property goals with confidence.
+              </p>
+            </div>
+
+            <div className="relative h-[400px] w-full rounded-2xl overflow-hidden">
+              <Image
+                src="/assets/about-gallery1.png"
+                alt="About Omsritara Developer"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* <PropertySearch/> */}
       {/* Components */}
+
       <ServicesSlider />
       <SuccessArea />
 
-
-
-
-      <FeaturedProperties />
+      {/* <FeaturedProperties /> */}
       {/* <FeaturedPropertiesRent /> */}
       {/* <PropertyByType /> */}
+      {/*
       <section
         className="relative bg-cover bg-center bg-no-repeat h-[400px] md:h-[600px] flex items-center justify-center"
         style={{ backgroundImage: "url('assets/villa-menari-promo-banner.jpg')" }}
@@ -154,15 +187,15 @@ export default function Home() {
           >
             <Play size={40} strokeWidth={2.5} />
           </a>
-          {/* Pulse Effect */}
           <span className="absolute w-full h-full rounded-full border-4 border-red-500 animate-ping"></span>
         </div>
       </section>
-      <section className="py-16 md:py-0 mb-10 bg-white">
+      */}
+
+      <section className="py-0 mb-12 md:mb-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Top Row */}
+          {/*
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left Text */}
             <div className="lg:col-span-5 md:mt-10">
               <span className="text-xs sm:text-sm uppercase tracking-wide font-semibold border border-gray-300 px-4 py-1 mb-4 rounded-full">
                 Industry Certifications
@@ -172,7 +205,6 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Right Image */}
             <div className="lg:col-span-7">
               <div className="relative w-full h-auto">
                 <Image
@@ -185,14 +217,21 @@ export default function Home() {
               </div>
             </div>
           </div>
+          */}
 
           {/* Counters */}
           <div className="max-w-7xl">
             {/*<div className="grid grid-cols-2 md:grid-cols-4 gap-12 mt-10 justify-between text-center md:text-start">*/}
-            <div className="grid grid-cols-2 md:flex md:flex-row justify-evenly items-center gap-12 mt-10 text-center md:text-start">
+            <div className="grid grid-cols-2 md:flex md:flex-row justify-evenly items-center gap-12 text-center md:text-start">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={300} duration={3} />+
+                  <CountUp end={10} duration={3} />+
+                </h2>
+                <span className="block mt-2 text-gray-600">Years of Experience</span>
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                  <CountUp end={120} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Complete Projects</span>
               </div>
@@ -204,7 +243,7 @@ export default function Home() {
               </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={120} duration={3} />+
+                  <CountUp end={160} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Client Reviews</span>
               </div>
@@ -219,39 +258,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-      <ExperienceSection />
+      </section >
+
+      {/* <ExperienceSection /> */}
+
       {/* Appointment Modal */}
       <AppointmentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      <TestimonialsSection />
 
-      {/* About Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            About Omsritara Developer
-          </h2>
-          <p className="mt-4 py-8 text-lg text-gray-600 max-w-7xl mx-auto">
-            Omsritara Developer is a trusted name in real estate, dedicated to
-            providing expert property solutions that cater to the unique needs
-            of our clients. With years of experience in property buying,
-            selling, and management, we ensure seamless and transparent services
-            for residential and commercial properties. Our team of skilled
-            professionals offers personalized consultation, market insights, and
-            end-to-end support, making property transactions smooth and
-            hassle-free. At Omsritara Developer, we combine innovation,
-            integrity, and commitment to deliver the best value for your
-            investment, helping you achieve your property goals with confidence.
-          </p>
-        </div>
-      </section>
-
-
-
-
+      {/* <TestimonialsSection />*/}
     </>
   );
 }

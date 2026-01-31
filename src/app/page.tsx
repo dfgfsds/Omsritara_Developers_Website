@@ -53,13 +53,6 @@ const Counter = ({
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState(0);
-  const videoList = [
-    "/assets/video1.mp4",
-    "/assets/video2.mp4",
-    "/assets/video3.mp4",
-    "/assets/video4.mp4"
-  ];
 
   return (
     <>

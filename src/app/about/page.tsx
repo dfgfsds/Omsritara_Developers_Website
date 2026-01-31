@@ -34,10 +34,10 @@ export default function About() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative mt-20 bg-gray-50 py-16 overflow-hidden">
+      <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
         {/* Background Illustration */}
         <div
-          className="absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
+          className="hidden md:block absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
         ></div>
 
         {/* Heading */}
@@ -48,7 +48,7 @@ export default function About() {
           </h1>
 
           {/* Breadcrumb */}
-          <div className="mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
+          <div className="mt-3 md:mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
             <Link href="/" className="hover:text-[#9b0000] transition">
               Home
             </Link>
@@ -58,8 +58,8 @@ export default function About() {
         </div>
       </div>
 
-      <section className="about__section about__page--section section--padding px-6 md:px-0">
-        <div className="max-w-7xl mx-auto">
+      <section className="about__section about__page--section section--padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="about__inner d-flex">
             <div className="about__thumbnail ml-0 position-relative" data-aos="fade-up" data-aos-duration="1200"
               data-aos-delay="100">
@@ -98,7 +98,7 @@ export default function About() {
                 <h3 className=" text-3xl md:text-4xl font-bold text-start text-gray-900 mb-4">
                   <svg width="18" height="18" className="hidden md:block" viewBox="0 0 18 18"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_15_6)">
+                    <g clipPath="url(#clip0_15_6)">
                       <path
                         d="M9.00021 4.72925L2.5806 10.0215C2.5806 10.029 2.57872 10.04 2.57497 10.055C2.57129 10.0698 2.56934 10.0806 2.56934 10.0883V15.4473C2.56934 15.6408 2.64008 15.8085 2.78152 15.9497C2.92292 16.091 3.09037 16.1621 3.2839 16.1621H7.571V11.8747H10.4295V16.1622H14.7165C14.91 16.1622 15.0777 16.0913 15.2189 15.9497C15.3603 15.8086 15.4313 15.6408 15.4313 15.4473V10.0883C15.4313 10.0586 15.4272 10.0361 15.4201 10.0215L9.00021 4.72925Z"
                         fill="#F23B3B" />
@@ -136,7 +136,7 @@ export default function About() {
                   </h3>
                 </div>
               </div>
-              <div className="about__content--details flex flex-wrap items-center">
+              <div className="about__content--details flex flex-wrap items-center mt-5 md:mt-4">
                 <div className="about__experince">
                   <span className="about__experince--number">2</span>
                   <span className="about__experince--text">Years of Experince</span>
@@ -157,10 +157,10 @@ export default function About() {
 
                 </div>
               </div>
-              <div className="about__content--footer flex items-center ">
+              <div className="about__content--footer flex items-center">
                 <Link
                   href="/contact"
-                  className="relative max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
+                  className="relative mt-4 md:mt-3 max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
                 >
                   <span className="relative z-10">GET ADVICES</span>
                   <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[40px] h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
@@ -185,7 +185,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      <section className="py-12 px-6 lg:px-12">
+      <section className="pt-10 pb-5 md:pt-16 md:pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
           {/* Left Content */}
@@ -194,12 +194,12 @@ export default function About() {
               {/* <Home className="h-5 w-5" /> */}
               OUR BROKERAGE CHARGES
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 md:mt-4">
               Clear, Simple & Transparent Rates
             </h2>
 
             {/* Rental Transactions */}
-            <div className="mt-6">
+            <div className="mt-5 md:mt-6">
               <h3 className="text-xl font-semibold text-gray-800">Rental Transactions</h3>
               <p className="text-gray-600 text-sm italic">
                 Residential / Commercial / Industrial
@@ -218,7 +218,7 @@ export default function About() {
             </div>
 
             {/* Sale Transactions */}
-            <div className="mt-8">
+            <div className="mt-7 md:mt-6">
               <h3 className="text-xl font-semibold text-gray-800">Sale Transactions</h3>
               <p className="text-gray-600 text-sm italic">
                 City, Outside City & Industrial
@@ -273,8 +273,8 @@ export default function About() {
           </div>
         </div>
       </section>
-      <section className="py-16 px-6 lg:px-12 bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
 
           {/* Left Content */}
           <div>
@@ -287,7 +287,7 @@ export default function About() {
             </p>
 
             {/* Bullet Points */}
-            <ul className="mt-6 space-y-3">
+            <ul className="mt-5 space-y-3">
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
@@ -315,7 +315,7 @@ export default function About() {
             </ul>
 
             {/* Images */}
-            <div className="mt-5 relative w-full max-w-md">
+            <div className="mt-7 md:mt-6 relative w-full max-w-md">
               <div className="relative">
                 <Image
                   src="/assets/featured-grid1.jpg"
@@ -372,6 +372,7 @@ export default function About() {
                 name="description"
                 rows={4}
                 placeholder="Message"
+                required
                 className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 outline-none text-sm md:text-base"
               ></textarea>
 

@@ -52,7 +52,7 @@ export default function ContactPage() {
       </div>
 
       {/* Contact Section */}
-      <div className="py-12 md:py-16 bg-white">
+      <div className="py-10 md:py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Contact Info */}
@@ -67,7 +67,7 @@ export default function ContactPage() {
                 We’re here to assist you! Please reach out with any questions, feedback, or project inquiries.
               </p>
 
-              <div className="flex items-start sm:items-center gap-3">
+              <div className="flex items-center gap-3">
                 <Phone className="w-6 h-6 md:w-8 md:h-8 text-red-800 shrink-0" />
                 <p className="text-gray-700 font-medium text-sm md:text-base">
                   <span className="text-lg md:text-xl text-gray-900 block mb-1">Phone:</span>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="flex items-start sm:items-center gap-3">
+              <div className="flex items-center gap-3">
                 <Mail className="w-6 h-6 md:w-8 md:h-8 text-red-800 shrink-0" />
                 <p className="text-gray-700 font-medium text-sm md:text-base break-words">
                   <span className="text-lg md:text-xl text-gray-900 block mb-1">Email Address:</span>
@@ -83,7 +83,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-center gap-3">
                 <MapPin className="w-6 h-6 md:w-8 md:h-8 text-red-800 shrink-0" />
                 <p className="text-gray-700 font-medium text-sm md:text-base">
                   <span className="text-lg md:text-xl text-gray-900 block mb-1">Location:</span>
@@ -135,6 +135,7 @@ export default function ContactPage() {
                   name="description"
                   rows={4}
                   placeholder="Message"
+                  required
                   className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-yellow-500 outline-none text-sm md:text-base"
                 ></textarea>
 

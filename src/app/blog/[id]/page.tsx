@@ -37,14 +37,14 @@ const posts = [
       Praesent libero. Sed cursus ante dapibus diam.</p>
     `,
   },
-   {
+  {
     id: "3",
     title: "Flats, Land, Farmhouse, and Agriculture Deals",
     comments: 3,
     author: "Admin",
     image:
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
-       content: `
+    content: `
       <p>This is a detailed blog about buying and selling properties easily. 
       Learn the tips and tricks to make your property transactions smooth and profitable.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. 
@@ -58,7 +58,7 @@ const posts = [
     author: "Admin",
     image:
       "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80",
-       content: `
+    content: `
       <p>This is a detailed blog about buying and selling properties easily. 
       Learn the tips and tricks to make your property transactions smooth and profitable.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. 
@@ -87,9 +87,9 @@ export default function BlogDetailPage() {
 
   return (
     <>
-        <div className="relative mt-20 bg-gray-50 py-16 overflow-hidden">
+      <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
         <div
-          className="absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
+          className="hidden md:block absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
         ></div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
@@ -97,7 +97,7 @@ export default function BlogDetailPage() {
             <span className="text-[#9b0000]">Blog Details </span>
           </h1>
 
-          <div className="mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
+          <div className="mt-3 md:mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
             <Link href="/" className="hover:text-[#9b0000] transition">
               Home
             </Link>
@@ -107,56 +107,56 @@ export default function BlogDetailPage() {
         </div>
       </div>
 
-    <div className="max-w-7xl mx-auto px-4 py-16">
-        
-      {/* Breadcrumb */}
-      <div className="text-sm text-gray-600 mb-6 flex gap-2 items-center">
-        <Link href="/" className="hover:text-red-800">Home</Link>
-        <span>&gt;</span>
-        <Link href="/blog" className="hover:text-red-800">Blog</Link>
-        <span>&gt;</span>
-        <span className="text-gray-800 font-medium">{post.title}</span>
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
 
-      {/* Blog Title */}
-      <h1 className="text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
+        {/* Breadcrumb */}
+        <div className="text-sm text-gray-600 mb-5 md:mb-6 flex gap-2 items-center">
+          <Link href="/" className="hover:text-red-800">Home</Link>
+          <span>&gt;</span>
+          <Link href="/blog" className="hover:text-red-800">Blog</Link>
+          <span>&gt;</span>
+          <span className="text-gray-800 font-medium">{post.title}</span>
+        </div>
 
-      {/* Author & Comments */}
-      <div className="flex items-center gap-6 text-gray-500 mb-8 text-sm sm:text-base">
-        <span className="flex items-center gap-1">
-          <User size={16} /> {post.author}
-        </span>
-        {/* <span className="flex items-center gap-1">
+        {/* Blog Title */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-5">{post.title}</h1>
+
+        {/* Author & Comments */}
+        <div className="flex items-center gap-6 text-gray-500 mb-5 md:mb-6 text-sm sm:text-base">
+          <span className="flex items-center gap-1">
+            <User size={16} /> {post.author}
+          </span>
+          {/* <span className="flex items-center gap-1">
           <MessageSquare size={16} /> {post.comments} Comments
         </span> */}
-      </div>
+        </div>
 
-      {/* Image */}
-      <div className="relative w-full h-80 mb-8">
-        <Image
-          src={post.image}
-          alt={post.title}
-          fill
-          className="object-cover rounded-lg"
-        />
-      </div>
+        {/* Image */}
+        <div className="relative w-full h-80 mb-6 md:mb-7">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover rounded-lg"
+          />
+        </div>
 
-      {/* Content */}
-      <div
-        className="prose max-w-none text-gray-700"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      ></div>
+        {/* Content */}
+        <div
+          className="prose max-w-none text-gray-700"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        ></div>
 
-      {/* Back Button */}
-      <div className="mt-12">
-        <Link
-          href="/blog"
-          className="inline-block px-6 py-2 bg-red-800 text-white rounded hover:bg-red-700 transition"
-        >
-          Back to Blog
-        </Link>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-6">
+          <Link
+            href="/blog"
+            className="inline-block px-6 py-2 bg-red-800 text-white rounded hover:bg-red-700 transition"
+          >
+            Back to Blog
+          </Link>
+        </div>
       </div>
-    </div>
-        </>
+    </>
   );
 }

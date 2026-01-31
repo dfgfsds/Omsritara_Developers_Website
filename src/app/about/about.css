@@ -96,7 +96,7 @@
 }
 
 .about__section {
-  padding: 80px 0;
+  padding: 64px 0;
   background-color: #f8f8f8;
 }
 
@@ -120,7 +120,7 @@
 .about__thumbnail {
   flex: 1;
   position: relative;
-   align-items: start;
+  align-items: start;
 }
 
 .about__thumbnail img {
@@ -155,8 +155,9 @@
   font-size: 28px;
   color: #333;
   margin-bottom: 15px;
-  @media (max-width: 450px){
-    text-align:start ;
+
+  @media (max-width: 450px) {
+    text-align: start;
   }
 }
 
@@ -164,8 +165,9 @@
   font-size: 16px;
   color: #666;
   line-height: 1.5;
-  @media (max-width: 450px){
-    text-align:start ;
+
+  @media (max-width: 450px) {
+    text-align: start;
   }
 }
 
@@ -220,7 +222,7 @@
 
 @media (max-width: 768px) {
   .about__section {
-    padding: 50px 18px;
+    padding: 20px 0px 40px;
   }
 
   .section__heading h2 {
@@ -259,12 +261,12 @@ a {
 }
 
 .section__heading--subtitle {
-    font-size: 1.4rem;
-    line-height: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    color: var(--color-hover);
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: var(--color-hover);
 }
 
 .about__experince--number {
@@ -294,6 +296,12 @@ a {
 
 .about__content--details {
   gap: 3rem;
+}
+
+@media(max-width: 600px) {
+  .about__content--details {
+    gap: 1.5rem;
+  }
 }
 
 .categories__section.categories__bg .categories__box {
@@ -404,11 +412,10 @@ a {
   text-align: start;
 }
 
-.section__heading--subtitle{
-  @media(max-width: 450px){
+.section__heading--subtitle {
+  @media(max-width: 450px) {
     text-align: start;
     font-size: 20px;
 
   }
 }
-

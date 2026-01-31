@@ -46,9 +46,9 @@ export default function BlogPage() {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative mt-20 bg-gray-50 py-16 overflow-hidden">
+      <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
         <div
-          className="absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
+          className="hidden md:block absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
         ></div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
@@ -56,7 +56,7 @@ export default function BlogPage() {
             <span className="text-[#9b0000]">Blog </span>
           </h1>
 
-          <div className="mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
+          <div className="mt-3 md:mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
             <Link href="/" className="hover:text-[#9b0000] transition">
               Home
             </Link>
@@ -66,7 +66,7 @@ export default function BlogPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-8">
           {posts.map((post) => (
             <div

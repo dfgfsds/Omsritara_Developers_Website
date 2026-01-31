@@ -65,9 +65,14 @@ const Footer = () => {
               Second Floor, North Side, 46 Giri Rd, Satyamurthy Nagar, T. Nagar, Chennai, Tamil Nadu, 600001.
             </a>
           </h6>
-          <h4>
+          <h4 className="mb-2">
             <a href="tel:+91000000000" className="text-yellow-600 text-xl underline">
               +91 7779958889
+            </a>
+          </h4>
+          <h4>
+            <a href="mailto:info@omsritaradevelopers.in" className="text-yellow-600 text-xl underline">
+              info@omsritaradevelopers.in
             </a>
           </h4>
         </div>

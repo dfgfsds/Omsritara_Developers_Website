@@ -1,36 +1,23 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { services, Service } from "@/data/services";
+import BackButton from "@/components/BackButton";
 
-export default function ServiceDetailPage() {
-    const params = useParams();
-    const router = useRouter();
-    const [service, setService] = useState<Service | null>(null);
+// Generate static params for all service pages at build time
+export async function generateStaticParams() {
+    return services.map((service) => ({
+        id: service.id.toString(),
+    }));
+}
 
-    useEffect(() => {
-        const id = Number(params.id);
-        const found = services.find((s) => s.id === id);
-        if (!found) {
-            router.push("/");
-        } else {
-            setService(found);
-        }
-    }, [params.id, router]);
+export default async function ServiceDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id: paramId } = await params;
+    const id = Number(paramId);
+    const service = services.find((s) => s.id === id);
 
     if (!service) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] md:min-h-screen bg-white">
-                <Loader2 className="w-12 h-12 text-[#9b0000] animate-spin mb-4" />
-                <div className="text-lg font-semibold text-gray-700 animate-pulse">
-                    Loading Service Details...
-                </div>
-            </div>
-        );
+        notFound();
     }
 
     return (
@@ -75,12 +62,7 @@ export default function ServiceDetailPage() {
                 ></div>
 
                 <div className="mt-5 md:mt-6">
-                    <button
-                        onClick={() => router.back()}
-                        className="inline-block px-6 py-2 bg-red-800 text-white rounded hover:bg-red-700 transition cursor-pointer"
-                    >
-                        Back
-                    </button>
+                    <BackButton />
                 </div>
             </div>
         </>

@@ -18,6 +18,23 @@ body {
   padding: 0 !important;
 }
 
+/* Hide scrollbar but keep functionality */
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+  /* Chrome, Safari and Opera */
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
 
 .banner__one {
 

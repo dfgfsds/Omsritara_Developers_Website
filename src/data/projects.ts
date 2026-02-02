@@ -143,7 +143,7 @@ export const projects: Project[] = [
     },
     {
         id: "heritage-villas-mahabalipuram",
-        name: "Heritage Villas - Mahabalipuram",
+        name: "Heritage Villas",
         category: "ongoing",
         type: "Villa",
         location: "Mahabalipuram, Chennai",

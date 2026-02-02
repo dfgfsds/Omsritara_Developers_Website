@@ -1,11 +1,8 @@
-// app/blog/[id]/page.tsx
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import Image from "next/image";
-import { User, MessageSquare } from "lucide-react";
+import { User } from "lucide-react";
 import Link from "next/link";
+import BackButton from "@/components/BackButton";
 
 // Example blog posts (you can replace with API fetch)
 const posts = [
@@ -67,23 +64,20 @@ const posts = [
   },
 ];
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const [post, setPost] = useState<any>(null);
+// Generate static params for all blog pages at build time
+export async function generateStaticParams() {
+  return posts.map((post) => ({
+    id: post.id,
+  }));
+}
 
-  useEffect(() => {
-    // Find post by ID
-    const found = posts.find((p) => p.id === params.id);
-    if (!found) {
-      // Redirect to blog list if not found
-      router.push("/blog");
-    } else {
-      setPost(found);
-    }
-  }, [params.id]);
+export default async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const post = posts.find((p) => p.id === id);
 
-  if (!post) return <div className="text-center mt-20">Loading...</div>;
+  if (!post) {
+    notFound();
+  }
 
   return (
     <>
@@ -149,12 +143,7 @@ export default function BlogDetailPage() {
 
         {/* Back Button */}
         <div className="mt-5 md:mt-6">
-          <Link
-            href="/blog"
-            className="inline-block px-6 py-2 bg-red-800 text-white rounded hover:bg-red-700 transition"
-          >
-            Back to Blog
-          </Link>
+          <BackButton />
         </div>
       </div>
     </>

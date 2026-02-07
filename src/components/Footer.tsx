@@ -1,6 +1,9 @@
 
+"use client";
+
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import Image from "next/image";
 import Logo from '../../public/assets/logo.png'
 import Link from "next/link";
@@ -9,10 +12,20 @@ import { Facebook, Instagram, Youtube, PhoneCall } from "lucide-react";
 
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
+  const getLinkClass = (path: string) => {
+    return isActive(path)
+      ? "text-yellow-400 text-lg hover:text-yellow-500 transition-colors"
+      : "text-gray-100 text-lg hover:text-yellow-400 transition-colors";
+  };
+
   return (
     <footer className="bg-[#9b0000] overflow-hidden">
       {/* CTA Section */}
-      <div className="py-12 sm:py-16 border-b border-gray-700">
+      <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-gray-400">
         <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6">
 
           {/* Text */}
@@ -26,7 +39,7 @@ const Footer = () => {
           <div className="w-full lg:w-1/3 flex justify-center lg:justify-end">
             <a
               href="/contact"
-              className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 bg-yellow-500 text-[#990106] rounded-full text-4xl sm:text-5xl transition-transform duration-300 group-hover:rotate-45"
+              className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-yellow-500 text-[#990106] rounded-full text-4xl sm:text-5xl transition-transform duration-300 group-hover:rotate-45"
             >
               <ArrowRight size={36} />
             </a>
@@ -36,7 +49,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Widgets */}
-      <div className="pt-24 pb-32 px-4 container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="pt-14 pb-9 md:py-20 px-4 sm:px-6 lg:px-8 container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-0 gap-y-5 md:gap-x-8 md:gap-y-0">
         {/* Logo Widget */}
         <div className="flex flex-col">
           <Link href="/" className="mb-6">
@@ -47,74 +60,92 @@ const Footer = () => {
               height={50}
             />
           </Link>
-          <h5 className="text-white text-xl  lg:text-2xl font-normal">
-            We’re Solutions for all construction
-          </h5>
+          <p className="text-gray-100 text-lg leading-relaxed">
+            Omsritara Developer is a trusted name in construction, dedicated to providing expert property solutions that cater to the unique needs of our clients.
+          </p>
+        </div>
+
+        {/* Quick Links Widget */}
+        <div className="flex justify-start md:justify-center">
+          <div className="flex flex-col sm:mt-0 mt-8">
+            <h4 className="text-white text-xl mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className={getLinkClass("/")}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className={getLinkClass("/about")}>
+                  About Us
+                </Link>
+              </li>
+              {/*
+              <li>
+                <Link href="/properties" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
+                  Properties
+                </Link>
+              </li>
+              */}
+              <li>
+                <Link href="/project" className={getLinkClass("/project")}>
+                  Project
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className={getLinkClass("/blog")}>
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className={getLinkClass("/contact")}>
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Address Widget */}
         <div className="flex flex-col sm:mt-0 mt-8">
           <h4 className="text-white text-2xl mb-4">Address</h4>
-          <h6 className="text-gray-100 text-lg mb-2">
+
+          <div className="flex items-start gap-3 mb-3">
+            <MapPin className="text-yellow-500 w-6 h-6 mt-1 shrink-0" />
             <a
               href="https://www.google.com/maps"
-              className="hover:text-yellow-600 transition-colors"
+              className="text-gray-100 text-lg hover:text-yellow-500 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
               Second Floor, North Side, 46 Giri Rd, Satyamurthy Nagar, T. Nagar, Chennai, Tamil Nadu, 600001.
             </a>
-          </h6>
-          <h4 className="mb-2">
-            <a href="tel:+91000000000" className="text-yellow-600 text-xl underline">
+          </div>
+
+          <div className="flex items-center gap-3 mb-3">
+            <Phone className="text-yellow-500 w-5 h-5 shrink-0" />
+            <a href="tel:+917779958889" className="text-gray-100 text-lg hover:text-yellow-500 transition-colors">
               +91 7779958889
             </a>
-          </h4>
-          <h4>
-            <a href="mailto:info@omsritaradevelopers.in" className="text-yellow-600 text-xl underline">
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Mail className="text-yellow-500 w-5 h-5 shrink-0" />
+            <a href="mailto:info@omsritaradevelopers.in" className="text-gray-100 text-lg hover:text-yellow-500 transition-colors">
               info@omsritaradevelopers.in
             </a>
-          </h4>
-        </div>
-
-        {/* Quick Links Widget */}
-        <div className="flex flex-col sm:mt-0 mt-8">
-          <h4 className="text-white text-2xl mb-4">Quick Links</h4>
-          <ul className="space-y-2">
-            <li>
-              <Link href="about" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
-                About Us
-              </Link>
-            </li>
-            {/*
-            <li>
-              <Link href="/properties" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
-                Properties
-              </Link>
-            </li>
-            */}
-            <li>
-              <Link href="blog" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="contact" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
-                Contact Us
-              </Link>
-            </li>
-          </ul>
+          </div>
         </div>
 
         {/* Empty Widget */}
-        <div className="sm:mt-0 mt-8"></div>
+        <div className="sm:mt-0"></div>
       </div>
 
       {/* Copyright Area */}
-      <div className="bg-[#a80208] py-6">
+      <div className="bg-[#9b0000] border-t border-gray-400 pt-6 pb-3 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto flex flex-col items-center justify-center text-center">
           <p className="text-gray-100 text-sm">
-            ©2025 Omsritara developers | All rights Reserved | Designed by{" "}
+            ©2026 Omsritara developers | All rights Reserved | Designed by{" "}
             <a
               href="https://ftdigitalsolutions.in"
               target="_blank"
@@ -172,15 +203,13 @@ const Footer = () => {
               href="https://wa.me/917779958889"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#9b0000] hover:bg-red-700 text-white shadow-md"
+              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-700 text-white shadow-md"
             >
               <PhoneCall className="w-6 h-6" />
             </a>
           </li>
         </ul>
       </div>
-
-
     </footer>
   );
 };

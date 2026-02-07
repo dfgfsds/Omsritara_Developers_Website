@@ -8,7 +8,7 @@ import Link from "next/link";
 const posts = [
   {
     id: "1",
-    title: "Buy and Sell Properties Made Easy",
+    title: "Liaisoning and Approvals – Expert Guidance by Omsritara Developers",
     comments: 3,
     author: "Admin",
     image:
@@ -16,7 +16,7 @@ const posts = [
   },
   {
     id: "2",
-    title: "Expert Property Buying Consulting",
+    title: "Buying and Selling Properties – Trusted Real Estate Solutions by Omsritara Developers",
     comments: 3,
     author: "Admin",
     image:
@@ -24,7 +24,7 @@ const posts = [
   },
   {
     id: "3",
-    title: "Flats, Land, Farmhouse, and Agriculture Deals",
+    title: "Construction Services by Omsritara Developers – Building Quality That Lasts",
     comments: 3,
     author: "Admin",
     image:
@@ -32,7 +32,7 @@ const posts = [
   },
   {
     id: "4",
-    title: "Licensing Work & Approvals",
+    title: "Plotted Development Services by Omsritara Developers – Smart Land Investments Made Secure",
     comments: 3,
     author: "Admin",
     image:
@@ -48,7 +48,7 @@ export default function BlogPage() {
       {/* Hero Section */}
       <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
         <div
-          className="hidden md:block absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
+          className="hidden absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
         ></div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">

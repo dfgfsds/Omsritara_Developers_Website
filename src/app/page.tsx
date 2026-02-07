@@ -10,6 +10,7 @@ import FeaturedPropertiesRent from "@/components/FeaturedPropertiesRent";
 import PropertyByType from "@/components/propertyByType";
 import PropertySearch from "@/components/PropertySearch";
 import ServicesSlider from "@/components/ServicesSlider";
+import LatestProperties from "@/components/LatestProperties";
 import { useEffect, useState } from "react";
 import SuccessArea from "@/components/whychoose";
 import ExperienceSection from "@/components/ExperienceSection";
@@ -124,36 +125,73 @@ export default function Home() {
       </div>
 
       {/* About Section */}
-      <section className="bg-gray-50 py-10 md:py-16">
+      <section className="relative overflow-hidden py-10 md:py-16 bg-white">
+        <div className="absolute bottom-0 left-0">
+          <img src="https://html.themehour.net/piller/demo/assets/img/icon/about-2-shape.png" alt="shape"
+            className="w-32 md:w-40" />
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="text-left">
-              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-6">
-                About Omsritara Developer
-              </h2>
-              <p className="text-lg text-gray-600 mb-4">
-                Omsritara Developer is a trusted name in real estate, dedicated to
-                providing expert property solutions that cater to the unique needs
-                of our clients. With years of experience in property buying,
-                selling, and management, we ensure seamless and transparent services
-                for residential and commercial properties.
-              </p>
-              <p className="text-lg text-gray-600">
-                Our team of skilled professionals offers personalized consultation,
-                market insights, and end-to-end support, making property transactions
-                smooth and hassle-free. At Omsritara Developer, we combine innovation,
-                integrity, and commitment to deliver the best value for your
-                investment, helping you achieve your property goals with confidence.
-              </p>
+          <div className="grid lg:grid-cols-12 gap-x-12 gap-y-8 items-center">
+            <div className="lg:col-span-6 relative flex flex-col md:flex-row gap-6 h-full self-stretch">
+              <div className="flex flex-col md:text-end gap-4 z-10 flex-1">
+                <div className="rounded-2xl md:w-44 overflow-hidden flex-1">
+                  <img src="https://html.themehour.net/piller/demo/assets/img/about/about-1-left-1.jpg" alt="Image"
+                    className="w-full h-full object-cover rounded-2xl" />
+                </div>
+
+                <div className="w-32 h-32 md:w-44 md:h-44 ml-auto overflow-hidden rounded-2xl hidden md:block flex-1">
+                  <img src="https://html.themehour.net/piller/demo/assets/img/about/about-1-left-2.jpg" alt="Image"
+                    className="w-full h-full object-cover" />
+                </div>
+              </div>
+
+              <div className="relative z-10 mt-4 md:mt-0 flex-1 hidden md:block">
+                <img src="https://html.themehour.net/piller/demo/assets/img/about/about-1-middle.jpg" alt="Image"
+                  className="w-full h-full object-cover tilt-active rounded-2xl" />
+              </div>
+
+              <div className="flex flex-col gap-4 justify-end z-10 mt-4 md:mt-0 hidden md:flex flex-1">
+                <div className="w-32 h-32 md:w-44 md:h-44 overflow-hidden rounded-2xl flex-1">
+                  <img src="https://html.themehour.net/piller/demo/assets/img/about/about-1-right-1.jpg" alt="Image"
+                    className="w-full h-full object-cover" />
+                </div>
+                <div className="overflow-hidden rounded-2xl h-32 md:h-44 flex-1">
+                  <img src="https://html.themehour.net/piller/demo/assets/img/about/about-1-right-2.jpg" alt="Image"
+                    className="w-full h-full object-cover" />
+                </div>
+              </div>
             </div>
 
-            <div className="relative h-[400px] w-full rounded-2xl overflow-hidden">
-              <Image
-                src="/assets/about-gallery1.png"
-                alt="About Omsritara Developer"
-                fill
-                className="object-cover"
-              />
+            <div className="lg:col-span-6 space-y-6 z-10 mt-0 text-center lg:text-left">
+              <div className="space-y-4">
+                <span className="text-xs sm:text-sm uppercase tracking-wide font-semibold border border-gray-300 px-4 py-1 rounded-full inline-block">
+                  About Us
+                </span>
+                <h4 className="text-3xl md:text-4xl font-medium">
+                  Your Trusted Partner in Real Estate & Property Solutions
+                </h4>
+                <p className="text-gray-600 leading-relaxed text-lg text-left md:text-center lg:text-left">
+                  Omsritara Developer is a premier real estate company offering expert solutions in property buying, selling, construction, plotted development, and approvals. With years of experience, we provide seamless, transparent, and client-focused services tailored for property owners, investors, and developers.
+                </p>
+                <p className="text-gray-600 leading-relaxed text-lg text-left md:text-center lg:text-left">
+                  We guide clients in buying and selling properties with accurate market insights and personalized support. Our construction projects are delivered on time with quality and safety in mind. We also develop well-planned plots with modern infrastructure and handle all regulatory approvals, ensuring hassle-free compliance.
+                </p>
+              </div>
+
+
+              <div className="flex flex-row items-center justify-center lg:justify-start sm:gap-6 mt-0 gap-4">
+                <Link
+                  href="/about"
+                  className="relative max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 md:gap-4 group overflow-hidden"
+                >
+                  <span className="relative z-10 text-[14px] md:text-[16px]">More About Us</span>
+                  <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[30px] h-[30px] md:w-[40px] md:h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                    <ArrowUpRight className="w-5 h-5 md:w-7 md:h-7 font-extrabold" />
+                  </span>
+                  <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -162,12 +200,14 @@ export default function Home() {
       {/* <PropertySearch/> */}
       {/* Components */}
 
+      <LatestProperties />
       <ServicesSlider />
       <SuccessArea />
 
       {/* <FeaturedProperties /> */}
       {/* <FeaturedPropertiesRent /> */}
       {/* <PropertyByType /> */}
+
       {/*
       <section
         className="relative bg-cover bg-center bg-no-repeat h-[400px] md:h-[600px] flex items-center justify-center"

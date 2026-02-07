@@ -37,7 +37,7 @@ export default function About() {
       <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
         {/* Background Illustration */}
         <div
-          className="hidden md:block absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
+          className="hidden absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
         ></div>
 
         {/* Heading */}
@@ -112,11 +112,9 @@ export default function About() {
                       </clipPath>
                     </defs>
                   </svg>
-                  Trusted Real Estate Experts</h3>
-                <h2 className="section__heading--title">Building Your Dream Spaces</h2>
-                <p className="section__heading--desc">Om Sri Tara Developers is your trusted partner in real estate,
-                  specializing in property buying, selling, consulting, and licensing. We provide expert
-                  guidance for CMDA and DTCP-approved projects, ensuring a seamless experience.</p>
+                  Trusted Real Estate </h3>
+                <h2 className="section__heading--title">Delivering Excellence in Every Development</h2>
+                <p className="section__heading--desc">Omsritara Developers is a professionally managed real estate and infrastructure development firm providing comprehensive solutions in property buying and selling, construction, plotted development, and statutory liaisoning & approvals. We are committed to delivering legally compliant, strategically planned, and value-oriented real estate solutions.</p>
               </div>
               <div className="about__content--info flex">
                 <div className="about__content--info__list flex items-center">
@@ -195,52 +193,51 @@ export default function About() {
               OUR BROKERAGE CHARGES
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 md:mt-4">
-              Clear, Simple & Transparent Rates
+              Clear, Transparent & Structured Charges
             </h2>
 
             {/* Rental Transactions */}
             <div className="mt-5 md:mt-6">
-              <h3 className="text-xl font-semibold text-gray-800">Rental Transactions</h3>
+              <h3 className="text-xl font-semibold text-gray-800">Buying & Selling Transactions</h3>
               <p className="text-gray-600 text-sm italic">
-                Residential / Commercial / Industrial
+                Property Buying, Selling & Investment Advisory
               </p>
               <ul className="mt-4 space-y-2">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>One month rent each from both landlord & tenant</span>
+                  <span>Professional advisory and transaction support</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>Lease renewal: 15 days commission</span>
+                  <span>Documentation and registration assistance</span>
                 </li>
-                <li className="text-sm text-gray-500">* GST @18% extra. Conditions apply</li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
+                  <span>Legal verification and compliance checks</span>
+                </li>
               </ul>
             </div>
 
             {/* Sale Transactions */}
             <div className="mt-7 md:mt-6">
-              <h3 className="text-xl font-semibold text-gray-800">Sale Transactions</h3>
+              <h3 className="text-xl font-semibold text-gray-800">Construction & Development Services</h3>
               <p className="text-gray-600 text-sm italic">
-                City, Outside City & Industrial
+                Construction, Plotted Development & Approvals
               </p>
               <ul className="mt-4 space-y-2">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>2% – Within city limits (each party)</span>
+                  <span>Detailed project estimation</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>3% – Outside city (each party)</span>
+                  <span>Quality-controlled execution</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>4% – Industrial / Agricultural land (outside city)</span>
+                  <span>Structured milestone-based delivery</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>2% – Joint venture (developer & owner)</span>
-                </li>
-                <li className="text-sm text-gray-500">* GST @18% extra. Conditions apply</li>
+                <li className="text-sm text-gray-500">* All statutory taxes and government charges applicable as per prevailing regulations.</li>
               </ul>
             </div>
           </div>
@@ -282,8 +279,7 @@ export default function About() {
               How We Work
             </h2>
             <p className="text-gray-600 mt-4">
-              Our services in <span className="font-semibold">Rental & Sale Transactions</span>
-              are designed to make your real estate journey seamless and transparent.
+              Our end-to-end construction, property development, and transaction services are structured to deliver clarity, compliance, and smooth execution at every stage of your project.
             </p>
 
             {/* Bullet Points */}
@@ -291,25 +287,25 @@ export default function About() {
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
-                  <strong>Identify:</strong> Find tenants, buyers, or suitable properties.
+                  <strong>Requirement Assessment:</strong> Understanding client objectives and feasibility.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
-                  <strong>Negotiate:</strong> Assist in lease or sale agreement discussions.
+                  <strong>Planning & Approvals:</strong> Design development and statutory compliance.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
-                  <strong>Document:</strong> Prepare Lease Deeds & handle legal formalities.
+                  <strong>Execution:</strong> Controlled construction and development management.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
-                  <strong>Advise:</strong> Provide market insights & property guidance.
+                  <strong> Handover:</strong> Timely delivery with complete documentation.
                 </span>
               </li>
             </ul>

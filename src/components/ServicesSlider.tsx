@@ -3,41 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { services } from "@/data/services";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function ServicesSlider() {
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 800,
-    cssEase: "cubic-bezier(0.45, 0.05, 0.55, 0.95)",
-    pauseOnHover: true,
-    arrows: false,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
-  };
-
   return (
     <section className="pb-10 md:pb-16 bg-gray-100 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,13 +21,39 @@ export default function ServicesSlider() {
           </h2>
         </div>
 
-        {/* Slider */}
+        {/* Swiper Slider */}
         <div className="w-full">
-          <Slider {...settings} className="service-slider">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={800}
+            loop={true}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+            }}
+            className="services-swiper"
+          >
             {services.map((service) => {
               const IconComponent = service.icon;
               return (
-                <div key={service.id} className="px-3">
+                <SwiperSlide key={service.id}>
                   <div className="bg-white rounded-[20px] p-6 h-full">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="w-9 h-9 rounded-lg bg-transparent flex items-center justify-center flex-shrink-0">
@@ -87,12 +84,11 @@ export default function ServicesSlider() {
                       </span>
                       <span className="text-[16px] font-semibold text-gray-900">View Details</span>
                     </Link>
-
                   </div>
-                </div>
+                </SwiperSlide>
               );
             })}
-          </Slider>
+          </Swiper>
         </div>
       </div>
     </section>

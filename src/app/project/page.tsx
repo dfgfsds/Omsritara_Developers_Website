@@ -18,7 +18,7 @@ export default function ProjectPage() {
     const stats = [
         { label: "Total Projects", value: "120+", icon: Building2 },
         { label: "Completed Projects", value: projects.filter(p => p.category === "completed").length, icon: CheckCircle },
-        { label: "Ongoing Projects", value: projects.filter(p => p.category === "ongoing").length, icon: TrendingUp },
+        { label: "Future Projects", value: projects.filter(p => p.category === "ongoing").length, icon: TrendingUp },
         { label: "Happy Families", value: "500+", icon: Users },
     ];
 
@@ -108,7 +108,7 @@ export default function ProjectPage() {
                                     {/* Project Image */}
                                     <div className="relative h-64 overflow-hidden">
                                         <Image
-                                            src={project.image}
+                                            src={project?.image}
                                             alt={project.name}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -181,7 +181,7 @@ export default function ProjectPage() {
 
                                         {/* Price Range */}
                                         {project.priceRange && (
-                                            <div className="mb-8">
+                                            <div className="mb-4">
                                                 <p className="text-lg font-bold text-[#9b0000]">
                                                     {project.priceRange}
                                                 </p>
@@ -189,13 +189,13 @@ export default function ProjectPage() {
                                         )}
 
                                         {/* View Details Button */}
-                                        <button className="w-full mt-auto relative inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 group/btn overflow-hidden">
+                                        <Link href="#" className="w-fit mt-auto relative inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 group/btn overflow-hidden">
                                             <span className="relative z-10 text-sm">View Details</span>
                                             <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[32px] h-[32px] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">
                                                 <ArrowUpRight className="w-5 h-5" />
                                             </span>
-                                            <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover/btn:left-0 z-0"></span>
-                                        </button>
+                                            <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-500 transition-all duration-500 group-hover/btn:left-0 z-0"></span>
+                                        </Link>
                                     </div>
                                 </div>
                             ))}

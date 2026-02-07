@@ -35,7 +35,7 @@ export default function ContactPage() {
       {/* Hero Section */}
       <div className="relative mt-16 md:mt-20 bg-gray-50 py-12 md:py-16 overflow-hidden">
         <div
-          className="absolute right-0 top-0 bottom-0 w-1/2 sm:w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-30 md:opacity-40 pointer-events-none"
+          className="hidden absolute right-0 top-0 bottom-0 w-1/2 sm:w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-30 md:opacity-40 pointer-events-none"
         ></div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">

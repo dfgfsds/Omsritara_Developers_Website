@@ -1,7 +1,17 @@
 "use client";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Play } from "lucide-react";
+import {
+  ArrowUpRight,
+  Play,
+  Search,
+  MapPin,
+  SlidersHorizontal,
+  ChevronDown,
+  Building2,
+  Home as HomeIcon,
+  Building,
+  Warehouse
+} from "lucide-react";
 import CountUp from "react-countup";
 import Image from "next/image";
 import AppointmentModal from "@/components/AppointmentModal";
@@ -15,7 +25,6 @@ import { useEffect, useState } from "react";
 import SuccessArea from "@/components/whychoose";
 import ExperienceSection from "@/components/ExperienceSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-
 
 const Counter = ({
   target,
@@ -57,72 +66,43 @@ export default function Home() {
 
   return (
     <>
-      {/* Banner Section */}
-      <div
-        className="banner__one"
+      {/* Hero Section */}
+      <section
+        className="relative w-full min-h-screen md:h-[700px] flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
         style={{
-          //backgroundImage: "url('assets/banner-shape-home.webp')",
+          backgroundImage: "url('/assets/hero1.jpg')",
           backgroundSize: "cover",
-          width: "100%",
-          // height: "800px",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
         }}
       >
-        {/*
-        <div className="max-w-7xl mx-auto">
-          <div className="row">
-            <div className="col-xl-12 px-4 md:px-8">
-              <div className="banner__one-content  mx-auto">
-                <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 animate-fadeIn ">
-                  Where Every Plot Tells a Story.
-                </h1>
-                <div
-                  className="banner__one-content-user wow fadeInUp"
-                  data-wow-delay=".6s"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setIsModalOpen(true)}
-                    className="build_button text-center py-2 px-4"
-                  >
-                    Appointment
-                  </button>
-                </div>
-              </div>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative z-10 max-w-5xl mt-20 mx-auto px-4 w-full flex flex-col items-center text-center">
+          <h1 className="text-white text-[36px] md:text-[60px] font-bold mb-8 md:mb-6 drop-shadow-2xl">
+            Buy. Sell. Build. Manage
+            <span className="inline text-yellow-400"> - Your Reliable Partner</span>
+          </h1>
+
+          <div className="bg-white p-6 md:p-7 rounded-[10px] max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-5 duration-700">
+            <p className="text-gray-600 text-[17px] md:text-[19px] font-normal mb-4 md:mb-5 leading-relaxed">
+              Explore our landmark residential developments and high-quality construction projects across Chennai, built with trust and excellence.
+            </p>
+
+            <div className="flex justify-center">
+              <Link
+                href="/properties"
+                className="relative inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-2 gap-[10px] group overflow-hidden transition-all duration-300"
+              >
+                <span className="relative z-10 tracking-wider text-[14px] md:text-[16px]">Explore Projects</span>
+                <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[34px] h-[34px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="w-5 h-5 font-extrabold" />
+                </span>
+                <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
+              </Link>
             </div>
           </div>
         </div>
-        */}
-
-        {/* Video */}
-        {/*
-        <div className="banner__one-image relative w-full h-[500px] md:h-[700px] overflow-hidden">
-          {videoList.map((src, index) => (
-            <video
-              key={src}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentVideo ? "opacity-100 z-10" : "opacity-0 z-0"
-                }`}
-              autoPlay
-              muted
-              playsInline
-              onEnded={() => setCurrentVideo((prev) => (prev + 1) % videoList.length)}
-              src={index === currentVideo ? src : undefined}
-            />
-          ))}
-          <div className="absolute inset-0 bg-black/30 z-20"></div>
-        </div>
-        */}
-        <div className="banner__one-image relative w-full min-h-screen md:h-[700px] overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source src="/assets/vid2.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
+      </section>
 
       {/* About Section */}
       <section className="relative overflow-hidden py-10 md:py-16 bg-white">
@@ -183,11 +163,11 @@ export default function Home() {
               <div className="flex flex-row items-center justify-center lg:justify-start sm:gap-6 mt-0 gap-4">
                 <Link
                   href="/about"
-                  className="relative max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 md:gap-4 group overflow-hidden"
+                  className="relative max-w-[300px] inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-2 gap-[10px] group overflow-hidden"
                 >
-                  <span className="relative z-10 text-[14px] md:text-[16px]">More About Us</span>
-                  <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[30px] h-[30px] md:w-[40px] md:h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-                    <ArrowUpRight className="w-5 h-5 md:w-7 md:h-7 font-extrabold" />
+                  <span className="relative z-10 tracking-wider text-[14px] md:text-[16px]">More About Us</span>
+                  <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[34px] h-[34px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                    <ArrowUpRight className="w-5 h-5 font-extrabold" />
                   </span>
                   <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
                 </Link>

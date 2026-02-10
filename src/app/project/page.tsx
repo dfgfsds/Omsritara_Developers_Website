@@ -5,8 +5,87 @@ import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/data/projects";
 import { MapPin, Calendar, ArrowUpRight, CheckCircle, Building2, TrendingUp, Users } from "lucide-react";
+import { Swiper as SwiperType } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import { Project } from "@/data/projects";
 
 type FilterType = "all" | "completed" | "ongoing" | "upcoming";
+
+const PropertyCardImage = ({ project }: { project: Project }) => {
+    const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+
+    return (
+        <div
+            className="relative h-64 overflow-hidden cursor-pointer"
+            onMouseEnter={() => {
+                if (swiperInstance && swiperInstance.autoplay) {
+                    swiperInstance.autoplay.start();
+                }
+            }}
+            onMouseLeave={() => {
+                if (swiperInstance) {
+                    swiperInstance.autoplay.stop();
+                    swiperInstance.slideTo(0);
+                }
+            }}
+        >
+            <Swiper
+                modules={[Autoplay, EffectFade]}
+                effect="fade"
+                fadeEffect={{ crossFade: true }}
+                onSwiper={setSwiperInstance}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                }}
+                speed={1200}
+                loop={true}
+                nested={true}
+                onInit={(swiper) => {
+                    swiper.autoplay.stop();
+                }}
+                className="w-full h-full inner-property-swiper"
+            >
+                {(project.gallery || [project.image]).map((img, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={img}
+                                alt={`${project.name} - ${index}`}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none z-[5]"></div>
+
+            <div className="absolute top-4 right-4 z-10">
+                <span
+                    className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase backdrop-blur-md ${project.category === "completed"
+                        ? "bg-green-500/90 text-white"
+                        : project.category === "ongoing"
+                            ? "bg-yellow-500/90 text-white"
+                            : "bg-blue-500/90 text-white"
+                        }`}
+                >
+                    {project.category}
+                </span>
+            </div>
+
+            <div className="absolute top-4 left-4 z-10">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-gray-800 backdrop-blur-sm">
+                    {project.type}
+                </span>
+            </div>
+        </div>
+    );
+};
 
 export default function ProjectPage() {
     const [activeFilter, setActiveFilter] = useState<FilterType>("all");
@@ -42,7 +121,7 @@ export default function ProjectPage() {
             </div>
 
             {/* Stats Section */}
-            <section className="py-8 md:py-10 bg-white border-b">
+            <section className="py-8 md:py-10 bg-white border-b border-gray-400">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                         {stats.map((stat, index) => (
@@ -66,7 +145,7 @@ export default function ProjectPage() {
             </section>
 
             {/* Filter Tabs */}
-            <section className="py-6 md:py-8 bg-white sticky border-b">
+            <section className="py-6 md:py-8 bg-white sticky border-b border-gray-400">
                 <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
                     <div className="flex md:flex-wrap md:justify-center gap-4 md:gap-5 overflow-x-auto scrollbar-hide px-4 sm:px-0">
                         {[
@@ -106,37 +185,7 @@ export default function ProjectPage() {
                                     className="group bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 flex flex-col h-full"
                                 >
                                     {/* Project Image */}
-                                    <div className="relative h-64 overflow-hidden">
-                                        <Image
-                                            src={project?.image}
-                                            alt={project.name}
-                                            fill
-                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                        />
-                                        {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-
-                                        {/* Status Badge */}
-                                        <div className="absolute top-4 right-4">
-                                            <span
-                                                className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase backdrop-blur-md ${project.category === "completed"
-                                                    ? "bg-green-500/90 text-white"
-                                                    : project.category === "ongoing"
-                                                        ? "bg-yellow-500/90 text-white"
-                                                        : "bg-blue-500/90 text-white"
-                                                    }`}
-                                            >
-                                                {project.category}
-                                            </span>
-                                        </div>
-
-                                        {/* Type Badge */}
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-gray-800 backdrop-blur-sm">
-                                                {project.type}
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <PropertyCardImage project={project} />
 
                                     {/* Project Details */}
                                     <div className="pt-4 pb-6 px-6 flex flex-col flex-grow">
@@ -189,12 +238,15 @@ export default function ProjectPage() {
                                         )}
 
                                         {/* View Details Button */}
-                                        <Link href="#" className="w-fit mt-auto relative inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-3 group/btn overflow-hidden">
+                                        <Link
+                                            href={`/project/${project.id}`}
+                                            className="w-fit mt-auto relative inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-1.5 gap-[10px] group/btn overflow-hidden"
+                                        >
                                             <span className="relative z-10 text-sm">View Details</span>
-                                            <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[32px] h-[32px] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">
-                                                <ArrowUpRight className="w-5 h-5" />
+                                            <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[32px] h-[32px] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">
+                                                <ArrowUpRight className="w-5 h-5 font-extrabold" />
                                             </span>
-                                            <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-500 transition-all duration-500 group-hover/btn:left-0 z-0"></span>
+                                            <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover/btn:left-0 z-0"></span>
                                         </Link>
                                     </div>
                                 </div>

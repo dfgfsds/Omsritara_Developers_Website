@@ -1,18 +1,29 @@
 
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import Image from "next/image";
 import Logo from '../../public/assets/logo.png'
 import Link from "next/link";
 
-import { Facebook, Instagram, Youtube, PhoneCall } from "lucide-react";
+import { Facebook, Instagram, Youtube, PhoneCall, MessageCircle, X } from "lucide-react";
 
 
 const Footer = () => {
   const pathname = usePathname();
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  // Listen for form state changes
+  useEffect(() => {
+    const handleFormStateChange = (e: CustomEvent) => {
+      setIsFormOpen(e.detail.isOpen);
+    };
+
+    window.addEventListener('contactFormStateChange' as any, handleFormStateChange);
+    return () => window.removeEventListener('contactFormStateChange' as any, handleFormStateChange);
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -26,7 +37,7 @@ const Footer = () => {
     <footer className="bg-[#9b0000] overflow-hidden">
       {/* CTA Section */}
       <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-gray-400">
-        <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6">
+        <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0">
 
           {/* Text */}
           <div className="w-full lg:w-2/3 text-center lg:text-left">
@@ -80,16 +91,14 @@ const Footer = () => {
                   About Us
                 </Link>
               </li>
-              {/*
               <li>
                 <Link href="/properties" className="text-gray-100 text-lg hover:text-yellow-600 transition-colors">
                   Properties
                 </Link>
               </li>
-              */}
               <li>
                 <Link href="/project" className={getLinkClass("/project")}>
-                  Project
+                  Projects
                 </Link>
               </li>
               <li>
@@ -195,6 +204,53 @@ const Footer = () => {
         </ul>
       </div>
       */}
+      <div className="modal-sidebar-scroll-2">
+        <ul>
+          <li className="text-center">
+            <button
+              onClick={() => {
+                const event = new CustomEvent('toggleContactForm');
+                window.dispatchEvent(event);
+              }}
+              className="contact-toggle-btn group relative inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-700 text-white shadow-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Open contact form"
+            >
+              <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      {/* 
+      <div className="modal-sidebar-scroll-2">
+        <ul>
+          <li className="text-center">
+            <button
+              onClick={() => {
+                const event = new CustomEvent('toggleContactForm');
+                window.dispatchEvent(event);
+              }}
+              className="contact-toggle-btn group relative inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-700 text-white shadow-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label={isFormOpen ? "Close contact form" : "Open contact form"}
+            >
+              <div
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-300 transform ${isFormOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'
+                  }`}
+              >
+                <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
+              </div>
+
+              <div
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-300 transform ${isFormOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'
+                  }`}
+              >
+                <X className="w-6 h-6 md:w-7 md:h-7" />
+              </div>
+            </button>
+          </li>
+        </ul>
+      </div>
+      */}
 
       <div className="modal-sidebar-scroll-1">
         <ul>
@@ -203,7 +259,7 @@ const Footer = () => {
               href="https://wa.me/917779958889"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-700 text-white shadow-md"
+              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-700 text-white shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <PhoneCall className="w-6 h-6" />
             </a>

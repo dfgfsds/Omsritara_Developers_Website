@@ -10,7 +10,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 
-export default function PropertyDetail() {
+export default function PropertyDetail({ slug }: { slug?: string }) {
     const images = [
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
         "https://images.unsplash.com/photo-1600210492493-0946911123ea",

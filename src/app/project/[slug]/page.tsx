@@ -1,9 +1,30 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, Share2, Home, Bath, BedDouble, LandPlot, MapPin } from "lucide-react";
 import PropertyDetail from "@/components/PropertyDetail";
+import {
+  ArrowUpRight,
+  Share2,
+  Home,
+  Bath,
+  BedDouble,
+  LandPlot,
+  MapPin,
+} from "lucide-react";
 
 export default function ProjectDetailPage() {
+  // ✅ HOOK INSIDE COMPONENT
+  const { slug } = useParams<{ slug: string }>();
+
+  // luxury-bungalow → Luxury Bungalow
+  const title = slug
+    ?.replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+
+
+
     return (
         <div className="bg-white">
 
@@ -125,7 +146,7 @@ export default function ProjectDetailPage() {
           </div>
 
         </div> */}
-                <PropertyDetail />
+         <PropertyDetail slug={slug} />
             </div>
 
 

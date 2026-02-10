@@ -1,77 +1,16 @@
-// import { useParams } from "next/navigation";
-// import Link from "next/link";
-// import PropertyDetail from "@/components/PropertyDetail";
-// import {
-//   ArrowUpRight,
-//   Share2,
-//   Home,
-//   Bath,
-//   BedDouble,
-//   LandPlot,
-//   MapPin,
-// } from "lucide-react";
-
-// export const dynamic = "force-dynamic";
-
-// export default function ProjectDetailPage() {
-//   const params = useParams();
-//   const slug = params?.slug as string;
-
-//   if (!slug) {
-//     return null; // safety for hydration
-//   }
-
-//   const title = slug
-//     .replace(/-/g, " ")
-//     .replace(/\b\w/g, (c) => c.toUpperCase());
-
-// console.log(slug,params)
-
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight, Share2, Home, Bath, BedDouble, LandPlot, MapPin } from "lucide-react";
 import PropertyDetail from "@/components/PropertyDetail";
-import {
-    ArrowUpRight,
-    Share2,
-    Home,
-    Bath,
-    BedDouble,
-    LandPlot,
-    MapPin,
-} from "lucide-react";
-import { services } from "@/data/services";
-import { notFound } from "next/navigation";
-
-// export const dynamic = "force-dynamic";
+import { projects } from "@/data/projects";
 
 export async function generateStaticParams() {
-    return services.map((s: any) => ({
-        id: s.id.toString(),
+    return projects.map((project) => ({
+        id: project.id,
     }));
 }
 
-export default async function ProjectDetailPage({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
-    const service = services?.find((s) => s.id === parseInt(id));
-
-    if (!service) {
-        notFound();
-    }
-
-    // export default function ProjectDetailPage({
-    //     params,
-    // }: {
-    //     params: { id: string };
-    // }) {
-    //     const id = params.id;
-
-    //     const title = id
-    //         .replace(/-/g, " ")
-    //         .replace(/\b\w/g, (c) => c.toUpperCase());
-
+export default function ProjectDetailPage() {
     return (
         <div className="bg-white">
 
@@ -94,14 +33,9 @@ export default async function ProjectDetailPage({
                         </h1>
 
                         <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
-
-
                             <span className="bg-blue-100 text-blue-600 px-2 py-0.5 rounded font-medium">
                                 Buy
                             </span>
-
-
-
                             {/* Location */}
                             <span className="flex items-center gap-1">
                                 <span className="w-7 h-7 border rounded-full flex items-center justify-center">
@@ -137,14 +71,11 @@ export default async function ProjectDetailPage({
                         </div>
                     </div>
 
-
                     <div className="flex items-center gap-4">
-
-
                         <button
                             className="flex items-center gap-2 bg-[#9b0000] text-white 
-             px-4 py-2 rounded-md text-sm font-medium 
-             hover:bg-[#7e0000] transition"
+                            px-4 py-2 rounded-md text-sm font-medium 
+                            hover:bg-[#7e0000] transition"
                         >
                             <Share2 className="w-4 h-4" />
                             Share
@@ -193,7 +124,7 @@ export default async function ProjectDetailPage({
           </div>
 
         </div> */}
-                <PropertyDetail slug={id} />
+                <PropertyDetail />
             </div>
 
 

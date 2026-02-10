@@ -114,7 +114,7 @@ export default function PopupContactForm() {
                 <div className="w-full md:w-1/2 pt-10 pb-8 px-6 md:pt-10 md:p-8 relative bg-gray-100 flex flex-col justify-center">
                     <button
                         onClick={handleClose}
-                        className="absolute top-3.5 right-4 text-black transition-colors"
+                        className="absolute top-3.5 right-4 text-black transition-colors cursor-pointer"
                     >
                         <X size={24} />
                     </button>
@@ -174,7 +174,7 @@ export default function PopupContactForm() {
                                 className="relative inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] cursor-pointer font-semibold uppercase rounded-full pl-4 pr-2.5 py-1.5 gap-2 group overflow-hidden text-[12px] md:text-sm disabled:opacity-50"
                             >
                                 <span className="relative z-10 tracking-wide">
-                                    {isSubmitting ? "SUBMITTING..." : "GET STARTED"}
+                                    {isSubmitting ? "SUBMITTING..." : "SEND MESSAGE"}
                                 </span>
                                 <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[20px] h-[20px] md:w-[30px] md:h-[30px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
                                     <ArrowUpRight className="w-3.5 h-3.5 md:w-5 md:h-5 font-extrabold" />

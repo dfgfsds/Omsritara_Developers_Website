@@ -61,14 +61,12 @@ export default function SuccessArea() {
               </h4>
 
               <p className="text-gray-600 leading-relaxed text-lg">
-                We are your all-in-one destination for premium real estate solutions.
-                From <strong>high-quality building construction</strong> and
-                architectural excellence to <strong>strategic plotted developments</strong> in
-                prime locations, we build with precision. Whether you are
-                <strong> buying your dream home or selling a high-value property</strong>,
-                we ensure legal transparency and market-leading returns.
-                Experience a seamless journey from raw land to a fully constructed reality
-                with Om Sritara Developers.
+                Om Sritara Developers is your premier destination for integrated real estate solutions.
+                We specialize in <strong>buying and selling properties</strong> with complete transparency,
+                and crafting excellence through <strong>high-quality construction</strong> and
+                <strong> strategic plotted developments</strong>. Beyond building, we provide expert
+                <strong> property management</strong> and handle all <strong>liaisoning and approvals</strong>,
+                ensuring a hassle-free experience from legal compliance to a fully realized dream home.
               </p>
 
               <div className="mt-6 flex justify-center">

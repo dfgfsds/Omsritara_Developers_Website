@@ -83,6 +83,7 @@ export default function Home() {
             <span className="inline text-yellow-400"> - Your Reliable Partner</span>
           </h1>
 
+          {/*
           <div className="bg-white p-6 md:p-7 rounded-[10px] max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-5 duration-700">
             <p className="text-gray-600 text-[17px] md:text-[19px] font-normal mb-4 md:mb-5 leading-relaxed">
               Explore our landmark residential developments and high-quality construction projects across Chennai, built with trust and excellence.
@@ -101,6 +102,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          */}
         </div>
       </section>
 
@@ -152,7 +154,7 @@ export default function Home() {
                   Your Trusted Partner in Real Estate & Property Solutions
                 </h4>
                 <p className="text-gray-600 leading-relaxed text-lg text-left md:text-center lg:text-left">
-                  Omsritara Developer is a premier real estate company offering expert solutions in property buying, selling, construction, plotted development, and approvals. With years of experience, we provide seamless, transparent, and client-focused services tailored for property owners, investors, and developers.
+                  Omsritara Developer is a premier real estate company offering expert solutions in property buying, selling, construction, plotted development, property management and approvals. With years of experience, we provide seamless, transparent, and client-focused services tailored for property owners, investors, and developers.
                 </p>
                 <p className="text-gray-600 leading-relaxed text-lg text-left md:text-center lg:text-left">
                   We guide clients in buying and selling properties with accurate market insights and personalized support. Our construction projects are delivered on time with quality and safety in mind. We also develop well-planned plots with modern infrastructure and handle all regulatory approvals, ensuring hassle-free compliance.
@@ -238,7 +240,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:flex md:flex-row justify-evenly items-center gap-12 text-center md:text-start">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                  <CountUp end={10} duration={3} />+
+                  <CountUp end={14} duration={3} />+
                 </h2>
                 <span className="block mt-2 text-gray-600">Years of Experience</span>
               </div>

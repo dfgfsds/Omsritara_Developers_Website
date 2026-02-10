@@ -2,6 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Share2, Home, Bath, BedDouble, LandPlot, MapPin } from "lucide-react";
 import PropertyDetail from "@/components/PropertyDetail";
+import { projects } from "@/data/projects";
+
+export async function generateStaticParams() {
+    return projects.map((project) => ({
+        id: project.id,
+    }));
+}
 
 export default function ProjectDetailPage() {
     return (
@@ -26,14 +33,9 @@ export default function ProjectDetailPage() {
                         </h1>
 
                         <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
-
-
                             <span className="bg-blue-100 text-blue-600 px-2 py-0.5 rounded font-medium">
                                 Buy
                             </span>
-
-
-
                             {/* Location */}
                             <span className="flex items-center gap-1">
                                 <span className="w-7 h-7 border rounded-full flex items-center justify-center">
@@ -69,14 +71,11 @@ export default function ProjectDetailPage() {
                         </div>
                     </div>
 
-
                     <div className="flex items-center gap-4">
-
-
                         <button
                             className="flex items-center gap-2 bg-[#9b0000] text-white 
-             px-4 py-2 rounded-md text-sm font-medium 
-             hover:bg-[#7e0000] transition"
+                            px-4 py-2 rounded-md text-sm font-medium 
+                            hover:bg-[#7e0000] transition"
                         >
                             <Share2 className="w-4 h-4" />
                             Share

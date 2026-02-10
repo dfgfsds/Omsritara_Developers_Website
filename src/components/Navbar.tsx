@@ -41,7 +41,7 @@ export default function Header() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const isActive = (href: string) => pathname === href; // Active link checker
+  const isActive = (href: string) => pathname === href;
 
   // Helper to close all overlays
   const closeAll = () => {

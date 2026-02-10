@@ -136,7 +136,7 @@ export default function About() {
               </div>
               <div className="about__content--details flex flex-wrap items-center mt-5 md:mt-4">
                 <div className="about__experince">
-                  <span className="about__experince--number">2</span>
+                  <span className="about__experince--number">14</span>
                   <span className="about__experince--text">Years of Experince</span>
                 </div>
                 <div className="living__details--content__wrapper">

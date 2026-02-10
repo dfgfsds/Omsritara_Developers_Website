@@ -106,7 +106,7 @@ export const services: Service[] = [
     id: 2,
     title: "Plotted Development",
     description: "At Omsritara Developers, we specialize in premium plotted development projects, providing well-planned, strategically located plots for residential, commercial, and investment purposes. Our mission is to deliver high-quality plots with modern infrastructure, secure surroundings, and long-term value, helping clients build homes, start businesses, or make profitable investments.",
-    image: "/assets/land/image-01.webp",
+    image: "/assets/plot.webp",
     icon: LandPlot,
     content: `
       <section>
@@ -228,7 +228,7 @@ export const services: Service[] = [
     id: 3,
     title: "Construction",
     description: "At Omsritara Developers, we offer comprehensive construction solutions that transform your ideas into reality. From residential homes and commercial complexes to industrial projects and renovations, our experienced team ensures high-quality, timely, and cost-effective construction.",
-    image: "/assets/land/image-04.webp",
+    image: "/assets/construction3.png",
     icon: Home,
     content: `
       <section>

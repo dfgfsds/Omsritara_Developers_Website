@@ -1,33 +1,58 @@
 "use client";
 
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
+// import Link from "next/link";
+// import PropertyDetail from "@/components/PropertyDetail";
+// import {
+//   ArrowUpRight,
+//   Share2,
+//   Home,
+//   Bath,
+//   BedDouble,
+//   LandPlot,
+//   MapPin,
+// } from "lucide-react";
+
+// export const dynamic = "force-dynamic";
+
+// export default function ProjectDetailPage() {
+//   const params = useParams();
+//   const slug = params?.slug as string;
+
+//   if (!slug) {
+//     return null; // safety for hydration
+//   }
+
+//   const title = slug
+//     .replace(/-/g, " ")
+//     .replace(/\b\w/g, (c) => c.toUpperCase());
+
+// console.log(slug,params)
+
 import Link from "next/link";
 import PropertyDetail from "@/components/PropertyDetail";
 import {
-  ArrowUpRight,
-  Share2,
-  Home,
-  Bath,
-  BedDouble,
-  LandPlot,
-  MapPin,
+    ArrowUpRight,
+    Share2,
+    Home,
+    Bath,
+    BedDouble,
+    LandPlot,
+    MapPin,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-export default function ProjectDetailPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
+export default function ProjectDetailPage({
+    params,
+}: {
+    params: { slug: string };
+}) {
+    const slug = params.slug;
 
-  if (!slug) {
-    return null; // safety for hydration
-  }
-
-  const title = slug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-
-
+    const title = slug
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
 
     return (
         <div className="bg-white">
@@ -150,7 +175,7 @@ export default function ProjectDetailPage() {
           </div>
 
         </div> */}
-         <PropertyDetail slug={slug} />
+                <PropertyDetail slug={slug} />
             </div>
 
 

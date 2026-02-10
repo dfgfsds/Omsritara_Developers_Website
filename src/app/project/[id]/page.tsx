@@ -46,11 +46,11 @@ export const dynamic = "force-dynamic";
 export default function ProjectDetailPage({
     params,
 }: {
-    params: { slug: string };
+    params: { id: string };
 }) {
-    const slug = params.slug;
+    const id = params.id;
 
-    const title = slug
+    const title = id
         .replace(/-/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase());
 

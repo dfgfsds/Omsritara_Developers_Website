@@ -1,418 +1,348 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Ruler, MapPin } from "lucide-react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-import PropertyImageSlider from "./PropertyImageSlider";
+import Link from "next/link";
+import { MapPin, Phone, Mail, ChevronRight, Calendar, ArrowUpRight, } from "lucide-react";
 
-interface Property {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  area_size: number;
-  location: {
-    address: string;
-    city: string;
-    state: string;
-    country: string;
-  };
-  image_url: string[];
-  type?: string; // in case type is included in property object
-}
+import { Swiper as SwiperType } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+
+import { projects, Project } from "@/data/projects";
+
+type FilterType = "all" | "completed" | "ongoing" | "upcoming";
+
+const PropertyCardImage = ({ project }: { project: Project }) => {
+    const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+
+    return (
+        <div
+            className="relative h-60 overflow-hidden cursor-pointer"
+            onMouseEnter={() => {
+                if (swiperInstance && swiperInstance.autoplay) {
+                    swiperInstance.autoplay.start();
+                }
+            }}
+            onMouseLeave={() => {
+                if (swiperInstance) {
+                    swiperInstance.autoplay.stop();
+                    swiperInstance.slideTo(0);
+                }
+            }}
+        >
+            <Swiper
+                modules={[Autoplay, EffectFade]}
+                effect="fade"
+                fadeEffect={{ crossFade: true }}
+                onSwiper={setSwiperInstance}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                }}
+                speed={1200}
+                loop={true}
+                nested={true}
+                onInit={(swiper) => {
+                    swiper.autoplay.stop();
+                }}
+                className="w-full h-full inner-property-swiper"
+            >
+                {(project.gallery || [project.image]).map((img, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={img}
+                                alt={`${project.name} - ${index}`}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none z-[5]"></div>
+
+            <div className="absolute top-4 right-4 z-10">
+                <span
+                    className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase backdrop-blur-md ${project.category === "completed"
+                        ? "bg-green-500/90 text-white"
+                        : project.category === "ongoing"
+                            ? "bg-yellow-500/90 text-white"
+                            : "bg-blue-500/90 text-white"
+                        }`}
+                >
+                    {project.category}
+                </span>
+            </div>
+
+            <div className="absolute top-4 left-4 z-10">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-gray-800 backdrop-blur-sm">
+                    {project.type}
+                </span>
+            </div>
+        </div>
+    );
+};
+
+const ITEMS_PER_PAGE = 4;
 
 export default function PropertiesPage() {
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [propertyType, setPropertyType] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [pincode, setPincode] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
+    const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+    const [currentPage, setCurrentPage] = useState(1);
 
-  // filter states
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [minPrice, setMinPrice] = useState<number | "">("");
-  const [maxPrice, setMaxPrice] = useState<number | "">("");
-  const [sqftRange, setSqftRange] = useState({ min: 0, max: 5000 });
+    // FILTER
+    const filteredProjects =
+        activeFilter === "all"
+            ? projects
+            : projects.filter((p) => p.category === activeFilter);
 
-  // pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = 4;
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: { perView: 1, spacing: 5 },
-  });
-
-  function slugify(text: string) {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
-  }
-
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const res = await axios.get("https://api.omsritaradevelopers.in/property");
-        setProperties(res?.data.result);
-      } catch (err) {
-        console.error("Error fetching properties:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchPropertyType = async () => {
-      try {
-        const res = await axios.get("https://api.omsritaradevelopers.in/type/property");
-        setPropertyType(res?.data.result);
-      } catch (err) {
-        console.error("Error fetching property types:", err);
-      }
-    };
-
-    fetchProperties();
-    fetchPropertyType();
-  }, []);
-
-  // Filter logic
-  const filteredProperties = properties.filter((p: any) => {
-    const matchType =
-      selectedTypes.length === 0 || selectedTypes.includes(p.type?._id || "");
-
-    const matchPrice =
-      (minPrice === "" || p.price >= Number(minPrice)) &&
-      (maxPrice === "" || p.price <= Number(maxPrice));
-
-    const matchPincode =
-      !pincode || p?.pincode?.includes(pincode);
-
-    // ✅ Updated to use sqftRange instead of areaRange
-    const matchArea =
-      p.area_size >= sqftRange.min && p.area_size <= sqftRange.max;
-
-    return matchType && matchPrice && matchPincode && matchArea;
-  });
-
-
-  // Pagination logic
-  const indexOfLast = currentPage * propertiesPerPage;
-  const indexOfFirst = indexOfLast - propertiesPerPage;
-  const currentProperties = filteredProperties.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage);
-
-  const handleTypeChange = (type: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    // PAGINATION LOGIC
+    const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedProjects = filteredProjects.slice(
+        startIndex,
+        startIndex + ITEMS_PER_PAGE
     );
-    setCurrentPage(1);
-  };
 
-  const handleFilterClick = () => {
-    setCurrentPage(1); // reset to first page when filtering
-  };
+    // Reset page when filter changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [activeFilter]);
 
-  const settings = {
-    dots: true,            // show dots
-    infinite: true,        // loop slides
-    speed: 500,            // transition speed
-    slidesToShow: 1,       // default for desktop
-    slidesToScroll: 1,
-    arrows: true,          // show arrows on desktop
-    autoplay: true,        // auto-play slides
-    responsive: [
-      {
-        breakpoint: 1024,   // tablets
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,    // small tablets
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 480,    // mobile
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-    ],
-  };
+    return (
+        <main className="max-w-7xl mx-auto px-4 py-10 mt-10 md:mt-28 grid grid-cols-1 lg:grid-cols-3 gap-10 font-nunito">
 
-  const mobileSettings = {
-    dots: true,
-    infinite: true,
-    speed: 400,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-  };
+            {/* ================= CONTENT ================= */}
+            <section className="lg:col-span-2 order-2 lg:order-1">
 
-  return (
-    <>
-      {/* Banner Section */}
-      <div className="relative mt-20 bg-gray-50 py-16 overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"></div>
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            <span className="text-[#9b0000]">Property </span>
-            <span className="text-gray-800">Sales</span>
-          </h1>
-          <div className="mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
-            <Link href="/" className="hover:text-[#9b0000] transition">
-              Home
-            </Link>
-            <span>&gt;</span>
-            <span className="text-gray-800 font-medium">Property Sales</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-10 grid gap-8 
-  grid-cols-1 lg:grid-cols-10">
-        {/* Sidebar */}
-        <aside
-          className={`bg-white rounded-lg shadow p-6 space-y-6 
-    ${showFilters ? "block" : "hidden"} lg:block lg:col-span-3`}
-        >
-          <div className="bg-white rounded-lg shadow p-6 space-y-6">
-            {/* Categories */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Property Type</h2>
-              <ul className="space-y-3 text-gray-600">
-                {propertyType &&
-                  propertyType.map((el: any, i: number) => (
-                    <li key={i}>
-                      <input
-                        type="checkbox"
-                        className="mr-2"
-                        checked={selectedTypes.includes(el._id)}
-                        onChange={() => handleTypeChange(el._id)}
-                      />
-                      {el.name}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-
-            {/* Price Filtering */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Price Filtering</h2>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={minPrice}
-                  onChange={(e) =>
-                    setMinPrice(e.target.value ? Number(e.target.value) : "")
-                  }
-                  className="w-1/2 p-2 border rounded"
-                />
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={maxPrice}
-                  onChange={(e) =>
-                    setMaxPrice(e.target.value ? Number(e.target.value) : "")
-                  }
-                  className="w-1/2 p-2 border rounded"
-                />
-              </div>
-              {/* Pincode Filtering */}
-              <div>
-                <h2 className="text-lg font-semibold mb-4">Pincode</h2>
-                <input
-                  type="text"
-                  placeholder="Enter Pincode"
-                  value={pincode}
-                  onChange={(e) => setPincode(e.target.value)}
-                  className="w-full p-2 border rounded mb-4"
-                />
-              </div>
-
-              {/* Area (Sqft) Filtering */}
-
-              <div className="mb-6">
-                <h2 className="text-lg font-semibold mb-4">Area (Sqft)</h2>
-
-                {/* Min Sqft */}
-                <label className="block text-sm text-gray-600">Min: {sqftRange.min} Sqft</label>
-                <input
-                  type="range"
-                  min={0}
-                  max={5000}
-                  value={sqftRange.min}
-                  onChange={(e) =>
-                    setSqftRange((prev) => ({ ...prev, min: Number(e.target.value) }))
-                  }
-                  className="w-full accent-red-600"
-                />
-
-                {/* Max Sqft */}
-                <label className="block mt-4 text-sm text-gray-600">
-                  Max: {sqftRange.max} Sqft
-                </label>
-                <input
-                  type="range"
-                  min={0}
-                  max={5000}
-                  value={sqftRange.max}
-                  onChange={(e) =>
-                    setSqftRange((prev) => ({ ...prev, max: Number(e.target.value) }))
-                  }
-                  className="w-full accent-red-600"
-                />
-
-                <p className="mt-2 text-sm text-gray-700">
-                  Selected: <span className="font-semibold">{sqftRange.min}</span> –{" "}
-                  <span className="font-semibold">{sqftRange.max}</span> Sqft
-                </p>
-              </div>
-
-              <button
-                onClick={handleFilterClick}
-                type="submit"
-                className="max-w-[300px] flex justify-center gap-2 items-center shadow-xl text-base sm:text-md text-amber-50 bg-red-800 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-lg group cursor-pointer"
-              >
-                FILTER
-                <svg
-                  className="w-6 h-6 sm:w-8 sm:h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-100 group-hover:border-none p-1 sm:p-2 rotate-45"
-                  viewBox="0 0 16 19"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-                    className="fill-gray-100 group-hover:fill-gray-800"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        {/* Properties Section */}
-        <div className="flex-1 lg:col-span-7">
-
-          {/* ✅ Mobile Filter Toggle */}
-          <div className="mb-6 lg:hidden">
-            <button
-              onClick={() => setShowFilters((prev) => !prev)}
-              className="w-full py-2 px-4 bg-[#9b0000] text-white rounded-lg shadow"
-            >
-              {showFilters ? "Hide Filters" : "Show Filters"}
-            </button>
-          </div>
-          {/* Properties List */}
-          <main>
-            {loading ? (
-              <p className="text-center">Loading properties...</p>
-            ) : (
-              <div className="space-y-6">
-                {currentProperties.map((property) => (
-                  <div
-                    key={property._id}
-                    className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col sm:flex-col md:flex-row items-stretch transition hover:shadow-lg"
-                  >
-                    {/* Image Section */}
-                    <div className="relative  w-full md:w-72 h-56 sm:h-72 md:h-auto flex-shrink-0">
-                      <PropertyImageSlider images={property.image_url} name={property.name} />
-                      <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-md shadow">
-                        For Sale
-                      </span>
-                    </div>
-
-
-                    {/* Content Section */}
-                    <div className="flex-1 flex flex-col justify-between p-5">
-                      <div>
-                        <h2 className="text-xl font-semibold text-gray-800">
-                          {property.name}
-                        </h2>
-                        <p className="text-[#9b0000] font-bold text-2xl mt-2">
-                          ₹{property.price.toLocaleString()}
-                        </p>
-
-                        <div className="flex flex-wrap gap-7 text-gray-600 text-lg mt-3">
-                          <span className="flex items-center gap-2">
-                            <Ruler size={22} /> {property.area_size} Sqft
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="border-b mt-5 border-gray-400"></div>
-
-                      <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <p className="flex items-center gap-2 text-gray-500 text-base">
-                          <MapPin size={18} />{" "}
-                          {`${property.location.address}, ${property.location.city}, ${property.location.state}`}
-                        </p>
-
-                        <Link href={`/properties/${slugify(property.name)}`}>
-                          <button
-                            type="submit"
-                            className="flex justify-center gap-2 items-center shadow-xl text-base sm:text-lg text-amber-50 bg-red-800 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group cursor-pointer"
-                          >
-                            Land Details
-                            <svg
-                              className="w-6 h-6 sm:w-8 sm:h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-100 group-hover:border-none p-1 sm:p-2 rotate-45"
-                              viewBox="0 0 16 19"
-                              xmlns="http://www.w3.org/2000/svg"
+                {/* Filter Bar */}
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+                    <div className="flex flex-wrap gap-2">
+                        {[
+                            { key: "all", label: "All Property" },
+                            { key: "completed", label: "For Sale" },
+                            { key: "ongoing", label: "For Rent" },
+                        ].map((item) => (
+                            <button
+                                key={item.key}
+                                onClick={() => setActiveFilter(item.key as FilterType)}
+                                className={`relative px-6 py-2 rounded font-medium transition
+                                ${activeFilter === item.key
+                                        ? "bg-[#9b0000] text-white after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:border-l-8 after:border-r-8 after:border-t-8 after:border-l-transparent after:border-r-transparent after:border-t-[#9b0000]"
+                                        : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
                             >
-                              <path
-                                d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-                                className="fill-gray-100 group-hover:fill-gray-800"
-                              />
-                            </svg>
-                          </button>
-                        </Link>
-                      </div>
+                                {item.label}
+                            </button>
+                        ))}
                     </div>
-                  </div>
 
-                ))}
+                    <select className="border border-gray-200 px-4 py-2 rounded text-sm">
+                        <option>Sort by Newest</option>
+                        <option>Low to High</option>
+                        <option>High to Low</option>
+                    </select>
+                </div>
 
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <div className="flex justify-center gap-2 mt-6">
-                    {Array.from({ length: totalPages }, (_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrentPage(i + 1)}
-                        className={`px-3 py-1 rounded ${currentPage === i + 1
-                          ? "bg-[#9b0000] text-white"
-                          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                          }`}
-                      >
-                        {i + 1}
-                      </button>
+                {/* PROPERTY GRID */}
+                <div className="grid md:grid-cols-2 gap-8 auto-rows-fr">
+                    {paginatedProjects.map((project) => (
+                        <div
+                            key={project.id}
+                            className="group bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 flex flex-col h-full shadow-sm"
+                        >
+                            {/* Image */}
+                            <PropertyCardImage project={project} />
+
+                            {/* Content */}
+                            <div className="pt-4 pb-6 px-6 flex flex-col flex-grow">
+                                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#9b0000] transition">
+                                    {project.name}
+                                </h3>
+
+                                <div className="flex items-center gap-2 text-gray-600 mb-2">
+                                    <MapPin size={16} className="text-[#e29717]" />
+                                    <span className="text-sm">{project.location}</span>
+                                </div>
+
+                                <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                                    {project.description}
+                                </p>
+
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Calendar size={16} className="text-[#9b0000]" />
+                                    <span className="text-xs text-gray-600">
+                                        {project.timeline.status}
+                                    </span>
+                                </div>
+
+                                {project.priceRange && (
+                                    <p className="text-lg font-bold text-[#9b0000] mb-4">
+                                        {project.priceRange}
+                                    </p>
+                                )}
+
+                                <Link
+                                    href={`/project/${project.id}`}
+                                    className="w-fit mt-auto relative inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-1.5 gap-[10px] group/btn overflow-hidden"
+                                >
+                                    <span className="relative z-10 text-sm">View Details</span>
+                                    <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[32px] h-[32px] flex items-center justify-center transition-transform duration-300 group-hover/btn:rotate-45">
+                                        <ArrowUpRight className="w-5 h-5 font-extrabold" />
+                                    </span>
+                                    <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover/btn:left-0 z-0"></span>
+                                </Link>
+                            </div>
+                        </div>
                     ))}
-                  </div>
+                </div>
+
+                {/* ================= PAGINATION ================= */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-3 mt-10">
+                        <button
+                            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 rounded border disabled:opacity-50 cursor-pointer"
+                        >
+                            Prev
+                        </button>
+
+                        {[...Array(totalPages)].map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setCurrentPage(i + 1)}
+                                className={`w-10 h-10 cursor-pointer rounded-full font-semibold
+                                ${currentPage === i + 1
+                                        ? "bg-[#9b0000] text-white"
+                                        : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+
+                        <button
+                            onClick={() =>
+                                setCurrentPage((p) => Math.min(p + 1, totalPages))
+                            }
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 rounded border disabled:opacity-50 cursor-pointer"
+                        >
+                            Next
+                        </button>
+                    </div>
                 )}
-              </div>
-            )}
-          </main>
-        </div>
-      </div>
-    </>
-  );
+
+            </section>
+
+            {/* ================= SIDEBAR ================= */}
+
+            <aside className="space-y-8 order-1 lg:order-2">
+
+                {/* ================= ADVANCE SEARCH ================= */}
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                    <h3 className="text-lg font-semibold mb-4">Advance search</h3>
+                    <p className="text-sm font-medium mb-3">Filter</p>
+
+                    <div className="space-y-4">
+                        <select className="w-full border border-gray-200 rounded-md px-4 py-3 text-sm">
+                            <option>Property Status</option>
+                        </select>
+
+                        <select className="w-full border border-gray-200 rounded-md px-4 py-3 text-sm">
+                            <option>Apartment</option>
+                        </select>
+
+                        <select className="w-full border border-gray-200 rounded-md px-4 py-3 text-sm">
+                            <option>Max Rooms</option>
+                        </select>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <select className="border border-gray-200 rounded-md px-4 py-3 text-sm">
+                                <option>Bed</option>
+                            </select>
+                            <select className="border border-gray-200 rounded-md px-4 py-3 text-sm">
+                                <option>Bath</option>
+                            </select>
+                        </div>
+
+                        <select className="w-full border border-gray-200 rounded-md px-4 py-3 text-sm">
+                            <option>Agencies</option>
+                        </select>
+
+                        {/* Price */}
+                        <div>
+                            <div className="flex justify-between text-sm mb-2">
+                                <span>Price:</span>
+                                <span className="font-medium">$2500 - $8000</span>
+                            </div>
+                            <input type="range" className="w-full accent-[#9b0000]" />
+                        </div>
+
+                        {/* Area */}
+                        <div>
+                            <div className="flex justify-between text-sm mb-2">
+                                <span>Area:</span>
+                                <span className="font-medium">2500 - 6000 sq ft</span>
+                            </div>
+                            <input type="range" className="w-full accent-[#9b0000]" />
+                        </div>
+
+                        <button className="w-full bg-[#9b0000] hover:bg-[#9b0000] text-white py-4 rounded-full font-semibold shadow-md transition">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                {/* ================= CATEGORY ================= */}
+                <div className="bg-white rounded-xl shadow-sm p-6 hidden md:block">
+                    <h3 className="text-lg font-semibold mb-4">Category</h3>
+
+                    <ul className="space-y-3 text-sm text-gray-700">
+                        {["Apartment", "Villa", "Family House", "Town House", "Offices", "Duplexes"].map(
+                            (item) => (
+                                <li
+                                    key={item}
+                                    className="flex items-center gap-2 hover:text-orange-500 cursor-pointer transition"
+                                >
+                                    <ChevronRight size={14} />
+                                    {item}()
+                                </li>
+                            )
+                        )}
+                    </ul>
+                </div>
+
+                {/* ================= CONTACT INFO ================= */}
+                <div className="bg-white rounded-xl shadow-sm p-6 hidden md:block">
+                    <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+
+                    <ul className="space-y-4 text-sm text-gray-700">
+                        <li className="flex items-start gap-3">
+                            <MapPin size={18} className="text-[#9b0000] mt-0.5" />
+                            <span>A-32, Albany, Newyork.</span>
+                        </li>
+
+                        <li className="flex items-start gap-3">
+                            <Phone size={18} className="text-[#9b0000] mt-0.5" />
+                            <span>(+066) 518 - 457 - 5181</span>
+                        </li>
+
+                        <li className="flex items-start gap-3">
+                            <Mail size={18} className="text-[#9b0000] mt-0.5" />
+                            <span>Contact@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </aside>
+
+
+        </main>
+    );
 }

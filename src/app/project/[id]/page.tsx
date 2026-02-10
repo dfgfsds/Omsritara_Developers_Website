@@ -175,7 +175,7 @@ export default function ProjectDetailPage({
           </div>
 
         </div> */}
-                <PropertyDetail slug={slug} />
+                <PropertyDetail slug={id} />
             </div>
 
 

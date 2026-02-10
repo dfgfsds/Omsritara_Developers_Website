@@ -35,8 +35,8 @@ export default function Header() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    //{ name: "Properties", href: "/properties" },
-    { name: "Project", href: "/project" },
+    { name: "Properties", href: "/properties" },
+    //{ name: "Project", href: "/project" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -60,11 +60,11 @@ export default function Header() {
           <span className="hidden sm:inline">Second Floor, North Side, 46 Giri Rd, Satyanurthy Nagar, T. Nagar, Chennai, Tamil Nadu, 600001</span>
         </div>
         <div className="flex items-center gap-4 md:gap-8">
-          <Link href="tel:+917779958889" className="flex items-center gap-2 hover:text-gray-300 transition">
+          <Link href="tel:+917779958889" className="flex items-center gap-2 hover:text-yellow-400 transition">
             <FaPhoneAlt size={14} />
             <span className="hidden md:inline">+91 7779958889</span>
           </Link>
-          <Link href="mailto:info@omsritaradevelopers.in" className="flex items-center gap-2 hover:text-gray-300 transition">
+          <Link href="mailto:info@omsritaradevelopers.in" className="flex items-center gap-2 hover:text-yellow-400 transition">
             <FaEnvelope size={14} />
             <span className="hidden md:inline">info@omsritaradevelopers.in</span>
           </Link>

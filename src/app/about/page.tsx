@@ -158,11 +158,11 @@ export default function About() {
               <div className="about__content--footer flex items-center">
                 <Link
                   href="/contact"
-                  className="relative mt-4 md:mt-3 max-w-[300px] inline-flex items-center justify-center bg-[#9b0000] text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
+                  className="relative mt-4 md:mt-3 max-w-[300px] inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-2 gap-[10px] group overflow-hidden"
                 >
-                  <span className="relative z-10">GET ADVICES</span>
-                  <span className="relative z-10 bg-[#9b0000] border border-white text-white rounded-full w-[40px] h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-                    <ArrowUpRight className="w-7 h-7 font-extrabold" />
+                  <span className="relative z-10 tracking-wider text-[14px] md:text-[16px]">GET ADVICES</span>
+                  <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[34px] h-[34px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                    <ArrowUpRight className="w-5 h-5 font-extrabold" />
                   </span>
                   <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
                 </Link>
@@ -374,11 +374,11 @@ export default function About() {
 
               <button
                 type="submit"
-                className="relative inline-flex items-center justify-center bg-yellow-500 text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden text-sm md:text-base"
+                className="relative inline-flex items-center justify-center border-1 border-[#9b0000] bg-[#9b0000] text-white hover:text-[#9b0000] font-semibold uppercase rounded-full pl-5 pr-3 py-2 gap-[10px] group overflow-hidden text-sm md:text-base"
               >
-                <span className="relative z-10">GET STARTED</span>
-                <span className="relative z-10 bg-[#9b0000] text-white rounded-full w-[36px] h-[36px] md:w-[40px] md:h-[40px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-                  <ArrowUpRight className="w-6 h-6 md:w-7 md:h-7 font-extrabold" />
+                <span className="relative z-10 tracking-wider text-[14px] md:text-[16px]">GET STARTED</span>
+                <span className="relative z-10 bg-[#9b0000] border-2 border-white text-white rounded-full w-[34px] h-[34px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="w-5 h-5 font-extrabold" />
                 </span>
                 <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
               </button>
@@ -386,8 +386,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }

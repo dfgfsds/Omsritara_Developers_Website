@@ -31,6 +31,7 @@ export const projects: Project[] = [
         type: "Villa",
         location: "East Coast Road, Chennai",
         image: "/assets/Myans_Luxury_Villas_1.jpg",
+        gallery: ["/assets/Myans_Luxury_Villas_1.jpg", "/assets/about-gallery1.png", "/assets/about-gallery2.png"],
         description: "Premium luxury villas with modern architecture and world-class amenities on the scenic East Coast Road.",
         features: [
             "CMDA Approved",
@@ -60,6 +61,7 @@ export const projects: Project[] = [
         type: "Apartment",
         location: "T. Nagar, Chennai",
         image: "/assets/about-gallery1.png",
+        gallery: ["/assets/about-gallery1.png", "/assets/about-gallery2.png", "/assets/about-gallery3.png"],
         description: "Modern residential apartments in the heart of T. Nagar with excellent connectivity and premium finishes.",
         features: [
             "DTCP Approved",
@@ -89,6 +91,7 @@ export const projects: Project[] = [
         type: "Commercial",
         location: "Old Mahabalipuram Road, Chennai",
         image: "/assets/about-gallery2.png",
+        gallery: ["/assets/about-gallery2.png", "/assets/about-gallery3.png", "/assets/featured-grid1.jpg"],
         description: "State-of-the-art commercial complex with premium office spaces and retail outlets on OMR.",
         features: [
             "CMDA Approved",
@@ -119,6 +122,7 @@ export const projects: Project[] = [
         type: "Apartment",
         location: "Velachery, Chennai",
         image: "/assets/about-gallery3.png",
+        gallery: ["/assets/about-gallery3.png", "/assets/featured-grid1.jpg", "/assets/villa.webp"],
         description: "Premium high-rise apartments with panoramic city views and luxury amenities in Velachery.",
         features: [
             "CMDA Approved",
@@ -148,6 +152,7 @@ export const projects: Project[] = [
         type: "Villa",
         location: "Mahabalipuram, Chennai",
         image: "/assets/featured-grid1.jpg",
+        gallery: ["/assets/featured-grid1.jpg", "/assets/villa.webp", "/assets/about-gallery1.png"],
         description: "Exclusive beach-facing villas with traditional architecture blended with modern comforts near Mahabalipuram.",
         features: [
             "DTCP Approved",
@@ -177,6 +182,7 @@ export const projects: Project[] = [
         type: "Commercial",
         location: "Siruseri IT Corridor, Chennai",
         image: "/assets/villa.webp",
+        gallery: ["/assets/villa.webp", "/assets/about-gallery2.png", "/assets/about-gallery3.png"],
         description: "Modern IT park with Grade-A office spaces designed for tech companies and startups.",
         features: [
             "CMDA Approved",
@@ -207,6 +213,7 @@ export const projects: Project[] = [
         type: "Plotted Development",
         location: "Sriperumbudur, Chennai",
         image: "/assets/about-gallery1.png",
+        gallery: ["/assets/about-gallery1.png", "/assets/about-gallery2.png", "/assets/about-gallery3.png"],
         description: "DTCP approved residential plots with complete infrastructure in the upcoming smart city corridor.",
         features: [
             "DTCP Approved",
@@ -235,6 +242,7 @@ export const projects: Project[] = [
         type: "Apartment",
         location: "Adyar, Chennai",
         image: "/assets/about-gallery2.png",
+        gallery: ["/assets/about-gallery2.png", "/assets/about-gallery3.png", "/assets/featured-grid1.jpg"],
         description: "Ultra-luxury apartments overlooking the Adyar river with world-class amenities and finishes.",
         features: [
             "CMDA Approved",
@@ -264,6 +272,7 @@ export const projects: Project[] = [
         type: "Plotted Development",
         location: "Kanchipuram District",
         image: "/assets/about-gallery3.png",
+        gallery: ["/assets/about-gallery3.png", "/assets/featured-grid1.jpg", "/assets/villa.webp"],
         description: "Agricultural land parcels with organic farming support and weekend farmhouse development options.",
         features: [
             "Clear Title",

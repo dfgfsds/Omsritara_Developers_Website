@@ -13,15 +13,19 @@ import {
   MapPin,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default function ProjectDetailPage() {
-  // ✅ HOOK INSIDE COMPONENT
-  const { slug } = useParams<{ slug: string }>();
+  const params = useParams();
+  const slug = params?.slug as string;
 
-  // luxury-bungalow → Luxury Bungalow
+  if (!slug) {
+    return null; // safety for hydration
+  }
+
   const title = slug
-    ?.replace(/-/g, " ")
+    .replace(/-/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
-
 
 
 

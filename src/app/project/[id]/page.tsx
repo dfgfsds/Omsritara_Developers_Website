@@ -1,5 +1,3 @@
-"use client";
-
 // import { useParams } from "next/navigation";
 // import Link from "next/link";
 // import PropertyDetail from "@/components/PropertyDetail";
@@ -40,19 +38,39 @@ import {
     LandPlot,
     MapPin,
 } from "lucide-react";
+import { services } from "@/data/services";
+import { notFound } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-export default function ProjectDetailPage({
+export async function generateStaticParams() {
+    return services.map((s: any) => ({
+        id: s.id.toString(),
+    }));
+}
+
+export default async function ProjectDetailPage({
     params,
 }: {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
-    const id = params.id;
+    const { id } = await params;
+    const service = services?.find((s) => s.id === parseInt(id));
 
-    const title = id
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+    if (!service) {
+        notFound();
+    }
+
+    // export default function ProjectDetailPage({
+    //     params,
+    // }: {
+    //     params: { id: string };
+    // }) {
+    //     const id = params.id;
+
+    //     const title = id
+    //         .replace(/-/g, " ")
+    //         .replace(/\b\w/g, (c) => c.toUpperCase());
 
     return (
         <div className="bg-white">

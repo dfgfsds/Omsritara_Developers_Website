@@ -23,7 +23,7 @@ export function useStickySidebar() {
                 stopRect.top > sidebarHeight + offsetTop
             ) {
                 sidebar.className =
-                    "fixed top-[160px] w-[300px] bg-gray-100 p-6 rounded-lg border shadow-sm";
+                    "fixed top-[140px] w-[300px] bg-gray-100 p-6 rounded-lg border shadow-sm";
             } else if (stopRect.top <= sidebarHeight + offsetTop) {
                 sidebar.className =
                     "absolute bottom-0 w-[300px] bg-gray-100 p-6 rounded-lg border shadow-sm";

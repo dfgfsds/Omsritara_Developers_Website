@@ -114,7 +114,7 @@ export default function About() {
                   </svg>
                   Trusted Real Estate </h3>
                 <h2 className="section__heading--title">Delivering Excellence in Every Development</h2>
-                <p className="section__heading--desc">Omsritara Developers is a professionally managed real estate and infrastructure development firm providing comprehensive solutions in property buying and selling, construction, plotted development, and statutory liaisoning & approvals. We are committed to delivering legally compliant, strategically planned, and value-oriented real estate solutions.</p>
+                <p className="section__heading--desc">Omsritara Developers is a professionally managed real estate and infrastructure development firm offering end-to-end solutions in property buying and selling, construction, plotted development, property management, and statutory liaisoning & approvals, with a strong commitment to delivering legally compliant, strategically planned, and value-oriented real estate solutions.</p>
               </div>
               <div className="about__content--info flex">
                 <div className="about__content--info__list flex items-center">
@@ -198,14 +198,14 @@ export default function About() {
 
             {/* Rental Transactions */}
             <div className="mt-5 md:mt-6">
-              <h3 className="text-xl font-semibold text-gray-800">Buying & Selling Transactions</h3>
+              <h3 className="text-xl font-semibold text-gray-800">Real Estate, Construction & Development Services</h3>
               <p className="text-gray-600 text-sm italic">
                 Property Buying, Selling & Investment Advisory
               </p>
               <ul className="mt-4 space-y-2">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
-                  <span>Professional advisory and transaction support</span>
+                  <span>Professional advisory and transaction suppor</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
@@ -215,16 +215,6 @@ export default function About() {
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
                   <span>Legal verification and compliance checks</span>
                 </li>
-              </ul>
-            </div>
-
-            {/* Sale Transactions */}
-            <div className="mt-7 md:mt-6">
-              <h3 className="text-xl font-semibold text-gray-800">Construction & Development Services</h3>
-              <p className="text-gray-600 text-sm italic">
-                Construction, Plotted Development & Approvals
-              </p>
-              <ul className="mt-4 space-y-2">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
                   <span>Detailed project estimation</span>
@@ -236,6 +226,32 @@ export default function About() {
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
                   <span>Structured milestone-based delivery</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Sale Transactions */}
+            <div className="mt-7 md:mt-6">
+              <h3 className="text-xl font-semibold text-gray-800">Property Management Services</h3>
+              <p className="text-gray-600 text-sm italic">
+                Construction, Plotted Development & Approvals
+              </p>
+              <ul className="mt-4 space-y-2">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
+                  <span>End-to-end property maintenance and upkeep</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
+                  <span>Tenant coordination and rental management</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
+                  <span>Regular inspections and issue resolution</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#9b0000] mt-0.5" />
+                  <span>Compliance with local regulations and associations</span>
                 </li>
                 <li className="text-sm text-gray-500">* All statutory taxes and government charges applicable as per prevailing regulations.</li>
               </ul>
@@ -276,7 +292,7 @@ export default function About() {
           {/* Left Content */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              How We Work
+              Our Work Process
             </h2>
             <p className="text-gray-600 mt-4">
               Our end-to-end construction, property development, and transaction services are structured to deliver clarity, compliance, and smooth execution at every stage of your project.
@@ -306,6 +322,12 @@ export default function About() {
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
                 <span className="text-gray-700">
                   <strong> Handover:</strong> Timely delivery with complete documentation.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
+                <span className="text-gray-700">
+                  <strong> Property Management:</strong> Ongoing maintenance, management, and value enhancement.
                 </span>
               </li>
             </ul>

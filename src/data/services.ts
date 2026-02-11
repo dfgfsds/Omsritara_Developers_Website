@@ -228,7 +228,7 @@ export const services: Service[] = [
     id: 3,
     title: "Property Management",
     description: "At Omsritara Developers, we offer end-to-end Property Management services designed to simplify property ownership and maximize long-term value. Our expert team takes complete responsibility so property owners can enjoy stress-free ownership and steady returns.",
-    image: "/assets/property_management.png",
+    image: "https://addressadvisors.com/templates/yootheme/cache/e1/Property%20Management%20Service%20In%20Bangalore-e10c2505.jpeg",
     icon: Building2,
     content: `
       <section>

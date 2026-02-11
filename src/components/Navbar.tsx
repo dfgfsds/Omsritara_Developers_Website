@@ -207,7 +207,7 @@ export default function Header() {
             <div>
               <span className="block text-white font-medium">Email:</span>
               <Link href="mailto:info@ftdigitalsolutions.in" className="text-gray-100">
-                info@ftdigitalsolutions.in
+                info@omsritaradevelopers.in
               </Link>
             </div>
             <div>

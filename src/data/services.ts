@@ -226,6 +226,98 @@ export const services: Service[] = [
   },
   {
     id: 3,
+    title: "Property Management",
+    description: "At Omsritara Developers, we offer end-to-end Property Management services designed to simplify property ownership and maximize long-term value. Our expert team takes complete responsibility so property owners can enjoy stress-free ownership and steady returns.",
+    image: "/assets/property2.jpeg",
+    icon: Building2,
+    content: `
+      <section>
+        <p>At Omsritara Developers, we offer end-to-end Property Management services designed to simplify property ownership and maximize long-term value. Managing a property requires continuous attention, timely maintenance, tenant coordination, and financial discipline. Our expert team takes complete responsibility so property owners can enjoy stress-free ownership and steady returns.</p>
+        <p class="mt-3">Whether you own a single property or multiple assets, we provide customized management solutions tailored to residential, commercial, and rental properties.</p>
+
+        <h3 class="text-2xl font-bold mt-5 mb-3 text-gray-900">End-to-End Property Management Solutions</h3>
+        <p>Our property management services cover every stage of property care — from onboarding to daily operations and long-term maintenance. We ensure your property remains well-maintained, legally compliant, and income-generating.</p>
+        
+        <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-900">Our Property Management Services Include:</h4>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Tenant onboarding, coordination, and support</li>
+          <li>Monthly rent collection and payment tracking</li>
+          <li>Preventive and emergency maintenance handling</li>
+          <li>Property inspections and condition reporting</li>
+          <li>Vendor coordination for repairs and services</li>
+          <li>Documentation, agreements, and compliance support</li>
+        </ul>
+
+        <p class="mt-4 font-medium text-gray-900">With Omsritara Developers, your property is managed professionally with complete transparency.</p>
+
+        <h3 class="text-2xl font-bold mt-5 mb-3 text-gray-900">Residential Property Management</h3>
+        <p>We manage apartments, villas, independent houses, and gated community homes. Our residential property management focuses on tenant satisfaction, timely maintenance, and preserving the aesthetic and functional value of the property.</p>
+        <p class="mt-2">Our team ensures smooth communication between owners and tenants, reducing disputes and ensuring long-term occupancy.</p>
+
+        <h3 class="text-2xl font-bold mt-5 mb-3 text-gray-900">Commercial Property Management</h3>
+        <p>For commercial buildings, offices, and retail spaces, we provide structured property management services that ensure uninterrupted operations. From maintenance scheduling to tenant coordination, we help businesses function smoothly while protecting the property owner’s investment.</p>
+        <p class="mt-2">Our proactive management approach helps reduce downtime, maintenance costs, and operational issues.</p>
+
+        <h3 class="text-2xl font-bold mt-5 mb-3 text-gray-900">Ideal Solution for NRI & Outstation Property Owners</h3>
+        <p>Omsritara Developers is a trusted partner for NRI and outstation property owners who need reliable local management. We act as your on-ground representative, handling everything from tenant communication to maintenance and reporting.</p>
+        <p class="mt-2 font-medium">You stay informed while we handle the execution.</p>
+
+        <h3 class="text-2xl font-bold mt-5 mb-3 text-gray-900">Benefits of Choosing Omsritara Developers</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5 mt-5">
+          <div>
+            <h4 class="text-xl font-semibold text-gray-900 mb-1">Professional Team</h4>
+            <p class="text-gray-600 leading-relaxed">Experienced property management professionals dedicated to your asset.</p>
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold text-gray-900 mb-1">Transparent Tracking</h4>
+            <p class="text-gray-600 leading-relaxed">Complete clarity on rent collection and financial reporting.</p>
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold text-gray-900 mb-1">Regular Inspections</h4>
+            <p class="text-gray-600 leading-relaxed">Proactive maintenance through periodic property health checks.</p>
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold text-gray-900 mb-1">Legal Support</h4>
+            <p class="text-gray-600 leading-relaxed">Full assistance with documentation, agreements, and compliance.</p>
+          </div>
+          <div class="md:col-span-2">
+            <h4 class="text-xl font-semibold text-gray-900 mb-1">Customized Plans</h4>
+            <p class="text-gray-600 leading-relaxed">Tailored strategies based on property type and individual owner requirements.</p>
+          </div>
+        </div>
+        
+        <p class="mt-6 text-lg font-semibold text-gray-900">Our focus is to protect your property, enhance its value, and ensure consistent income.</p>
+      </section>
+    `,
+    faqs: [
+      {
+        question: "What does property management include?",
+        answer: "Property management includes tenant coordination, rent collection, maintenance handling, inspections, and documentation support."
+      },
+      {
+        question: "Do you manage both residential and commercial properties?",
+        answer: "Yes, Omsritara Developers manages residential, commercial, and rental properties."
+      },
+      {
+        question: "How do I receive updates about my property?",
+        answer: "We provide regular updates and reports related to rent, maintenance, and property condition."
+      },
+      {
+        question: "Can you manage my property if I live abroad or in another city?",
+        answer: "Yes, our services are ideal for NRI and outstation owners who require trusted local management."
+      },
+      {
+        question: "Will you handle emergency repairs and maintenance?",
+        answer: "Yes, we coordinate emergency repairs and routine maintenance to keep your property safe and functional."
+      },
+      {
+        question: "Is tenant screening part of your service?",
+        answer: "Yes, we assist with tenant coordination and ensure smooth onboarding."
+      }
+    ]
+  },
+  {
+    id: 4,
     title: "Construction",
     description: "At Omsritara Developers, we offer comprehensive construction solutions that transform your ideas into reality. From residential homes and commercial complexes to industrial projects and renovations, our experienced team ensures high-quality, timely, and cost-effective construction.",
     image: "/assets/construction3.png",
@@ -329,8 +421,8 @@ export const services: Service[] = [
     ]
   },
   {
-    id: 4,
-    title: "Liasioning and Approvals",
+    id: 5,
+    title: "Liaisoning and Approvals",
     description: "At Omsritara Developers, we provide comprehensive liaisoning and approvals services for all real estate, construction, and development projects. Navigating government regulations, permits, and legal approvals can be complex and time-consuming. Our expert team ensures a smooth, compliant, and hassle-free process.",
     image: "https://cdn.prod.website-files.com/676e863e8c931682a197e8a2/684687bf92e867ed8283e099_how-to-get-out-of-a-commercial-lease-business-guide-2025.webp",
     icon: FileText,

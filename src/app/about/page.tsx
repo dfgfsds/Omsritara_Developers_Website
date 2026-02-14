@@ -183,20 +183,18 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* 
       <section className="pt-10 pb-5 md:pt-16 md:pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-
-          {/* Left Content */}
           <div>
             <div className="flex items-center gap-2 text-[#9b0000] font-bold text-base">
-              {/* <Home className="h-5 w-5" /> */}
               OUR BROKERAGE CHARGES
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 md:mt-4">
               Clear, Transparent & Structured Charges
             </h2>
-
-            {/* Rental Transactions */}
+|
             <div className="mt-5 md:mt-6">
               <h3 className="text-xl font-semibold text-gray-800">Real Estate, Construction & Development Services</h3>
               <p className="text-gray-600 text-sm italic">
@@ -230,7 +228,6 @@ export default function About() {
               </ul>
             </div>
 
-            {/* Sale Transactions */}
             <div className="mt-7 md:mt-6">
               <h3 className="text-xl font-semibold text-gray-800">Property Management Services</h3>
               <p className="text-gray-600 text-sm italic">
@@ -258,7 +255,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Images */}
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <Image
@@ -286,10 +282,9 @@ export default function About() {
           </div>
         </div>
       </section>
+
       <section className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
-
-          {/* Left Content */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               Our Work Process
@@ -297,8 +292,6 @@ export default function About() {
             <p className="text-gray-600 mt-4">
               Our end-to-end construction, property development, and transaction services are structured to deliver clarity, compliance, and smooth execution at every stage of your project.
             </p>
-
-            {/* Bullet Points */}
             <ul className="mt-5 space-y-3">
               <li className="flex items-start gap-2">
                 <CheckCircle className="h-5 w-5 text-[#9b0000] mt-1" />
@@ -331,8 +324,6 @@ export default function About() {
                 </span>
               </li>
             </ul>
-
-            {/* Images */}
             <div className="mt-7 md:mt-6 relative w-full max-w-md">
               <div className="relative">
                 <Image
@@ -346,8 +337,6 @@ export default function About() {
               </div>
             </div>
           </div>
-
-          {/* Right Form */}
           <div className="bg-gray-50 p-4 md:p-8 rounded-xl shadow-sm">
             <h3 className="text-xl font-semibold text-gray-800 mb-6">Contact Us</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -407,7 +396,7 @@ export default function About() {
             </form>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

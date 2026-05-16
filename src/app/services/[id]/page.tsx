@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+
 export async function generateStaticParams() {
     return services.map((s) => ({
         id: s.id.toString(),

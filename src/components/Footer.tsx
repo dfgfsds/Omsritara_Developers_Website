@@ -154,13 +154,13 @@ const Footer = () => {
       <div className="bg-[#9b0000] border-t border-gray-400 pt-6 pb-3 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto flex flex-col items-center justify-center text-center">
           <p className="text-gray-100 text-sm">
-            ©2026 Omsritara developers | All rights Reserved | Designed by{" "}
+            ©{new Date().getFullYear()} Omsritara developers | All rights Reserved | Designed by{" "}
             <a
               href="https://ftdigitalsolutions.in"
               target="_blank"
               className="underline hover:text-gray-300"
             >
-              Ft Digital Solutions (Agency)
+              Ft Digital Solutions
             </a>
           </p>
           <div className="flex space-x-4 mt-4 justify-center">

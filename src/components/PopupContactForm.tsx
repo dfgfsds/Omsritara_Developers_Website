@@ -92,12 +92,12 @@ export default function PopupContactForm() {
                 {/* Left Side */}
                 <div className="relative w-full md:w-1/2 h-[180px] md:h-auto md:min-h-full hidden md:block">
                     <Image
-                        src="https://images.pexels.com/photos/13620067/pexels-photo-13620067.jpeg"
+                        src="/assets/form-cover.jfif"
                         alt="Background"
                         fill
                         className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/70 flex flex-col justify-end p-8">
+                    <div className="absolute inset-0 flex flex-col justify-end p-8">
                         <div className="bg-transparent self-start mb-2">
                             <Image
                                 src="/assets/logo.png"

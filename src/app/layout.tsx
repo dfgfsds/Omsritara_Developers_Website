@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Headers from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,14 +8,16 @@ import ScrollToTop from "@/components/ScrollToTop";
 import PopupContactForm from "@/components/PopupContactForm";
 import Script from "next/script";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-serif",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +42,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-visible`}>
+      <body className={`${plusJakarta.variable} ${playfair.variable} font-sans antialiased overflow-visible`}>
         {/* Google tag (gtag.js) */}
         <Script
           async

@@ -4,31 +4,23 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, X, Menu, ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
+import {
+  X,
+  Menu,
+  ArrowUpRight,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Sparkles,
+  ChevronRight,
+} from "lucide-react";
 import Logo from "../../public/assets/logo.png";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 
-// ... inside your component
-<div className="flex items-center gap-4 text-white text-sm">
-  <div className="flex items-center gap-2">
-    <FaMapMarkerAlt size={14} />
-    <span>No. 46, Giri Road, T. Nagar, Chennai-600 017.</span>
-  </div>
-
-  <div className="flex items-center gap-2">
-    <FaPhoneAlt size={14} className="rotate-[90deg]" />
-    <span>+ 91 9202 299202</span>
-  </div>
-
-  <div className="flex items-center gap-2">
-    <FaEnvelope size={14} />
-    <span>ambitcrest777@gmail.com</span>
-  </div>
-</div>
 export default function Header() {
-  const pathname = usePathname(); // Get current route
+  const pathname = usePathname();
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -41,213 +33,301 @@ export default function Header() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const isActive = (href: string) => pathname === href;
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
-  // Helper to close all overlays
   const closeAll = () => {
-    setIsSearchOpen(false);
     setIsSidebarOpen(false);
     setIsMobileMenuOpen(false);
   };
 
   return (
-    //<header className="w-full border-b border-[#e4e4e4] bg-[#9b0000] fixed top-0 left-0 z-50">
-    <header className="w-full bg-[#9b0000] fixed top-0 left-0 z-50">
+    <header className="w-full relative z-50 font-sans shadow-md">
+      {/* ================= 1. TOP UTILITY BAR ================= */}
+      <div className="bg-[#7d0000] border-b border-white/10 text-white text-xs py-2 px-4 sm:px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Left: Location & Approvals */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 text-gray-200">
+              <MapPin size={13} className="text-[#e29717] flex-shrink-0" />
+              <span className="hidden sm:inline">
+                46 Giri Rd, T. Nagar, Chennai, Tamil Nadu 600017
+              </span>
+              <span className="sm:hidden">T. Nagar, Chennai</span>
+            </div>
 
-      <div className="mx-auto hidden md:flex justify-between items-center px-5 md:px-10 py-2 text-white text-[14px]">
-        <div className="flex items-center gap-2">
-          <FaMapMarkerAlt size={14} />
-          <span className="hidden sm:inline">Second Floor, North Side, 46 Giri Rd, Satyanurthy Nagar, T. Nagar, Chennai, Tamil Nadu, 600001</span>
-        </div>
-        <div className="flex items-center gap-4 md:gap-8">
-          <Link href="tel:+917779958889" className="flex items-center gap-2 hover:text-yellow-400 transition">
-            <FaPhoneAlt size={14} />
-            <span className="hidden md:inline">+91 7779958889</span>
-          </Link>
-          <Link href="mailto:info@omsritaradevelopers.in" className="flex items-center gap-2 hover:text-yellow-400 transition">
-            <FaEnvelope size={14} />
-            <span className="hidden md:inline">info@omsritaradevelopers.in</span>
-          </Link>
-        </div>
-      </div>
-
-      <div className="mx-auto flex justify-between items-center px-5 md:px-10 py-3">
-        {/* Logo */}
-        <div className="relative z-50">
-          <Link href="/" onClick={closeAll}>
-            <Image src={Logo} alt="Logo" width={160} height={60} className="relative z-50" />
-          </Link>
-        </div>
-
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-10">
-          <ul className="flex gap-8 text-[15px] font-semibold uppercase text-gray-200">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={closeAll}
-                  className={`transition ${isActive(link.href)
-                    ? "text-white border-b-2 border-yellow-500"
-                    : "hover:text-white"
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Right Side */}
-        <div className="flex items-center gap-4">
-          {/* Search */}
-          {/*
-          <button
-            onClick={() => {
-              setIsSearchOpen(true);
-              setIsSidebarOpen(false);
-              setIsMobileMenuOpen(false);
-            }}
-            className="hidden md:block text-gray-200 text-xl"
-          >
-            <Search className="w-6 h-6 my-auto font-extrabold" />
-          </button>
-          */}
-
-          {/* CTA Button */}
-          {/*
-          <Link
-            href="/contact"
-            onClick={closeAll}
-            className="relative hidden sm:inline-flex items-center justify-center bg-yellow-500 text-white font-semibold uppercase rounded-full pl-6 pr-2 py-2 gap-4 group overflow-hidden"
-          >
-            <span className="relative z-10">GET STARTED</span>
-            <span className="relative z-10 bg-[#9b0000] text-white rounded-full w-[36px] h-[36px] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-              <ArrowUpRight className="w-6 h-6 font-extrabold" />
+            <span className="hidden lg:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/10 text-yellow-300 border border-white/15">
+              <Sparkles size={11} />
+              CMDA & DTCP Approved
             </span>
-            <span className="absolute top-0 left-[-100%] w-full h-full bg-yellow-400 transition-all duration-500 group-hover:left-0 z-0"></span>
-          </Link>
-          */}
+          </div>
 
-          {/* Sidebar */}
-          <button
-            onClick={() => {
-              setIsSidebarOpen(true);
-              setIsSearchOpen(false);
-              setIsMobileMenuOpen(false);
-            }}
-            className="hidden md:flex items-center justify-center w-11 h-11 rounded-full bg-white shadow cursor-pointer"
-          >
-            <Menu className="text-gray-900 w-6 h-6" />
-          </button>
+          {/* Right: Contact & Quick Info */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Link
+              href="tel:+917779958889"
+              className="flex items-center gap-1.5 text-gray-200 hover:text-yellow-300 transition-colors font-medium"
+            >
+              <Phone size={12} className="text-[#e29717]" />
+              <span className="font-semibold">+91 77799 58889</span>
+            </Link>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(true);
-              setIsSearchOpen(false);
-              setIsSidebarOpen(false);
-            }}
-            className="lg:hidden text-gray-50 text-2xl"
-          >
-            <Menu />
-          </button>
+            <Link
+              href="mailto:info@omsritaradevelopers.in"
+              className="hidden md:flex items-center gap-1.5 text-gray-200 hover:text-yellow-300 transition-colors font-medium"
+            >
+              <Mail size={12} className="text-[#e29717]" />
+              <span>info@omsritaradevelopers.in</span>
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Search Overlay */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 bg-[#ad0202] z-[9999] flex items-center justify-center transition-all">
-          <form className="w-4/5 md:w-1/2 flex relative">
-            <input
-              type="search"
-              placeholder="Search Here..."
-              className="w-full p-4 rounded-lg bg-white outline-none"
-            />
-            <button type="submit" className="absolute right-0 top-0 h-full w-14 bg-gray-900 text-white rounded-r-lg">
-              <Search />
-            </button>
-          </form>
-          <button
-            onClick={() => setIsSearchOpen(false)}
-            className="absolute top-6 right-6 text-white text-3xl"
+      {/* ================= 2. MAIN NAVIGATION BAR ================= */}
+      <div className="bg-gradient-to-r from-[#8e0000] via-[#9b0000] to-[#8e0000] border-b border-[#e29717]/30 px-4 sm:px-6 lg:px-10 py-3.5">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Brand Logo */}
+          <Link
+            href="/"
+            onClick={closeAll}
+            className="flex items-center gap-2 group transition-transform duration-300 hover:scale-[1.02]"
           >
-            <X />
-          </button>
-        </div>
-      )}
-
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <div className="fixed top-0 right-0 w-96 max-w-full h-full bg-[#a50000] p-10 z-[9999] transition-transform duration-500">
-          <button
-            onClick={() => setIsSidebarOpen(false)}
-            className="absolute top-6 right-6 text-2xl bg-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
-          >
-            <X className="text-gray-900" />
-          </button>
-          <div className="mb-6">
-            <Image src={Logo} alt="Logo" width={150} height={50} />
-          </div>
-          <p className="text-white mb-6">
-            Om Sritara Developer is redefining the construction industry with
-            innovative solutions, cutting-edge technology, and sustainable
-            practices.
-          </p>
-
-          {/* Contact Info */}
-          <div className="space-y-6 border-t border-b border-gray-200 py-6">
-            <div>
-              <span className="block text-white font-medium">Phone:</span>
-              <Link href="tel:+917779958889" className="text-gray-100">
-                +91 7779958889
-              </Link>
+            <div className="relative h-12 w-36 sm:h-14 sm:w-44">
+              <Image
+                src={Logo}
+                alt="Omsritara Developers"
+                fill
+                priority
+                className="object-contain"
+              />
             </div>
-            <div>
-              <span className="block text-white font-medium">Email:</span>
-              <Link href="mailto:info@ftdigitalsolutions.in" className="text-gray-100">
-                info@omsritaradevelopers.in
-              </Link>
-            </div>
-            <div>
-              <span className="block text-white font-medium">Location:</span>
-              <Link href="https://www.google.com/maps" className="text-gray-100">
-                Second Floor, North Side, 46 Giri Rd, T. Nagar, Chennai, Tamil Nadu, 600001.
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+          </Link>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-[#a50000] z-[9999] p-8 transition">
-          <div className="flex justify-between items-center mb-6">
-            <Image src={Logo} alt="Logo" width={140} height={50} />
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-2xl bg-white w-10 h-10 rounded-full flex items-center justify-center"
+          {/* Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center">
+            <ul className="flex items-center gap-8 text-[13.5px] font-bold uppercase tracking-wider">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={closeAll}
+                      className={`relative py-1.5 transition-all duration-300 ${
+                        active
+                          ? "text-yellow-300 font-extrabold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-yellow-400 after:to-[#e29717] after:rounded-full"
+                          : "text-white/90 hover:text-yellow-300 after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-yellow-400 after:rounded-full after:transition-all after:duration-300 hover:after:w-full"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Right Actions: CTA & Sidebar Button */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Luxury CTA Button: Enquire Now */}
+            <Link
+              href="/contact"
+              onClick={closeAll}
+              className="relative hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider text-gray-950 bg-gradient-to-r from-yellow-400 via-yellow-500 to-[#e29717] hover:from-yellow-300 hover:to-yellow-400 shadow-[0_4px_16px_rgba(226,151,23,0.3)] hover:shadow-[0_6px_22px_rgba(226,151,23,0.5)] transition-all duration-300 hover:-translate-y-0.5 group"
             >
-              <X className="text-gray-900" />
+              <span>Enquire Now</span>
+              <span className="w-5 h-5 rounded-full bg-black/15 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                <ArrowUpRight size={13} className="text-gray-950 stroke-[2.5]" />
+              </span>
+            </Link>
+
+            {/* Side Info Drawer Toggle Button */}
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              aria-label="Open Sidebar"
+              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all duration-300 cursor-pointer shadow-sm hover:scale-105"
+            >
+              <Menu size={18} />
+            </button>
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open Mobile Menu"
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors cursor-pointer"
+            >
+              <Menu size={20} />
             </button>
           </div>
-          <ul className="flex flex-col gap-6 text-white text-lg font-medium">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={closeAll}
-                  className={`transition block ${isActive(link.href)
-                    ? "text-yellow-400"
-                    : "hover:text-gray-300"
-                    }`}
+        </div>
+      </div>
+
+      {/* ================= 3. DESKTOP SIDEBAR DRAWER ================= */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 z-[9999]">
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsSidebarOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500"
+          />
+
+          {/* Drawer Panel */}
+          <aside className="absolute top-0 right-0 w-96 max-w-[85vw] h-full bg-[#8c0000] text-white p-8 sm:p-10 shadow-2xl flex flex-col justify-between overflow-y-auto z-10 border-l border-white/15">
+            <div>
+              {/* Close Button */}
+              <div className="flex justify-between items-center mb-8">
+                <div className="relative h-12 w-36">
+                  <Image
+                    src={Logo}
+                    alt="Omsritara"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Bio */}
+              <p className="text-gray-200 text-sm leading-relaxed mb-8">
+                Om Sritara Developers is redefining Chennai&apos;s real estate
+                landscape with visionary architecture, CMDA-approved gated
+                communities, and luxury living spaces.
+              </p>
+
+              {/* Contact Information */}
+              <div className="space-y-5 border-t border-white/15 pt-6">
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-yellow-400 font-bold block mb-1">
+                    Head Office
+                  </span>
+                  <p className="text-xs text-gray-200 leading-relaxed">
+                    Second Floor, North Side, 46 Giri Rd, T. Nagar, Chennai,
+                    Tamil Nadu 600017.
+                  </p>
+                </div>
+
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-yellow-400 font-bold block mb-1">
+                    Call Us Directly
+                  </span>
+                  <Link
+                    href="tel:+917779958889"
+                    className="text-sm font-semibold text-white hover:text-yellow-300 transition"
+                  >
+                    +91 77799 58889
+                  </Link>
+                </div>
+
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-yellow-400 font-bold block mb-1">
+                    Official Email
+                  </span>
+                  <Link
+                    href="mailto:info@omsritaradevelopers.in"
+                    className="text-xs text-gray-200 hover:text-yellow-300 transition"
+                  >
+                    info@omsritaradevelopers.in
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom CTA in Drawer */}
+            <div className="pt-8 border-t border-white/15">
+              <Link
+                href="/contact"
+                onClick={closeAll}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all"
+              >
+                <span>Schedule Site Visit</span>
+                <ArrowUpRight size={15} />
+              </Link>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {/* ================= 4. MOBILE DRAWER MENU ================= */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[9999] lg:hidden">
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+
+          {/* Mobile Panel */}
+          <div className="absolute top-0 right-0 w-80 max-w-[85vw] h-full bg-[#8f0000] text-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto border-l border-white/15">
+            <div>
+              {/* Header */}
+              <div className="flex justify-between items-center pb-6 border-b border-white/15 mb-6">
+                <div className="relative h-10 w-32">
+                  <Image
+                    src={Logo}
+                    alt="Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center cursor-pointer"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <ul className="flex flex-col gap-2">
+                {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={closeAll}
+                        className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider transition ${
+                          active
+                            ? "bg-white/15 text-yellow-300"
+                            : "text-gray-100 hover:bg-white/10"
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <ChevronRight size={15} className="opacity-60" />
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Mobile Footer CTAs */}
+            <div className="pt-6 border-t border-white/15 space-y-3">
+              <Link
+                href="/contact"
+                onClick={closeAll}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-[#e29717] text-gray-950 font-bold text-xs uppercase tracking-wider shadow-md"
+              >
+                <span>Enquire Now</span>
+                <ArrowUpRight size={14} />
+              </Link>
+
+              <Link
+                href="tel:+917779958889"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition"
+              >
+                <Phone size={13} className="text-yellow-400" />
+                <span>Call +91 77799 58889</span>
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </header>

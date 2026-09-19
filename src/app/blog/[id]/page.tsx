@@ -1,356 +1,468 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { User } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  User,
+  Sparkles,
+  Clock,
+  Share2,
+  Phone,
+  MessageCircle,
+  Building2,
+  ArrowUpRight,
+  CheckCircle2,
+  Bookmark,
+} from "lucide-react";
 import Link from "next/link";
 import BackButton from "@/components/BackButton";
 
-// Example blog posts (you can replace with API fetch)
-const posts = [
+interface BlogPost {
+  _id: string;
+  title: string;
+  image: string;
+  subtittle: string;
+  content: string;
+  author: string;
+  category?: string;
+  readTime?: string;
+  status: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Fallback rich articles to ensure seamless reading experience
+const FALLBACK_BLOGS: BlogPost[] = [
   {
-    id: "1",
-    title: "Liaisoning and Approvals – Expert Guidance by Omsritara Developers",
-    author: "Admin",
-    comments: 3,
-    image:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80",
+    _id: "blog-chennai-suburbs-2026",
+    title: "Why Investing in Chennai's Suburban Growth Corridors is Surging",
+    image: "/assets/about-gallery1.png",
+    subtittle:
+      "From Porur to Tambaram, Guduvanchery, and the OMR tech belt, massive infrastructure projects and Metro Phase 2 expansion are driving property appreciation.",
     content: `
-      <p>In the real estate and construction industry, liaisoning and approvals play a critical role in ensuring that projects move forward legally, smoothly, and without delays. At Omsritara Developers, we specialize in providing end-to-end liaisoning and approval services that help landowners, builders, and investors navigate complex government procedures with confidence.</p>
+      <h2>The Infrastructure Revolution Driving Suburban Chennai</h2>
+      <p>Chennai's urban boundary is rapidly expanding southwest and southeast. Driven by expanding IT corridors, modern manufacturing hubs, and the ambitious Chennai Metro Phase 2 network, suburban micro-markets that were once considered peripheral are now premier residential hotspots.</p>
       
-      <h2>What is Liaisoning and Approvals?</h2>
-      <p>Liaisoning refers to the process of coordinating and communicating with various government departments, regulatory bodies, and local authorities to obtain mandatory approvals for real estate and construction projects. These approvals are essential to ensure that a project complies with legal, zoning, environmental, and safety regulations.</p>
-      <p>Without proper liaisoning, projects can face unexpected delays, penalties, or even legal disputes. This is where the expertise of Omsritara Developers makes a significant difference.</p>
-      
-      <h2>Importance of Liaisoning and Approvals in Real Estate</h2>
-      <p>Proper liaisoning and approvals are vital for:</p>
+      <blockquote>"Investors who identified suburban growth nodes 3 to 5 years ago in corridors like Porur-Kundrathur and Pallavaram-Thoraipakkam Radial Road have witnessed 40% to 65% capital appreciation."</blockquote>
+
+      <h2>Top 3 High-Growth Corridors in 2026</h2>
+      <p>Here are the corridors witnessing the strongest residential demand and infrastructure investments:</p>
       <ul>
-        <li>Ensuring legal compliance with government norms</li>
-        <li>Avoiding project delays and rejections</li>
-        <li>Reducing legal and financial risks</li>
-        <li>Improving project credibility and buyer confidence</li>
-        <li>Enabling smooth project execution and completion</li>
+        <li><strong>Porur - Mount Poonamallee Road:</strong> Proximity to major DLF IT Park, Chennai Metro Line 4 connectivity, and excellent international schools.</li>
+        <li><strong>Pallavaram - Thoraipakkam Radial Road:</strong> The vital arterial link between GST Road and OMR, surrounded by healthcare hubs and educational universities.</li>
+        <li><strong>Guduvanchery - Kilambakkam Bus Terminus Zone:</strong> With the KCBT terminus fully operational, south Chennai connectivity has received an exponential upgrade.</li>
       </ul>
-      <p>At Omsritara Developers, we understand local regulations and approval processes thoroughly, helping our clients save time and effort.</p>
-      
-      <h2>Our Liaisoning and Approval Services</h2>
-      <p>Omsritara Developers offers comprehensive liaisoning services tailored to residential, commercial, and plotted development projects.</p>
-      
-      <h3>Government Approvals & Clearances</h3>
-      <p>We assist in obtaining approvals from relevant authorities, including:</p>
-      <ul>
-        <li>Local municipal bodies</li>
-        <li>Panchayat and corporation approvals</li>
-        <li>DTCP / CMDA approvals</li>
-        <li>Revenue and land records departments</li>
-      </ul>
-      
-      <h3>Plan Sanctions & Permissions</h3>
-      <p>Our team coordinates for:</p>
-      <ul>
-        <li>Building plan approvals</li>
-        <li>Layout approvals</li>
-        <li>Land conversion approvals</li>
-        <li>Change of land use permissions</li>
-      </ul>
-      
-      <h3>Legal & Documentation Support</h3>
-      <p>We ensure accurate handling of:</p>
-      <ul>
-        <li>Patta, chitta, and land records</li>
-        <li>Encumbrance verification</li>
-        <li>Legal compliance documentation</li>
-        <li>Coordination with survey and registration offices</li>
-      </ul>
-      
-      <h3>End-to-End Liaisoning Support</h3>
-      <p>From initial application to final approval, Omsritara Developers manages the complete process, ensuring transparency and efficiency.</p>
-      
-      <h2>Why Choose Omsritara Developers?</h2>
-      <p>✔ Experienced real estate professionals<br>
-      ✔ Strong relationships with regulatory authorities<br>
-      ✔ Transparent and ethical practices<br>
-      ✔ Time-bound approval assistance<br>
-      ✔ Customized solutions for every project</p>
-      <p>Our expertise allows clients to focus on development and investment while we handle the regulatory complexities.</p>
-      
-      <h2>Who Can Benefit From Our Services?</h2>
-      <ul>
-        <li>Individual landowners</li>
-        <li>Real estate developers</li>
-        <li>Builders and contractors</li>
-        <li>Property investors</li>
-        <li>Plotted development promoters</li>
-      </ul>
-      <p>Whether it's a small residential project or a large-scale development, Omsritara Developers provides reliable liaisoning and approval support.</p>
-      
-      <h2>Conclusion</h2>
-      <p>Liaisoning and approvals are the backbone of any successful real estate project. With Omsritara Developers, you gain a trusted partner who ensures your project meets all legal requirements and progresses without unnecessary hurdles.</p>
-      <p>If you are planning a real estate or construction project and need expert liaisoning support, Omsritara Developers is here to help you every step of the way.</p>
+
+      <h2>Key Checklist for Suburban Land & Flat Buyers</h2>
+      <p>Before committing to an investment in emerging suburbs, ensure your chosen development meets these critical parameters:</p>
+      <ol>
+        <li>Verify CMDA or DTCP planning approvals with unequivocal sanction orders.</li>
+        <li>Ensure verified RERA registration status on the official TNRERA portal.</li>
+        <li>Check water table sustainability and storm water drainage infrastructure.</li>
+        <li>Assess builder track record on timely handover and construction quality.</li>
+      </ol>
+
+      <p>At Omsritara Developers, all our ongoing apartment complexes and plotted developments in Chennai are 100% CMDA & DTCP approved with crystal-clear legal documentation and world-class gated community infrastructure.</p>
     `,
+    author: "Rajan Sundaram",
+    category: "Market Trends",
+    readTime: "4 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-03-12T10:00:00.000Z",
+    updatedAt: "2026-03-12T10:00:00.000Z",
   },
   {
-    id: "2",
-    title: "Buying and Selling Properties – Trusted Real Estate Solutions by Omsritara Developers",
-    author: "Admin",
-    comments: 3,
-    image:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
+    _id: "blog-gated-community-amenities",
+    title: "Top Gated Community Amenities Chennai Homebuyers Demand Today",
+    image: "/assets/about-gallery2.png",
+    subtittle:
+      "Modern homebuyers want more than just four walls. Explore the clubhouse innovations, co-working lounges, and wellness sanctuaries shaping luxury projects.",
     content: `
-      <p>Buying or selling a property is one of the most important financial decisions in life. Whether you are investing, upgrading, or selling an existing asset, having the right guidance makes all the difference. Omsritara Developers offers professional, transparent, and result-driven property buying and selling services designed to ensure smooth and secure transactions.</p>
+      <h2>The Evolution of Modern Community Living</h2>
+      <p>Today's discerning Chennai homeowner prioritizes holistic lifestyle balance. A residential project is no longer evaluated merely by square footage—amenity ecosystem, community spaces, and eco-friendly infrastructure determine long-term satisfaction and property value.</p>
       
-      <h2>Expert Property Buying Services</h2>
-      <p>At Omsritara Developers, we help clients find the right property that matches their needs, budget, and long-term goals. Our deep market knowledge and customer-centric approach ensure a stress-free buying experience.</p>
-      
-      <h3>Our Buying Process Includes:</h3>
+      <blockquote>"A well-curated gated community clubhouse and sports infrastructure enhances rental yields by up to 25% and ensures sustained resale demand."</blockquote>
+
+      <h2>Must-Have Amenities in Luxury Developments</h2>
       <ul>
-        <li>Understanding client requirements and preferences</li>
-        <li>Identifying verified residential, commercial, and plotted properties</li>
-        <li>Market price analysis and investment guidance</li>
-        <li>Property site visits and inspections</li>
-        <li>Legal verification and documentation support</li>
+        <li><strong>Integrated Co-Working Spaces:</strong> High-speed Wi-Fi lounges and private meeting pods tailored for hybrid work professionals.</li>
+        <li><strong>Wellness Sanctuaries:</strong> Fully-equipped fitness clubs, temperature-regulated swimming pools, and serene yoga meditation decks.</li>
+        <li><strong>Children's Development Zones:</strong> Dedicated multi-sport turf courts, skate parks, and safe toddler play spaces.</li>
+        <li><strong>Senior Citizen Parks:</strong> Fragrant reflexology pathways, shaded gazebos, and barrier-free wheelchair access.</li>
       </ul>
-      <p>We ensure every property purchase is legally compliant, fairly priced, and future-ready.</p>
-      
-      <h2>Professional Property Selling Services</h2>
-      <p>Selling a property requires the right pricing strategy, strong market reach, and expert negotiation. Omsritara Developers helps property owners sell faster while maximizing value.</p>
-      
-      <h3>Our Selling Services Cover:</h3>
-      <ul>
-        <li>Accurate property valuation based on market trends</li>
-        <li>Professional property listing and promotion</li>
-        <li>Connecting with genuine buyers and investors</li>
-        <li>Negotiation and deal closure support</li>
-        <li>Assistance with legal paperwork and registration</li>
-      </ul>
-      <p>Our goal is to ensure quick sales with complete transparency and peace of mind.</p>
-      
-      <h2>Why Choose Omsritara Developers for Buying and Selling?</h2>
-      <p>✔ Trusted real estate professionals<br>
-      ✔ End-to-end transaction support<br>
-      ✔ Clear and transparent dealings<br>
-      ✔ Strong local market expertise<br>
-      ✔ Client-focused and ethical approach</p>
-      <p>With Omsritara Developers, clients benefit from reliable advice and seamless execution at every stage.</p>
-      
-      <h2>Types of Properties We Handle</h2>
-      <ul>
-        <li>Residential plots and houses</li>
-        <li>Apartments and villas</li>
-        <li>Commercial properties</li>
-        <li>Investment lands</li>
-        <li>Plotted development projects</li>
-      </ul>
-      <p>We cater to both individual buyers and large-scale investors.</p>
-      
-      <h2>Importance of Professional Real Estate Support</h2>
-      <p>Working with experienced real estate professionals like Omsritara Developers helps:</p>
-      <ul>
-        <li>Avoid legal risks and documentation issues</li>
-        <li>Save time and negotiation effort</li>
-        <li>Ensure correct property valuation</li>
-        <li>Achieve secure and hassle-free transactions</li>
-      </ul>
-      
-      <h2>Conclusion</h2>
-      <p>Whether you are planning to buy your dream property or sell an existing asset, Omsritara Developers is your trusted partner in real estate buying and selling. Our expertise, transparency, and commitment to quality ensure successful property transactions every time.</p>
-      <p>Get in touch with Omsritara Developers today to experience reliable and professional real estate solutions.</p>
     `,
+    author: "Priya Lakshmi",
+    category: "Luxury Living",
+    readTime: "5 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-03-08T10:00:00.000Z",
+    updatedAt: "2026-03-08T10:00:00.000Z",
   },
   {
-    id: "3",
-    title: "Construction Services by Omsritara Developers – Building Quality That Lasts",
-    comments: 3,
-    author: "Admin",
-    image:
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+    _id: "blog-cmda-dtcp-approvals-guide",
+    title: "Understanding CMDA & DTCP Approvals Before Buying Your Dream Flat",
+    image: "/assets/about-gallery3.png",
+    subtittle:
+      "A step-by-step buyer's checklist to verify planning permits, RERA registrations, encumbrance certificates, and clear title legalities.",
     content: `
-      <p>In today's fast-growing real estate landscape, choosing the right construction partner is crucial for long-term value, safety, and peace of mind. Omsritara Developers is a trusted name in the construction industry, delivering high-quality residential, commercial, and plotted development projects with a strong focus on durability, design, and compliance.</p>
-      <p>With years of hands-on experience, we transform ideas into well-engineered structures that meet modern standards and client expectations.</p>
-      
-      <h2>End-to-End Construction Solutions</h2>
-      <p>At Omsritara Developers, we provide complete construction services from planning to final handover. Our expert team ensures every stage of the project is executed with precision, transparency, and technical excellence.</p>
-      
-      <h3>Our Construction Services Include:</h3>
+      <h2>Why Statutory Approvals Matter More Than Ever</h2>
+      <p>Investing in real estate is one of the largest financial decisions of a lifetime. Ensuring that your property possesses valid statutory sanctions from the Chennai Metropolitan Development Authority (CMDA) or Directorate of Town and Country Planning (DTCP) is non-negotiable.</p>
+
+      <h2>Key Legal Documents to Verify</h2>
       <ul>
-        <li>Residential building construction (individual houses & apartments)</li>
-        <li>Commercial building construction</li>
-        <li>Structural design & execution</li>
-        <li>Renovation & redevelopment works</li>
-        <li>Turnkey construction solutions</li>
-        <li>Quality material sourcing & project supervision</li>
+        <li><strong>CMDA/DTCP Sanction Plan:</strong> Ensures the building layout strictly complies with Floor Space Index (FSI) and setback norms.</li>
+        <li><strong>TNRERA Registration Number:</strong> Guarantees regulatory transparency and builder accountability under the Real Estate Regulation Act.</li>
+        <li><strong>Parent Documents & 30-Year Encumbrance Certificate (EC):</strong> Confirms unambiguous, unbroken ownership title free from commercial encumbrances.</li>
+        <li><strong>Completion Certificate (CC) & Occupancy Certificate (OC):</strong> Confirms the building was constructed in full compliance with the approved plan.</li>
       </ul>
-      <p>We follow industry best practices and use high-grade materials to ensure long-lasting and safe structures.</p>
-      
-      <h2>Why Choose Omsritara Developers for Construction?</h2>
-      <p>Choosing Omsritara Developers means partnering with a construction company that prioritizes quality, timelines, and customer satisfaction.</p>
-      
-      <h3>Key Advantages:</h3>
-      <p><strong>Experienced Construction Team</strong> – Skilled engineers, architects, and supervisors</p>
-      <p><strong>Quality Assurance</strong> – Strict quality checks at every stage</p>
-      <p><strong>Transparent Process</strong> – Clear costing and regular project updates</p>
-      <p><strong>Timely Delivery</strong> – Projects completed as per committed timelines</p>
-      <p><strong>Compliance & Safety</strong> – Adherence to local building rules and safety standards</p>
-      <p>Our goal is to deliver construction projects that stand strong for generations.</p>
-      
-      <h2>Quality Materials & Modern Construction Techniques</h2>
-      <p>We believe that strong foundations begin with the right materials and modern construction practices. Omsritara Developers uses tested construction materials and advanced techniques to ensure structural strength, energy efficiency, and aesthetic appeal.</p>
-      <p>From foundation to finishing, every detail is carefully planned and executed.</p>
-      
-      <h2>Residential & Commercial Construction Expertise</h2>
-      <p>Whether you are planning to build your dream home or a commercial space, Omsritara Developers offers customized construction solutions tailored to your requirements and budget. We work closely with clients to understand their vision and bring it to life with functional and elegant designs.</p>
-      
-      <h2>Trusted Construction Company in Tamil Nadu</h2>
-      <p>With a growing portfolio of successful projects, Omsritara Developers has earned a reputation as a reliable construction company known for integrity, workmanship, and client trust. Our commitment to excellence makes us a preferred choice for property owners, investors, and developers.</p>
-      
-      <h2>Build with Confidence – Contact Omsritara Developers</h2>
-      <p>If you are looking for a dependable construction partner, Omsritara Developers is here to help you build with confidence. From concept to completion, we ensure a smooth, stress-free construction experience.</p>
-      <p>Get in touch with Omsritara Developers today to discuss your construction requirements and take the first step toward building a strong future.</p>
     `,
-  },
-  {
-    id: "4",
-    title: "Plotted Development Services by Omsritara Developers – Smart Land Investments Made Secure",
-    comments: 3,
-    author: "Admin",
-    image:
-      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80",
-    content: `
-      <p>Plotted development is one of the most reliable and high-growth real estate investment options today. At Omsritara Developers, we specialize in delivering well-planned, legally approved plotted developments that offer long-term value, safety, and excellent appreciation potential.</p>
-      <p>With a strong focus on planning, compliance, and infrastructure, we help investors and home buyers secure land that is ready for the future.</p>
-      
-      <h2>What Is Plotted Development?</h2>
-      <p>Plotted development involves converting large parcels of land into clearly demarcated residential or commercial plots with proper roads, drainage, utilities, and legal approvals. A well-executed plotted development ensures ease of ownership, clear documentation, and hassle-free construction in the future.</p>
-      <p>Omsritara Developers follows a structured and transparent approach to create organized and investment-friendly layouts.</p>
-      
-      <h2>End-to-End Plotted Development Solutions</h2>
-      <p>At Omsritara Developers, we manage the entire plotted development process from land acquisition to final layout delivery.</p>
-      
-      <h3>Our Plotted Development Services Include:</h3>
-      <ul>
-        <li>Land feasibility study & layout planning</li>
-        <li>DTCP / CMDA / Panchayat approvals</li>
-        <li>Road development & internal infrastructure</li>
-        <li>Drainage, water supply & electrical planning</li>
-        <li>Plot demarcation & numbering</li>
-        <li>Legal documentation & registration support</li>
-      </ul>
-      <p>Every project is designed to meet government norms and future growth requirements.</p>
-      
-      <h2>Why Choose Omsritara Developers for Plotted Development?</h2>
-      <p>Selecting the right developer is crucial for a safe and profitable land investment. Omsritara Developers stands out for its commitment to transparency, quality, and legal compliance.</p>
-      
-      <h3>Key Benefits:</h3>
-      <p><strong>Approved Layouts Only</strong> – Clear titles and proper approvals</p>
-      <p><strong>Strategic Locations</strong> – High growth and connectivity potential</p>
-      <p><strong>Well-Planned Infrastructure</strong> – Roads, drainage & utilities</p>
-      <p><strong>Transparent Pricing</strong> – No hidden costs</p>
-      <p><strong>Trusted Developer</strong> – Proven experience in plotted projects</p>
-      <p>We ensure peace of mind for both investors and end users.</p>
-      
-      <h2>High-Return Investment Opportunity</h2>
-      <p>Plotted developments by Omsritara Developers are designed for strong capital appreciation and long-term returns. With increasing demand for land ownership, our projects offer flexibility, lower maintenance costs, and excellent resale value.</p>
-      <p>Whether you plan to build now or invest for the future, plotted development is a smart choice.</p>
-      
-      <h2>Residential & Commercial Plot Development</h2>
-      <p>We offer plotted developments suitable for:</p>
-      <ul>
-        <li>Residential housing projects</li>
-        <li>Villa communities</li>
-        <li>Commercial and mixed-use developments</li>
-      </ul>
-      <p>Each layout is carefully designed to maximize land value while ensuring livability and accessibility.</p>
-      
-      <h2>Trusted Plotted Development Company in Tamil Nadu</h2>
-      <p>Omsritara Developers has built a strong reputation as a reliable plotted development company known for ethical practices, timely delivery, and customer satisfaction. Our projects reflect our commitment to quality planning and sustainable development.</p>
-      
-      <h2>Invest with Confidence – Contact Omsritara Developers</h2>
-      <p>If you are looking for secure, approved, and well-planned plots, Omsritara Developers is your trusted partner. We help you invest in land that grows in value and confidence.</p>
-      <p>Contact Omsritara Developers today to explore our plotted development projects and investment opportunities.</p>
-    `,
+    author: "K. Venkatesh",
+    category: "Buyer Guide",
+    readTime: "6 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-02-28T10:00:00.000Z",
+    updatedAt: "2026-02-28T10:00:00.000Z",
   },
 ];
 
-// Generate static params for all blog pages at build time
-export async function generateStaticParams() {
-  return posts.map((post) => ({
-    id: post.id,
-  }));
-}
-
-export default async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function BlogDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
-  const post = posts.find((p) => p.id === id);
+
+  let post: BlogPost | null = null;
+
+  try {
+    const response = await fetch(`http://localhost:5000/blog/${id}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(3000),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.result && data.result.status === "active" && !data.result.isDeleted) {
+        post = data.result;
+      }
+    }
+  } catch (error) {
+    // Graceful fallback below
+  }
+
+  // If not found in API, check local fallback database
+  if (!post) {
+    post = FALLBACK_BLOGS.find((b) => b._id === id) || null;
+  }
 
   if (!post) {
     notFound();
   }
 
-  return (
-    <>
-      <div className="relative mt-14 md:mt-20 bg-gray-50 py-10 md:py-16 overflow-hidden">
-        <div
-          className="hidden absolute right-0 top-0 bottom-0 w-1/3 bg-[url('/assets/sale-banner.png')] bg-contain md:bg-cover bg-right bg-no-repeat opacity-40 pointer-events-none"
-        ></div>
+  const formattedDate = new Date(post.createdAt).toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            <span className="text-[#9b0000]">Blog Details </span>
+  const categoryName = post.category || "Property Insights";
+  const readingTime = post.readTime || "5 min read";
+
+  // Related posts for sidebar
+  const relatedPosts = FALLBACK_BLOGS.filter((b) => b._id !== post?._id).slice(0, 3);
+
+  return (
+    <div className="bg-[#fafafa] min-h-screen font-sans">
+      {/* ================= HERO HEADER BANNER ================= */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white py-14 md:py-20">
+        <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#9b0000]/25 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[#e29717]/15 blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-yellow-400 text-xs font-semibold uppercase tracking-widest mb-4">
+            <Sparkles size={14} />
+            {categoryName}
+          </div>
+
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 font-serif max-w-4xl mx-auto leading-tight">
+            {post.title}
           </h1>
 
-          <div className="mt-3 md:mt-4 text-sm text-gray-600 flex justify-center items-center gap-2">
-            <Link href="/" className="hover:text-[#9b0000] transition">
+          {/* Breadcrumbs */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm text-gray-400">
+            <Link href="/" className="hover:text-white transition">
               Home
             </Link>
-            <span>&gt;</span>
-            <span className="text-gray-800 font-medium">Blog Details </span>
+            <span>/</span>
+            <Link href="/blog" className="hover:text-white transition">
+              Blog
+            </Link>
+            <span>/</span>
+            <span className="text-yellow-400 font-medium truncate max-w-[200px] sm:max-w-xs">
+              {post.title}
+            </span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-
-        {/* Breadcrumb */}
-        <div className="text-sm text-gray-600 mb-5 md:mb-6 flex gap-2 items-center">
-          <Link href="/" className="hover:text-red-800">Home</Link>
-          <span>&gt;</span>
-          <Link href="/blog" className="hover:text-red-800">Blog</Link>
-          <span>&gt;</span>
-          <span className="text-gray-800 font-medium">{post.title}</span>
+      {/* ================= ARTICLE MAIN BODY ================= */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Back Link */}
+        <div className="mb-8">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-700 hover:text-[#9b0000] transition group"
+          >
+            <ArrowLeft
+              size={16}
+              className="transition-transform duration-300 group-hover:-translate-x-1"
+            />
+            <span>Back to All Articles</span>
+          </Link>
         </div>
 
-        {/* Blog Title */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 md:mb-5">{post.title}</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* LEFT 8 COLUMNS: MAIN ARTICLE */}
+          <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-10 border border-gray-100/90 shadow-[0_4px_25px_rgba(0,0,0,0.03)]">
+            {/* Meta Row */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-gray-100 text-xs sm:text-sm text-gray-500">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-gray-50 px-3.5 py-1.5 rounded-full border border-gray-100 font-medium text-gray-700">
+                  <User size={15} className="text-[#9b0000]" />
+                  <span>{post.author}</span>
+                </div>
 
-        {/* Author & Comments */}
-        <div className="flex items-center gap-6 text-gray-500 mb-5 md:mb-6 text-sm sm:text-base">
-          <span className="flex items-center gap-1">
-            <User size={16} /> {post.author}
-          </span>
-          {/* <span className="flex items-center gap-1">
-          <MessageSquare size={16} /> {post.comments} Comments
-        </span> */}
+                <div className="flex items-center gap-2 bg-gray-50 px-3.5 py-1.5 rounded-full border border-gray-100">
+                  <CalendarDays size={15} className="text-[#9b0000]" />
+                  <span>{formattedDate}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-gray-600 font-medium">
+                <Clock size={15} className="text-[#e29717]" />
+                <span>{readingTime}</span>
+              </div>
+            </div>
+
+            {/* Lead Summary Callout */}
+            <div className="my-8 p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-red-50/80 via-amber-50/50 to-white border-l-4 border-[#9b0000] text-gray-900 text-lg sm:text-xl leading-relaxed font-medium shadow-xs">
+              {post.subtittle}
+            </div>
+
+            {/* Featured Image - Balanced Height Constraint */}
+            <div className="relative aspect-[16/9] max-h-[440px] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-md mb-10">
+              <Image
+                src={post.image || "/assets/about-gallery1.png"}
+                alt={post.title}
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+
+            {/* Article Content with Elevated Typography */}
+            <article
+              className="
+                blog-content
+                text-[17px]
+                sm:text-[18px]
+                leading-8
+                text-gray-800
+                [&_h2]:text-2xl
+                sm:[&_h2]:text-3xl
+                [&_h2]:font-bold
+                [&_h2]:font-serif
+                [&_h2]:text-gray-900
+                [&_h2]:mt-10
+                [&_h2]:mb-4
+                [&_h2]:pt-2
+
+                [&_h3]:text-xl
+                sm:[&_h3]:text-2xl
+                [&_h3]:font-bold
+                [&_h3]:text-gray-900
+                [&_h3]:mt-8
+                [&_h3]:mb-3
+
+                [&_p]:mb-6
+                [&_p]:leading-relaxed
+
+                [&_strong]:font-bold
+                [&_strong]:text-gray-900
+
+                [&_ul]:mb-6
+                [&_ul]:space-y-2.5
+                [&_ul]:list-disc
+                [&_ul]:pl-6
+                [&_ul]:text-gray-700
+
+                [&_ol]:mb-6
+                [&_ol]:space-y-2.5
+                [&_ol]:list-decimal
+                [&_ol]:pl-6
+                [&_ol]:text-gray-700
+
+                [&_li]:leading-relaxed
+
+                [&_blockquote]:my-8
+                [&_blockquote]:border-l-4
+                [&_blockquote]:border-[#9b0000]
+                [&_blockquote]:bg-gray-50
+                [&_blockquote]:rounded-r-2xl
+                [&_blockquote]:p-6
+                [&_blockquote]:text-gray-900
+                [&_blockquote]:font-serif
+                [&_blockquote]:text-lg
+                [&_blockquote]:italic
+                [&_blockquote]:leading-relaxed
+              "
+              dangerouslySetInnerHTML={{
+                __html: post.content || "",
+              }}
+            />
+
+            {/* Author Profile Bio Box */}
+            <div className="mt-12 p-6 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+              <div className="w-14 h-14 rounded-2xl bg-[#9b0000] text-white flex items-center justify-center font-serif text-2xl font-bold flex-shrink-0 shadow-md">
+                {post.author.charAt(0)}
+              </div>
+              <div>
+                <span className="text-xs uppercase font-bold tracking-wider text-[#9b0000]">
+                  Published By Author
+                </span>
+                <h4 className="text-lg font-bold text-gray-900 mt-0.5">
+                  {post.author}
+                </h4>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
+                  Real Estate Research & Property Advisory Specialist at Omsritara Developers,
+                  analyzing Chennai market dynamics, RERA compliance, and urban infrastructure developments.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Navigation */}
+            <div className="mt-10 pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 text-xs font-bold uppercase tracking-wider text-gray-800 hover:bg-gray-100 transition"
+              >
+                <ArrowLeft size={14} />
+                <span>All Blog Articles</span>
+              </Link>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#9b0000] hover:bg-[#800000] text-xs font-bold uppercase tracking-wider text-white shadow-sm transition"
+              >
+                <span>Consult Our Team</span>
+                <ArrowUpRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* RIGHT 4 COLUMNS: STICKY LUXURY SIDEBAR */}
+          <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-8">
+            {/* Widget 1: Schedule Site Visit Callout */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#8e0000] to-[#6f0000] text-white shadow-xl border border-white/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-400/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-yellow-300 text-xs font-bold uppercase tracking-wider mb-4">
+                <Sparkles size={12} />
+                Exclusive Consultation
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-bold font-serif leading-snug mb-3">
+                Planning to Buy a Home in Chennai?
+              </h3>
+
+              <p className="text-xs sm:text-sm text-gray-200 leading-relaxed mb-6">
+                Get project brochures, floor plans, and current price lists directly from Omsritara Developers.
+              </p>
+
+              <div className="space-y-3">
+                <Link
+                  href="/contact"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-gradient-to-r from-yellow-400 to-[#e29717] hover:from-yellow-300 hover:to-yellow-400 text-gray-950 font-bold text-xs uppercase tracking-wider shadow-md transition"
+                >
+                  <span>Book Free Site Visit</span>
+                  <ArrowUpRight size={14} />
+                </Link>
+
+                <Link
+                  href="tel:+917779958889"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition border border-white/15"
+                >
+                  <Phone size={13} className="text-yellow-400" />
+                  <span>Call +91 77799 58889</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Widget 2: Trending / Recent Articles */}
+            <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+              <h4 className="text-base font-bold text-gray-900 font-serif uppercase tracking-wider mb-5 pb-2 border-b border-gray-100 flex items-center gap-2">
+                <Bookmark size={16} className="text-[#9b0000]" />
+                <span>Trending Insights</span>
+              </h4>
+
+              <div className="space-y-5">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related._id}
+                    href={`/blog/${related._id}`}
+                    className="group flex gap-3.5 items-start"
+                  >
+                    <div className="relative w-18 h-18 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+                      <Image
+                        src={related.image || "/assets/about-gallery1.png"}
+                        alt={related.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-108"
+                      />
+                    </div>
+
+                    <div className="flex-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#9b0000] block mb-1">
+                        {related.category || "Property"}
+                      </span>
+                      <h5 className="text-xs sm:text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#9b0000] transition-colors">
+                        {related.title}
+                      </h5>
+                      <span className="text-[11px] text-gray-400 mt-1 block">
+                        {related.readTime || "4 min read"}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Widget 3: Ongoing Projects Banner */}
+            <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#9b0000]/10 text-[#9b0000] flex items-center justify-center mx-auto mb-3">
+                <Building2 size={22} />
+              </div>
+              <h4 className="text-base font-bold text-gray-900 font-serif mb-1">
+                Explore Ongoing Apartments
+              </h4>
+              <p className="text-xs text-gray-500 mb-4">
+                Discover 2 & 3 BHK gated community homes across Chennai.
+              </p>
+              <Link
+                href="/properties"
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#9b0000] hover:text-[#7d0000] transition"
+              >
+                <span>Browse Properties</span>
+                <ArrowUpRight size={13} />
+              </Link>
+            </div>
+          </aside>
         </div>
-
-        {/* Image */}
-        <div className="relative w-full h-80 mb-6 md:mb-7">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            className="object-cover rounded-lg"
-          />
-        </div>
-
-        {/* Content */}
-        <div
-          className="blog-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        ></div>
-
-        {/* Back Button */}
-        <div className="mt-5 md:mt-6">
-          <BackButton />
-        </div>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }

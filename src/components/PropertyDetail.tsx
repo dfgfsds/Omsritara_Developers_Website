@@ -1,52 +1,134 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+
 import {
-    ArrowUpRight,
-    Share2,
     X,
     ChevronLeft,
     ChevronRight,
 } from "lucide-react";
 
-export default function PropertyDetail({ slug }: { slug?: string }) {
-    const images = [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-        "https://images.unsplash.com/photo-1600210492493-0946911123ea",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde",
-        "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b",
-        "https://images.unsplash.com/photo-1600585154208-7c9cfa1f2c29",
-        "https://images.unsplash.com/photo-1600585154341-1c8b8c6a1a2b",
-        "https://images.unsplash.com/photo-1600585154352-2d8cfa1f2c99",
-        "https://images.unsplash.com/photo-1600585154360-4f2cfa1f2c88",
-        "https://images.unsplash.com/photo-1600585154370-8cfa1f2c77",
-        "https://images.unsplash.com/photo-1600585154380-1f2cfa1f2c66",
-    ];
+interface Property {
+    _id: string;
+    name: string;
+    image_url?: string[];
+}
 
+function slugify(text: string) {
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+}
+
+export default function PropertyDetail({ slug }: { slug?: string }) {
+    const [images, setImages] = useState<string[]>([]);
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState(0);
 
+    useEffect(() => {
+        const fetchProperty = async () => {
+            try {
+                const currentSlug =
+                    slug ||
+                    window.location.pathname.split("/").filter(Boolean).pop();
+
+                const response = await fetch(
+                    "http://localhost:5000/property"
+                );
+
+                const data = await response.json();
+
+                const properties: Property[] = Array.isArray(data?.result)
+                    ? data.result
+                    : [];
+
+                const property = properties.find(
+                    (item) => slugify(item.name) === currentSlug
+                );
+
+                if (property?.image_url?.length) {
+                    const validImages = property.image_url.map((image) =>
+                        image.replace(
+                            "http://localhost:5000",
+                            "https://api.omsritaradevelopers.in"
+                        )
+                    );
+
+                    setImages(validImages);
+                }
+            } catch (error) {
+                console.error("Failed to fetch property images:", error);
+            }
+        };
+
+        fetchProperty();
+    }, [slug]);
+
+    if (!images.length) {
+        return (
+            <div className="max-w-7xl mx-auto px-4 py-4">
+                <div className="w-full h-64 sm:h-80 rounded-2xl bg-gray-100 flex items-center justify-center border border-gray-200">
+                    <p className="text-gray-500 font-medium text-sm">No images available</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="max-w-7xl mx-auto px-4 py-4">
-
-            {/* ---------- GALLERY ---------- */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10">
-
-                <div className="lg:col-span-2 rounded-xl overflow-hidden">
-                    <img src={images[0]} className="w-full h-full object-cover" />
+            {/* ---------- GALLERY (BALANCED LUXURY SIZING) ---------- */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+                {/* Main Featured Image */}
+                <div
+                    onClick={() => {
+                        setOpen(true);
+                        setCurrent(0);
+                    }}
+                    className="lg:col-span-2 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative h-72 sm:h-80 md:h-[400px] cursor-pointer group"
+                >
+                    <img
+                        src={images[0]}
+                        alt="Property"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <span className="text-xs font-bold uppercase tracking-wider text-white bg-black/60 px-3 py-1 rounded-full backdrop-blur-md">
+                            Click to View Gallery
+                        </span>
+                    </div>
                 </div>
 
-                <div className="grid grid-rows-2 gap-4">
-
-                    <div className="rounded-xl overflow-hidden">
-                        <img src={images[1]} className="w-full h-full object-cover" />
+                {/* Right Side 2-row Grid */}
+                <div className="grid grid-rows-2 gap-4 h-72 sm:h-80 md:h-[400px]">
+                    <div
+                        onClick={() => {
+                            setOpen(true);
+                            setCurrent(1);
+                        }}
+                        className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative h-full cursor-pointer group"
+                    >
+                        <img
+                            src={images[1] || images[0]}
+                            alt="Property"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-
-                        <div className="rounded-xl overflow-hidden">
-                            <img src={images[2]} className="w-full h-full object-cover" />
+                    <div className="grid grid-cols-2 gap-4 h-full">
+                        <div
+                            onClick={() => {
+                                setOpen(true);
+                                setCurrent(2);
+                            }}
+                            className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative h-full cursor-pointer group"
+                        >
+                            <img
+                                src={images[2] || images[0]}
+                                alt="Property"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
                         </div>
 
                         {/* SHOW ALL */}
@@ -55,26 +137,27 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                                 setOpen(true);
                                 setCurrent(0);
                             }}
-                            className="relative rounded-xl overflow-hidden cursor-pointer"
+                            className="relative rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-full cursor-pointer group"
                         >
-                            <img src={images[3]} className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="text-white text-sm font-semibold text-center">
-                                    Show all
+                            <img
+                                src={images[3] || images[0]}
+                                alt="Property"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+
+                            <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center group-hover:bg-black/70 transition-colors">
+                                <span className="text-white text-xs sm:text-sm font-bold uppercase tracking-wider text-center px-2">
+                                    + View All ({images.length})
                                 </span>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-
-
             {/* ---------- POPUP SLIDER ---------- */}
             {open && (
                 <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
-
                     {/* Close */}
                     <button
                         onClick={() => setOpen(false)}
@@ -87,7 +170,9 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                     <button
                         onClick={() =>
                             setCurrent((prev) =>
-                                prev === 0 ? images.length - 1 : prev - 1
+                                prev === 0
+                                    ? images.length - 1
+                                    : prev - 1
                             )
                         }
                         className="absolute left-4 text-white"
@@ -99,6 +184,7 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                     <div className="max-w-5xl w-full px-4">
                         <img
                             src={images[current]}
+                            alt="Property"
                             className="w-full h-[75vh] object-contain rounded-lg"
                         />
                     </div>
@@ -107,14 +193,15 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                     <button
                         onClick={() =>
                             setCurrent((prev) =>
-                                prev === images.length - 1 ? 0 : prev + 1
+                                prev === images.length - 1
+                                    ? 0
+                                    : prev + 1
                             )
                         }
                         className="absolute right-4 text-white"
                     >
                         <ChevronRight className="w-10 h-10" />
                     </button>
-
                 </div>
             )}
         </div>

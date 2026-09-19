@@ -35,7 +35,7 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                     window.location.pathname.split("/").filter(Boolean).pop();
 
                 const response = await fetch(
-                    "http://localhost:5000/property"
+                    "https://api.omsritaradevelopers.in/property"
                 );
 
                 const data = await response.json();
@@ -51,7 +51,7 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
                 if (property?.image_url?.length) {
                     const validImages = property.image_url.map((image) =>
                         image.replace(
-                            "http://localhost:5000",
+                            "https://api.omsritaradevelopers.in",
                             "https://api.omsritaradevelopers.in"
                         )
                     );

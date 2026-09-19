@@ -139,7 +139,7 @@ export default async function BlogDetailPage({
   let post: BlogPost | null = null;
 
   try {
-    const response = await fetch(`http://localhost:5000/blog/${id}`, {
+    const response = await fetch(`https://api.omsritaradevelopers.in/blog/${id}`, {
       cache: "no-store",
       signal: AbortSignal.timeout(3000),
     });

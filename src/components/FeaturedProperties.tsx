@@ -43,7 +43,7 @@ const FeaturedProperties = () => {
     const fetchProperties = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/property"
+          "https://api.omsritaradevelopers.in/property"
         );
 
         const data = Array.isArray(res?.data?.result)

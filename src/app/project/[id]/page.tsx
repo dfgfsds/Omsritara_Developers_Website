@@ -181,7 +181,7 @@ export default function ProjectDetailPage() {
       try {
         setLoading(true);
 
-        const response = await fetch("http://localhost:5000/property", {
+        const response = await fetch("https://api.omsritaradevelopers.in/property", {
           cache: "no-store",
         });
 
@@ -548,11 +548,10 @@ export default function ProjectDetailPage() {
                   </span>
                   <span className="text-gray-900">
                     {property.floor_number !== undefined
-                      ? `${property.floor_number}${
-                          property.total_floors
-                            ? ` / ${property.total_floors}`
-                            : ""
-                        }`
+                      ? `${property.floor_number}${property.total_floors
+                        ? ` / ${property.total_floors}`
+                        : ""
+                      }`
                       : "-"}
                   </span>
                 </div>

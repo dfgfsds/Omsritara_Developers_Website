@@ -129,7 +129,7 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/blog", {
+        const response = await fetch("https://api.omsritaradevelopers.in/blog", {
           cache: "no-store",
           signal: AbortSignal.timeout(4000),
         });
@@ -228,11 +228,10 @@ export default function BlogPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer ${
-                  activeCategory === cat
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer ${activeCategory === cat
                     ? "bg-[#9b0000] text-white shadow-md shadow-red-950/20"
                     : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-                }`}
+                  }`}
               >
                 {cat === "all" ? "All Articles" : cat}
               </button>

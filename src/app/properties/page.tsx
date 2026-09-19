@@ -249,11 +249,10 @@ const PropertyCardImage = ({ property }: { property: Property }) => {
       {/* Top Right: Status / Listing Badge */}
       <div className="absolute top-3.5 right-3.5 z-10">
         <span
-          className={`px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-md backdrop-blur-md ${
-            property.listing_type === "rent"
+          className={`px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-md backdrop-blur-md ${property.listing_type === "rent"
               ? "bg-[#e29717] text-white"
               : "bg-[#9b0000] text-white"
-          }`}
+            }`}
         >
           {property.listing_type === "rent" ? "For Rent" : "Ongoing"}
         </span>
@@ -274,7 +273,7 @@ export default function PropertiesPage() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/property", {
+        const response = await axios.get("https://api.omsritaradevelopers.in/property", {
           timeout: 4000,
         });
 
@@ -331,8 +330,8 @@ export default function PropertiesPage() {
       activeFilter === "all"
         ? properties
         : properties.filter(
-            (p) => p.listing_type?.toLowerCase() === activeFilter
-          );
+          (p) => p.listing_type?.toLowerCase() === activeFilter
+        );
 
     if (sortBy === "low") {
       list = [...list].sort((a, b) => (a.price || 0) - (b.price || 0));
@@ -409,11 +408,10 @@ export default function PropertiesPage() {
               <button
                 key={tab.key}
                 onClick={() => setActiveFilter(tab.key as FilterType)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
-                  activeFilter === tab.key
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-300 ${activeFilter === tab.key
                     ? "bg-[#9b0000] text-white shadow-md shadow-red-950/20"
                     : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -588,11 +586,10 @@ export default function PropertiesPage() {
               <button
                 key={i}
                 onClick={() => setCurrentPage(i + 1)}
-                className={`w-10 h-10 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
-                  currentPage === i + 1
+                className={`w-10 h-10 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${currentPage === i + 1
                     ? "bg-[#9b0000] text-white shadow-md shadow-red-950/20"
                     : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 {i + 1}
               </button>

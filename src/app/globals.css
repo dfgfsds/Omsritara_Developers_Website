@@ -2,6 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme {
+  --font-serif: var(--font-serif), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+}
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
@@ -13,6 +18,25 @@ body {
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #1f2937;
+  background-color: #fafafa;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif), "Playfair Display", Georgia, serif;
+}
+
+p {
+  color: #374151;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 html::-webkit-scrollbar,

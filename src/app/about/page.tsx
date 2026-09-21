@@ -157,7 +157,7 @@ export default function About() {
                 </Link>
 
                 <a
-                  href="tel:+919840000000"
+                  href="tel:+917779958889"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider text-gray-800 bg-gray-100 hover:bg-gray-200 transition-colors"
                 >
                   <span>Talk to Consultant</span>

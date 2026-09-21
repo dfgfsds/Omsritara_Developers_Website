@@ -127,7 +127,101 @@ const FALLBACK_BLOGS: BlogPost[] = [
     createdAt: "2026-02-28T10:00:00.000Z",
     updatedAt: "2026-02-28T10:00:00.000Z",
   },
+  {
+    _id: "blog-ecr-vs-omr-lifestyle",
+    title: "East Coast Road vs OMR: Which Chennai Location Fits Your Lifestyle?",
+    image: "/assets/Myans_Luxury_Villas_1.jpg",
+    subtittle:
+      "Comparing the tranquil coastal luxury of ECR with the bustling tech-centric convenience of OMR for your next home investment.",
+    content: `
+      <h2>The Great Chennai Dilemma: Coastal Serenity or Tech Boulevard?</h2>
+      <p>Choosing between East Coast Road (ECR) and Old Mahabalipuram Road (OMR) is one of the most common dilemmas facing premium homebuyers and real estate investors in Chennai. While they run parallel to each other, their lifestyles and growth drivers offer distinct advantages.</p>
+      
+      <blockquote>"ECR offers serene coastal exclusivity and low-density luxury, while OMR delivers unmatched rental yields, arterial IT infrastructure, and urban connectivity."</blockquote>
+
+      <h2>ECR Highlights: Coastal Luxury Living</h2>
+      <ul>
+        <li><strong>Low Rise & Villa Communities:</strong> Strict coastal regulation zones (CRZ) preserve open landscapes, fresh air, and sea breezes.</li>
+        <li><strong>Weekend Rejuvenation:</strong> Immediate access to beach clubs, luxury resorts, and high-end dining destinations.</li>
+        <li><strong>Scenic Highway Expansion:</strong> Ongoing widening of ECR into a 4-lane expressway ensures smooth commute times.</li>
+      </ul>
+
+      <h2>OMR Highlights: High-Yield IT Corridor</h2>
+      <ul>
+        <li><strong>Work-Life Proximity:</strong> Walking or short driving distance to major IT parks including Tidel Park, Ascendas, and ELCOT SEZ.</li>
+        <li><strong>Chennai Metro Phase 2:</strong> Line 3 corridor along OMR promises rapid commute to central Chennai.</li>
+        <li><strong>Exceptional Rental Demand:</strong> Constant influx of tech professionals ensures strong rental yields and minimal vacancies.</li>
+      </ul>
+    `,
+    author: "Anand Natarajan",
+    category: "Neighborhoods",
+    readTime: "5 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-02-20T10:00:00.000Z",
+    updatedAt: "2026-02-20T10:00:00.000Z",
+  },
+  {
+    _id: "blog-interior-natural-light",
+    title: "Maximizing Natural Light & Cross Ventilation in Modern Apartments",
+    image: "/assets/featured-grid1.jpg",
+    subtittle:
+      "Discover architectural principles that create healthier, energy-efficient residences with generous ceiling heights and smart window orientation.",
+    content: `
+      <h2>The Health & Wellness Power of Daylighting</h2>
+      <p>In contemporary apartment architecture, daylighting and natural cross-ventilation have transitioned from aesthetic choices to fundamental health necessities. Proper airflow reduces reliance on artificial cooling, lowers electricity costs, and dramatically enhances circadian wellness.</p>
+
+      <h2>Core Architectural Strategies</h2>
+      <ul>
+        <li><strong>North-South Window Orientation:</strong> Captures indirect daylight without excessive thermal heat gain typical of Chennai afternoons.</li>
+        <li><strong>Dual-Aspect Living Rooms:</strong> Balconies positioned on opposite elevations allow refreshing sea breezes to circulate continuously.</li>
+        <li><strong>Higher Floor-to-Ceiling Clearances:</strong> Ceiling heights of 10 feet or more facilitate natural heat dissipation and create an expansive sense of luxury.</li>
+      </ul>
+    `,
+    author: "Priya Lakshmi",
+    category: "Architecture",
+    readTime: "3 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-02-14T10:00:00.000Z",
+    updatedAt: "2026-02-14T10:00:00.000Z",
+  },
+  {
+    _id: "blog-first-time-buyer-checklist",
+    title: "The Ultimate Checklist for First-Time Homebuyers in Chennai",
+    image: "/assets/about-gallery1.png",
+    subtittle:
+      "From financial budgeting and home loan pre-approvals to inspecting construction quality, here is everything you must know.",
+    content: `
+      <h2>Navigating Your First Home Purchase with Confidence</h2>
+      <p>Buying your very first home in Chennai is an exhilarating milestone. By methodically verifying paperwork, budgeting for registration overheads, and assessing structural quality, you safeguard your hard-earned capital for decades.</p>
+
+      <h2>5 Crucial Steps for First-Time Buyers</h2>
+      <ol>
+        <li><strong>Get Pre-Approved for Home Loans:</strong> Know your true budget and EMI eligibility before shortlisting properties.</li>
+        <li><strong>Budget for Stamp Duty & Registration:</strong> In Tamil Nadu, factor in ~9% to 11% for stamp duty and registration fees over the agreement value.</li>
+        <li><strong>Verify CMDA / DTCP Sanctions:</strong> Never purchase an unapproved layout or a building deviating from sanctioned plans.</li>
+        <li><strong>Inspect Amenities & Maintenance Corpus:</strong> Inquire about monthly maintenance charges and water supply infrastructure.</li>
+        <li><strong>Review Builder Track Record:</strong> Choose reputed developers with a proven history of on-time project handovers.</li>
+      </ol>
+    `,
+    author: "Rajan Sundaram",
+    category: "Buyer Guide",
+    readTime: "7 min read",
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-02-05T10:00:00.000Z",
+    updatedAt: "2026-02-05T10:00:00.000Z",
+  },
 ];
+
+function slugify(text?: string) {
+  return (text || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
 
 export default async function BlogDetailPage({
   params,
@@ -135,32 +229,86 @@ export default async function BlogDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const rawId = typeof id === "string" ? id : "";
+  const decodedId = decodeURIComponent(rawId).trim().toLowerCase();
 
   let post: BlogPost | null = null;
 
+  // 1. Try fetching specific blog from API with safe timeout
   try {
-    const response = await fetch(`https://api.omsritaradevelopers.in/blog/${id}`, {
-      cache: "no-store",
-      signal: AbortSignal.timeout(3000),
-    });
+    const response = await fetch(
+      `https://api.omsritaradevelopers.in/blog/${rawId}`,
+      {
+        cache: "no-store",
+        signal: AbortSignal.timeout(8000),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
-      if (data.result && data.result.status === "active" && !data.result.isDeleted) {
+      if (
+        data.result &&
+        data.result.status === "active" &&
+        !data.result.isDeleted
+      ) {
         post = data.result;
       }
     }
   } catch (error) {
-    // Graceful fallback below
+    // Handled below
   }
 
-  // If not found in API, check local fallback database
+  // 2. If not found or API failed, search full blog list from API
   if (!post) {
-    post = FALLBACK_BLOGS.find((b) => b._id === id) || null;
+    try {
+      const listRes = await fetch("https://api.omsritaradevelopers.in/blog", {
+        cache: "no-store",
+        signal: AbortSignal.timeout(8000),
+      });
+      if (listRes.ok) {
+        const listData = await listRes.json();
+        const activeList: BlogPost[] = Array.isArray(listData.result)
+          ? listData.result.filter(
+              (b: BlogPost) => b.status === "active" && !b.isDeleted
+            )
+          : [];
+        post =
+          activeList.find(
+            (b) =>
+              b._id === rawId ||
+              b._id.toLowerCase() === decodedId ||
+              slugify(b.title) === decodedId ||
+              slugify(b.title) === rawId.toLowerCase()
+          ) || null;
+      }
+    } catch (error) {
+      // Handled below
+    }
+  }
+
+  // 3. If still not found, check local fallback articles
+  if (!post) {
+    post =
+      FALLBACK_BLOGS.find(
+        (b) =>
+          b._id === rawId ||
+          b._id.toLowerCase() === decodedId ||
+          slugify(b.title) === decodedId ||
+          slugify(b.title) === rawId.toLowerCase()
+      ) || null;
   }
 
   if (!post) {
     notFound();
+  }
+
+  // Clean image URL: replace any accidental localhost references with production API host
+  let displayImage = post.image || "/assets/about-gallery1.png";
+  if (displayImage.includes("localhost:5000")) {
+    displayImage = displayImage.replace(
+      /https?:\/\/localhost:5000/g,
+      "https://api.omsritaradevelopers.in"
+    );
   }
 
   const formattedDate = new Date(post.createdAt).toLocaleDateString("en-IN", {
@@ -256,7 +404,7 @@ export default async function BlogDetailPage({
             {/* Featured Image - Balanced Height Constraint */}
             <div className="relative aspect-[16/9] max-h-[440px] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-md mb-10">
               <Image
-                src={post.image || "/assets/about-gallery1.png"}
+                src={displayImage}
                 alt={post.title}
                 fill
                 priority

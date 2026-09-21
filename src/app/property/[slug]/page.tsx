@@ -220,7 +220,15 @@ interface Property {
 }
 
 export default function PropertyDetailPage() {
-  const { slug } = useParams();
+  const params = useParams();
+  const rawSlug =
+    typeof params?.slug === "string"
+      ? params.slug
+      : Array.isArray(params?.slug)
+      ? params.slug[0]
+      : "";
+  const decodedSlug = decodeURIComponent(rawSlug || "").trim().toLowerCase();
+
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -255,6 +263,11 @@ export default function PropertyDetailPage() {
   };
 
   useEffect(() => {
+    if (!decodedSlug && !rawSlug) {
+      setLoading(false);
+      return;
+    }
+
     async function fetchProperty() {
       try {
         const res = await fetch(
@@ -268,9 +281,16 @@ export default function PropertyDetailPage() {
 
         const data = await res.json();
 
-        const found = (data.result || []).find(
-          (item: Property) => slugify(item.name) === slug
-        );
+        const found = (data.result || []).find((item: Property) => {
+          if (!item || !item.name) return false;
+          const s = slugify(item.name);
+          return (
+            s === decodedSlug ||
+            s === rawSlug.toLowerCase() ||
+            item._id === rawSlug ||
+            item.name.toLowerCase().trim() === decodedSlug
+          );
+        });
 
         setProperty(found || null);
       } catch (err) {
@@ -282,7 +302,7 @@ export default function PropertyDetailPage() {
     }
 
     fetchProperty();
-  }, [slug]);
+  }, [decodedSlug, rawSlug]);
 
   if (loading) {
     return (

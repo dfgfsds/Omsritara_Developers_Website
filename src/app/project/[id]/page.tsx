@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { projects } from "@/data/projects";
 import {
   ArrowUpRight,
   Share2,
@@ -137,6 +139,8 @@ interface Property {
   isFeatured?: boolean;
   isVerified?: boolean;
   isDeleted?: boolean;
+  priceDisplay?: string;
+  features?: string[];
 }
 
 interface ApiResponse {
@@ -152,7 +156,8 @@ const slugify = (value: string) =>
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
-const formatPrice = (price?: number) => {
+const formatPrice = (price?: number, priceDisplay?: string) => {
+  if (priceDisplay) return priceDisplay;
   if (!price) return "Price on Request";
 
   if (price >= 10000000) {
@@ -172,6 +177,14 @@ const formatNumber = (value?: number) => {
 };
 
 export default function ProjectDetailPage() {
+  const params = useParams();
+  const rawParamId =
+    typeof params?.id === "string"
+      ? params.id
+      : Array.isArray(params?.id)
+      ? params.id[0]
+      : "";
+
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -181,32 +194,71 @@ export default function ProjectDetailPage() {
       try {
         setLoading(true);
 
+        const currentSlug =
+          slugify(rawParamId) ||
+          slugify(
+            typeof window !== "undefined"
+              ? window.location.pathname.split("/").filter(Boolean).pop() || ""
+              : ""
+          );
+
+        // 1. First check local landmark projects (e.g. luxury-villas-ecr)
+        const matchedProject = projects.find(
+          (p) =>
+            p.id.toLowerCase() === currentSlug.toLowerCase() ||
+            slugify(p.name) === currentSlug.toLowerCase()
+        );
+
+        if (matchedProject) {
+          setProperty({
+            _id: matchedProject.id,
+            name: matchedProject.name,
+            type: { name: matchedProject.type },
+            listing_type: matchedProject.category,
+            description: matchedProject.description,
+            area_unit: matchedProject.specifications?.area,
+            features: matchedProject.features,
+            amenities:
+              matchedProject.specifications?.amenities ||
+              matchedProject.features,
+            image_url: matchedProject.gallery?.length
+              ? matchedProject.gallery
+              : [matchedProject.image],
+            project_name: matchedProject.location,
+            status: matchedProject.timeline?.status,
+            priceDisplay: matchedProject.priceRange,
+            owner_name: matchedProject.timeline?.completionDate
+              ? `Target: ${matchedProject.timeline.completionDate}`
+              : undefined,
+          });
+          setNotFound(false);
+          setLoading(false);
+          return;
+        }
+
+        // 2. Fallback to remote API
         const response = await fetch("https://api.omsritaradevelopers.in/property", {
           cache: "no-store",
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch property");
+        if (response.ok) {
+          const data: ApiResponse = await response.json();
+          const matchedApiProperty = data.result?.find(
+            (item) =>
+              !item.isDeleted &&
+              (slugify(item.name || "") === currentSlug ||
+                item._id === rawParamId)
+          );
+
+          if (matchedApiProperty) {
+            setProperty(matchedApiProperty);
+            setNotFound(false);
+            setLoading(false);
+            return;
+          }
         }
 
-        const data: ApiResponse = await response.json();
-
-        const currentSlug = slugify(
-          window.location.pathname.split("/").filter(Boolean).pop() || ""
-        );
-
-        const matchedProperty = data.result?.find(
-          (item) =>
-            !item.isDeleted &&
-            slugify(item.name || "") === currentSlug
-        );
-
-        if (!matchedProperty) {
-          setNotFound(true);
-          return;
-        }
-
-        setProperty(matchedProperty);
+        setNotFound(true);
       } catch (error) {
         console.error("Property fetch error:", error);
         setNotFound(true);
@@ -216,7 +268,7 @@ export default function ProjectDetailPage() {
     };
 
     fetchProperty();
-  }, []);
+  }, [rawParamId]);
 
   if (loading) {
     return (
@@ -338,7 +390,7 @@ export default function ProjectDetailPage() {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="text-3xl sm:text-4xl font-bold font-serif text-[#9b0000]">
-              {formatPrice(property.price)}
+              {formatPrice(property.price, property.priceDisplay)}
             </div>
 
             <button
@@ -363,7 +415,10 @@ export default function ProjectDetailPage() {
 
       {/* Property Gallery */}
       <div className="max-w-7xl mx-auto px-4">
-        <PropertyDetail />
+        <PropertyDetail
+          initialImages={property.image_url}
+          slug={property.name}
+        />
       </div>
 
       {/* Property Content */}
@@ -518,7 +573,7 @@ export default function ProjectDetailPage() {
                     Price
                   </span>
                   <span className="text-gray-900">
-                    {formatPrice(property.price)}
+                    {formatPrice(property.price, property.priceDisplay)}
                   </span>
                 </div>
 

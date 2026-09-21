@@ -115,12 +115,12 @@ export default function ProjectPage() {
     { label: "Total Projects", value: "120+", icon: Building2 },
     {
       label: "Completed Projects",
-      value: projects.filter((p) => p.category === "completed").length,
+      value: "95+",
       icon: CheckCircle,
     },
     {
       label: "Ongoing Projects",
-      value: projects.filter((p) => p.category === "ongoing").length,
+      value: "25+",
       icon: TrendingUp,
     },
     { label: "Happy Families", value: "500+", icon: Users },

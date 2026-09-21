@@ -22,12 +22,23 @@ function slugify(text: string) {
         .replace(/\s+/g, "-");
 }
 
-export default function PropertyDetail({ slug }: { slug?: string }) {
-    const [images, setImages] = useState<string[]>([]);
+export default function PropertyDetail({
+    slug,
+    initialImages,
+}: {
+    slug?: string;
+    initialImages?: string[];
+}) {
+    const [images, setImages] = useState<string[]>(initialImages || []);
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
+        if (initialImages && initialImages.length > 0) {
+            setImages(initialImages);
+            return;
+        }
+
         const fetchProperty = async () => {
             try {
                 const currentSlug =
@@ -64,7 +75,7 @@ export default function PropertyDetail({ slug }: { slug?: string }) {
         };
 
         fetchProperty();
-    }, [slug]);
+    }, [slug, initialImages]);
 
     if (!images.length) {
         return (

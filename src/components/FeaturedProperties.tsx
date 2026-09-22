@@ -154,7 +154,7 @@ const FeaturedProperties = () => {
                         </h3>
                       </Link>
 
-                      <p className="text-red-500 font-bold text-sm sm:text-base whitespace-nowrap">
+                      <p className="text-gray-900 font-bold text-sm sm:text-base whitespace-nowrap">
                         ₹
                         {Number(
                           property?.price || 0

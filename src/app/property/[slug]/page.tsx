@@ -722,7 +722,7 @@ export default function PropertyDetailPage() {
               )}
             </div>
 
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl font-serif">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
               {property.name}
             </h1>
 
@@ -743,11 +743,7 @@ export default function PropertyDetailPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          <div className="relative">
-            <div className="mx-auto max-w-5xl px-3 py-3 sm:px-5">
-              <PropertyGallery images={images} />
-            </div>
-          </div>
+          <PropertyGallery images={images} />
 
           <div className="border-t border-gray-100">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
@@ -757,7 +753,7 @@ export default function PropertyDetailPage() {
                 </p>
 
                 <div className="flex flex-wrap items-end gap-3">
-                  <h2 className="text-3xl font-bold text-[#9b0000] sm:text-4xl">
+                  <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
                     ₹ {property.price?.toLocaleString("en-IN") || "-"}
                   </h2>
 

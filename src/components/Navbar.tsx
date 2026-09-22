@@ -46,11 +46,11 @@ export default function Header() {
   return (
     <header className="w-full relative z-50 font-sans shadow-md">
       {/* ================= 1. TOP UTILITY BAR ================= */}
-      <div className="bg-[#7d0000] border-b border-white/10 text-white text-xs py-2 px-4 sm:px-6 lg:px-10">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="bg-[#7d0000] border-b border-white/10 text-white text-xs py-2 px-4 sm:px-8 lg:px-12 xl:px-16">
+        <div className="w-full flex justify-between items-center">
           {/* Left: Location & Approvals */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 text-gray-200">
+          <div className="flex items-center gap-3 pl-1 sm:pl-2">
+            <div className="flex items-center gap-1.5 text-white font-medium">
               <MapPin size={13} className="text-[#e29717] flex-shrink-0" />
               <span className="hidden sm:inline">
                 46 Giri Rd, T. Nagar, Chennai, Tamil Nadu 600017
@@ -65,10 +65,10 @@ export default function Header() {
           </div>
 
           {/* Right: Contact & Quick Info */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 pr-1 sm:pr-2">
             <Link
               href="tel:+917779958889"
-              className="flex items-center gap-1.5 text-gray-200 hover:text-yellow-300 transition-colors font-medium"
+              className="flex items-center gap-1.5 text-white hover:text-yellow-300 transition-colors font-medium"
             >
               <Phone size={12} className="text-[#e29717]" />
               <span className="font-semibold">+91 77799 58889</span>
@@ -76,7 +76,7 @@ export default function Header() {
 
             <Link
               href="mailto:info@omsritaradevelopers.in"
-              className="hidden md:flex items-center gap-1.5 text-gray-200 hover:text-yellow-300 transition-colors font-medium"
+              className="hidden md:flex items-center gap-1.5 text-white hover:text-yellow-300 transition-colors font-medium"
             >
               <Mail size={12} className="text-[#e29717]" />
               <span>info@omsritaradevelopers.in</span>
@@ -86,13 +86,13 @@ export default function Header() {
       </div>
 
       {/* ================= 2. MAIN NAVIGATION BAR ================= */}
-      <div className="bg-gradient-to-r from-[#8e0000] via-[#9b0000] to-[#8e0000] border-b border-[#e29717]/30 px-4 sm:px-6 lg:px-10 py-3.5">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="bg-gradient-to-r from-[#8e0000] via-[#9b0000] to-[#8e0000] border-b border-[#e29717]/30 px-4 sm:px-8 lg:px-12 xl:px-16 py-3.5">
+        <div className="w-full flex justify-between items-center">
           {/* Brand Logo */}
           <Link
             href="/"
             onClick={closeAll}
-            className="flex items-center gap-2 group transition-transform duration-300 hover:scale-[1.02]"
+            className="flex items-center gap-2 group transition-transform duration-300 hover:scale-[1.02] pl-1 sm:pl-2"
           >
             <div className="relative h-12 w-36 sm:h-14 sm:w-44">
               <Image
@@ -107,7 +107,7 @@ export default function Header() {
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center">
-            <ul className="flex items-center gap-8 text-[13.5px] font-bold uppercase tracking-wider">
+            <ul className="flex items-center gap-7 xl:gap-8 text-[13.5px] font-bold uppercase tracking-wider">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
@@ -130,7 +130,7 @@ export default function Header() {
           </nav>
 
           {/* Right Actions: CTA & Sidebar Button */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 pr-1 sm:pr-2">
             {/* Luxury CTA Button: Enquire Now */}
             <Link
               href="/contact"
@@ -195,7 +195,7 @@ export default function Header() {
               </div>
 
               {/* Bio */}
-              <p className="text-gray-200 text-sm leading-relaxed mb-8">
+              <p style={{ color: "#b9bec3" }} className="!text-[#b9bec3] text-sm leading-relaxed mb-8">
                 Om Sritara Developers is redefining Chennai&apos;s real estate
                 landscape with visionary architecture, CMDA-approved gated
                 communities, and luxury living spaces.
@@ -207,7 +207,7 @@ export default function Header() {
                   <span className="text-xs uppercase tracking-wider text-yellow-400 font-bold block mb-1">
                     Head Office
                   </span>
-                  <p className="text-xs text-gray-200 leading-relaxed">
+                  <p style={{ color: "#b9bec3" }} className="text-xs !text-[#b9bec3] leading-relaxed">
                     Second Floor, North Side, 46 Giri Rd, T. Nagar, Chennai,
                     Tamil Nadu 600017.
                   </p>
@@ -231,7 +231,7 @@ export default function Header() {
                   </span>
                   <Link
                     href="mailto:info@omsritaradevelopers.in"
-                    className="text-xs text-gray-200 hover:text-yellow-300 transition"
+                    className="text-xs text-white/95 hover:text-yellow-300 transition"
                   >
                     info@omsritaradevelopers.in
                   </Link>
@@ -296,7 +296,7 @@ export default function Header() {
                         className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider transition ${
                           active
                             ? "bg-white/15 text-yellow-300"
-                            : "text-gray-100 hover:bg-white/10"
+                            : "text-white/95 hover:bg-white/10"
                         }`}
                       >
                         <span>{link.name}</span>

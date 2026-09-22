@@ -58,7 +58,7 @@ export default function SuccessArea() {
             Your Trusted Partner for <span className="text-[#9b0000]">End-to-End</span> Real Estate
           </h3>
 
-          <p className="text-gray-700 leading-relaxed text-base sm:text-lg md:text-xl">
+          <p className="text-black leading-relaxed text-base sm:text-lg md:text-xl">
             Omsritara Developers is your premier destination for integrated real estate solutions.
             We specialize in <strong className="text-gray-950 font-semibold">buying and selling properties</strong> with complete transparency,
             and crafting architectural excellence through <strong className="text-gray-950 font-semibold">high-quality construction</strong> and

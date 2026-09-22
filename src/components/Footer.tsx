@@ -55,7 +55,7 @@ const Footer = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-serif text-white leading-snug">
               Your Dream Project Awaits — Step Into Luxury Living
             </h2>
-            <p className="text-gray-200 text-sm mt-2">
+            <p style={{ color: "#b9bec3" }} className="!text-[#b9bec3] text-sm mt-2">
               Speak with our senior architects and property advisors today for
               custom layouts and site visits.
             </p>
@@ -90,7 +90,7 @@ const Footer = () => {
             </div>
           </Link>
 
-          <p className="text-gray-200 text-sm leading-relaxed max-w-sm">
+          <p style={{ color: "#b9bec3" }} className="!text-[#b9bec3] text-sm leading-relaxed max-w-sm">
             Omsritara Developers is a premier Chennai real estate brand dedicated
             to constructing landmark gated communities, modern apartments, and
             luxury villas with statutory excellence.
@@ -139,7 +139,7 @@ const Footer = () => {
           <h4 className="text-white text-base font-bold uppercase tracking-wider border-b border-[#e29717]/40 pb-2 w-fit">
             Quick Navigation
           </h4>
-          <ul className="space-y-2.5 text-sm text-gray-200">
+          <ul className="space-y-2.5 text-sm text-white/95">
             {[
               { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
@@ -152,7 +152,7 @@ const Footer = () => {
                 <Link
                   href={link.href}
                   className={`transition-colors hover:text-yellow-300 flex items-center gap-1.5 ${
-                    isActive(link.href) ? "text-yellow-400 font-bold" : ""
+                    isActive(link.href) ? "text-yellow-400 font-bold" : "text-white/90"
                   }`}
                 >
                   <span>›</span>
@@ -169,10 +169,10 @@ const Footer = () => {
             Head Office
           </h4>
 
-          <div className="space-y-3.5 text-sm text-gray-200">
+          <div className="space-y-3.5 text-sm text-white/95">
             <div className="flex items-start gap-3">
               <MapPin className="text-[#e29717] w-5 h-5 mt-0.5 shrink-0" />
-              <p className="leading-relaxed">
+              <p style={{ color: "#b9bec3" }} className="leading-relaxed !text-[#b9bec3]">
                 Second Floor, North Side, 46 Giri Rd, T. Nagar, Chennai, Tamil
                 Nadu 600017
               </p>
@@ -182,7 +182,7 @@ const Footer = () => {
               <Phone className="text-[#e29717] w-4 h-4 shrink-0" />
               <Link
                 href="tel:+917779958889"
-                className="hover:text-yellow-300 transition font-semibold"
+                className="hover:text-yellow-300 transition font-semibold text-white"
               >
                 +91 77799 58889
               </Link>
@@ -192,7 +192,7 @@ const Footer = () => {
               <Mail className="text-[#e29717] w-4 h-4 shrink-0" />
               <Link
                 href="mailto:info@omsritaradevelopers.in"
-                className="hover:text-yellow-300 transition break-all"
+                className="hover:text-yellow-300 transition break-all text-white font-medium"
               >
                 info@omsritaradevelopers.in
               </Link>
@@ -203,8 +203,8 @@ const Footer = () => {
 
       {/* ================= COPYRIGHT AREA ================= */}
       <div className="bg-black/25 border-t border-white/10 py-5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs text-gray-300">
-          <p>
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs text-white/90">
+          <p style={{ color: "#b9bec3" }} className="!text-[#b9bec3]">
             © {new Date().getFullYear()} Omsritara Developers. All Rights
             Reserved.
           </p>

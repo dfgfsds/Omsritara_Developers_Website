@@ -376,7 +376,7 @@ export default function PropertiesPage() {
             Apartments in <span className="text-[#e29717]">Chennai</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/95 leading-relaxed font-normal">
             Explore premium gated community apartments, luxury flats and
             villas crafted with world-class amenities, prime locations, and
             timeless modern architecture.

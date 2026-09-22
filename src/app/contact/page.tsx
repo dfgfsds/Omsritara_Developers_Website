@@ -78,7 +78,7 @@ export default function ContactPage() {
             Contact <span className="text-[#e29717]">Omsritara</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/95 leading-relaxed font-normal">
             Schedule a private project visit, enquire about ongoing apartments,
             or speak directly with our senior property investment advisors.
           </p>

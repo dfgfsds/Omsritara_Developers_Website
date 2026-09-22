@@ -49,7 +49,7 @@ export default function About() {
             About <span className="text-[#e29717]">Omsritara Developers</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/95 leading-relaxed font-normal">
             Leading Chennai&apos;s real estate development through superior
             craftsmanship, statutory compliance, and modern gated community
             living.
@@ -119,14 +119,14 @@ export default function About() {
                 </h2>
               </div>
 
-              <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+              <p className="text-black leading-relaxed text-base sm:text-lg">
                 Omsritara Developers is a professionally managed real estate and infrastructure
                 development firm offering end-to-end turnkey solutions across property buying and selling,
                 architectural construction, plotted community development, property management, and statutory
                 liaisoning & approvals.
               </p>
 
-              <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+              <p className="text-black leading-relaxed text-base sm:text-lg">
                 With a steadfast commitment to delivering legally compliant, strategically planned,
                 and value-oriented real estate solutions across Chennai, we ensure our clients experience
                 transparent documentation, on-schedule handover, and long-term capital appreciation.

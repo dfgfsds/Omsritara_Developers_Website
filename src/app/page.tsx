@@ -50,7 +50,10 @@ export default function Home() {
           </h1>
 
           {/* Subtitle */}
-          <p className="max-w-3xl text-gray-100 text-base sm:text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md font-normal">
+          <p
+            style={{ color: "#ededed" }}
+            className="max-w-3xl !text-[#ededed] text-base sm:text-lg md:text-xl leading-relaxed mb-8 drop-shadow-md font-medium"
+          >
             Delivering iconic gated community apartments, luxury private villas,
             and CMDA-approved plotted developments across Chennai&apos;s prime
             growth corridors.
@@ -87,7 +90,7 @@ export default function Home() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-gray-200 text-xs font-semibold"
+                className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/15 text-white text-xs font-semibold"
               >
                 <item.icon size={15} className="text-yellow-400 flex-shrink-0" />
                 <span className="truncate">{item.label}</span>
@@ -147,14 +150,14 @@ export default function Home() {
                   <span className="text-[#9b0000]">Chennai Real Estate</span>
                 </h2>
 
-                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+                <p className="text-black leading-relaxed text-base sm:text-lg">
                   Omsritara Developer is a premier real estate and infrastructure
                   conglomerate delivering turnkey solutions across property
                   development, architectural construction, CMDA approvals, and
                   property management.
                 </p>
 
-                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+                <p className="text-black leading-relaxed text-base sm:text-lg">
                   Our projects are built upon the cornerstones of strict
                   statutory compliance, transparent dealings, structural
                   integrity, and modern aesthetic elegance tailored for discerning

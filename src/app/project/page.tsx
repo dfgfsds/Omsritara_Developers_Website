@@ -143,7 +143,7 @@ export default function ProjectPage() {
             Our Landmark <span className="text-[#e29717]">Projects</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/95 leading-relaxed font-normal">
             Discover Omsritara&apos;s signature ongoing, upcoming, and completed
             residential developments across Chennai&apos;s premier addresses.
           </p>

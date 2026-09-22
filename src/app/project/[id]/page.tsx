@@ -683,7 +683,7 @@ export default function ProjectDetailPage() {
               Project Description
             </h2>
 
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+            <p className="text-base sm:text-lg text-black leading-relaxed">
               {property.description ||
                 "No description available for this property."}
             </p>

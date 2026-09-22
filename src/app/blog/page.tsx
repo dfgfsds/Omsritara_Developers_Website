@@ -203,7 +203,7 @@ export default function BlogPage() {
             Property <span className="text-[#e29717]">Blog & Insights</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-white/95 leading-relaxed font-normal">
             Discover the latest Chennai real estate market trends, homebuyer
             checklists, architectural inspirations, and expert guidance from
             Omsritara Developers.

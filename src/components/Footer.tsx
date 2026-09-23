@@ -19,6 +19,7 @@ import {
 import Image from "next/image";
 import Logo from "../../public/assets/logo.png";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -248,13 +249,24 @@ const Footer = () => {
               href="https://wa.me/917779958889"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white/20"
+              className="inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-white/20"
               aria-label="Chat on WhatsApp"
             >
-              <PhoneCall className="w-6 h-6" />
+              <FaWhatsapp className="w-7 h-7" />
             </a>
           </li>
         </ul>
+      </div>
+
+      {/* Floating Call Button (Bottom-Left Corner) */}
+      <div className="fixed bottom-6 left-5 sm:left-6 z-50">
+        <a
+          href="tel:+917779958889"
+          className="group relative inline-flex items-center justify-center w-12 md:w-14 h-12 md:h-14 rounded-full bg-[#A5291B] hover:bg-red-800 text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-white/20"
+          aria-label="Call +91 77799 58889"
+        >
+          <PhoneCall className="w-5 h-5 md:w-6 md:h-6" />
+        </a>
       </div>
     </footer>
   );

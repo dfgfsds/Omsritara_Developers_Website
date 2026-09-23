@@ -334,9 +334,9 @@ export default function PropertiesPage() {
                     className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col sm:flex-col md:flex-row items-stretch transition hover:shadow-lg"
                   >
                     {/* Image Section */}
-                    <div className="relative  w-full md:w-72 h-56 sm:h-72 md:h-auto flex-shrink-0">
+                    <div className="relative w-full md:w-80 h-64 sm:h-72 md:h-auto md:min-h-[270px] flex-shrink-0 overflow-hidden bg-gray-100">
                       <PropertyImageSlider images={property.image_url} name={property.name} />
-                      <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-md shadow">
+                      <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-md shadow z-10">
                         For Sale
                       </span>
                     </div>
@@ -348,8 +348,8 @@ export default function PropertiesPage() {
                         <h2 className="text-xl font-semibold text-gray-800">
                           {property.name}
                         </h2>
-                        <p className="text-[#9b0000] font-bold text-2xl mt-2">
-                          ₹{property.price.toLocaleString()}
+                        <p className="text-gray-900 font-bold text-2xl mt-2">
+                          ₹{property.price.toLocaleString("en-IN")}
                         </p>
 
                         <div className="flex flex-wrap gap-7 text-gray-600 text-lg mt-3">

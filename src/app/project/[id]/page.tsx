@@ -159,15 +159,6 @@ const slugify = (value: string) =>
 const formatPrice = (price?: number, priceDisplay?: string) => {
   if (priceDisplay) return priceDisplay;
   if (!price) return "Price on Request";
-
-  if (price >= 10000000) {
-    return `₹${(price / 10000000).toFixed(2)} Cr`;
-  }
-
-  if (price >= 100000) {
-    return `₹${(price / 100000).toFixed(2)} L`;
-  }
-
   return `₹${price.toLocaleString("en-IN")}`;
 };
 
@@ -389,7 +380,7 @@ export default function ProjectDetailPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="text-3xl sm:text-4xl font-bold font-serif text-[#9b0000]">
+            <div className="text-3xl sm:text-4xl font-bold text-gray-900">
               {formatPrice(property.price, property.priceDisplay)}
             </div>
 

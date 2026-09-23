@@ -314,14 +314,6 @@ export default function PropertiesPage() {
     if (listingType === "rent") {
       return `₹${Number(price).toLocaleString("en-IN")}/mo`;
     }
-    if (price >= 10000000) {
-      const cr = (price / 10000000).toFixed(2);
-      return `Rs. ${cr.replace(/\.00$/, "")}* CR Onwards`;
-    }
-    if (price >= 100000) {
-      const lakhs = (price / 100000).toFixed(1);
-      return `Rs. ${lakhs.replace(/\.0$/, "")}* Lakhs`;
-    }
     return `₹${Number(price).toLocaleString("en-IN")}`;
   }
 
@@ -372,7 +364,7 @@ export default function PropertiesPage() {
             Ongoing & Premium Homes
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 font-serif">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
             Apartments in <span className="text-[#e29717]">Chennai</span>
           </h1>
 
@@ -500,7 +492,7 @@ export default function PropertiesPage() {
                 >
                   {/* DAC TOP HEADER: Title & Location */}
                   <div className="projtitle p-5 pb-3.5 border-b border-gray-100/80">
-                    <h3 className="text-lg sm:text-xl font-bold font-serif text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors">
                       <Link href={`/property/${slugify(property.name)}`}>
                         {property.name}
                       </Link>
@@ -539,7 +531,7 @@ export default function PropertiesPage() {
                         {bhkConfig}
                       </div>
                       <div className="text-gray-300 px-1 font-normal">|</div>
-                      <div className="flex-1 truncate text-[#9b0000] font-bold">
+                      <div className="flex-1 truncate text-gray-900 font-bold">
                         {formatPrice(property.price, property.listing_type)}
                       </div>
                       {property.area_size && (

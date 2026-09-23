@@ -119,7 +119,7 @@ export default function LatestProperties() {
               <Sparkles size={12} />
               Featured Developments
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-serif">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               Ongoing & Landmark <span className="text-[#9b0000]">Projects</span>
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -221,7 +221,7 @@ export default function LatestProperties() {
                     {/* DAC TOP: Project Name & Location from actual data */}
                     <div className="projtitle p-5 pb-3.5 border-b border-gray-100 flex flex-col gap-1">
                       <div className="flex items-center justify-between gap-2">
-                        <h3 className="text-lg font-bold font-serif text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors line-clamp-1">
+                        <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors line-clamp-1">
                           <Link href={`/project/${project.id}`}>
                             {project.name}
                           </Link>
@@ -265,7 +265,7 @@ export default function LatestProperties() {
                         <div className="text-gray-300 px-1 font-normal">|</div>
 
                         {/* 2. Actual Price or Timeline */}
-                        <div className="flex-1 truncate text-[#9b0000] font-bold">
+                        <div className="flex-1 truncate text-gray-900 font-bold">
                           {priceText}
                         </div>
 

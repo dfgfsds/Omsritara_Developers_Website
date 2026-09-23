@@ -1,27 +1,25 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import axios from "axios";
+import { Metadata } from "next";
 import {
   ArrowLeft,
   CalendarDays,
   User,
   Sparkles,
   Clock,
-  Share2,
   Phone,
-  MessageCircle,
   Building2,
   ArrowUpRight,
-  CheckCircle2,
   Bookmark,
 } from "lucide-react";
-import Link from "next/link";
-import BackButton from "@/components/BackButton";
 
 interface BlogPost {
   _id: string;
   title: string;
   image: string;
-  subtittle: string;
+  subtittle?: string;
   content: string;
   author: string;
   category?: string;
@@ -32,189 +30,6 @@ interface BlogPost {
   updatedAt: string;
 }
 
-// Fallback rich articles to ensure seamless reading experience
-const FALLBACK_BLOGS: BlogPost[] = [
-  {
-    _id: "blog-chennai-suburbs-2026",
-    title: "Why Investing in Chennai's Suburban Growth Corridors is Surging",
-    image: "/assets/about-gallery1.png",
-    subtittle:
-      "From Porur to Tambaram, Guduvanchery, and the OMR tech belt, massive infrastructure projects and Metro Phase 2 expansion are driving property appreciation.",
-    content: `
-      <h2>The Infrastructure Revolution Driving Suburban Chennai</h2>
-      <p>Chennai's urban boundary is rapidly expanding southwest and southeast. Driven by expanding IT corridors, modern manufacturing hubs, and the ambitious Chennai Metro Phase 2 network, suburban micro-markets that were once considered peripheral are now premier residential hotspots.</p>
-      
-      <blockquote>"Investors who identified suburban growth nodes 3 to 5 years ago in corridors like Porur-Kundrathur and Pallavaram-Thoraipakkam Radial Road have witnessed 40% to 65% capital appreciation."</blockquote>
-
-      <h2>Top 3 High-Growth Corridors in 2026</h2>
-      <p>Here are the corridors witnessing the strongest residential demand and infrastructure investments:</p>
-      <ul>
-        <li><strong>Porur - Mount Poonamallee Road:</strong> Proximity to major DLF IT Park, Chennai Metro Line 4 connectivity, and excellent international schools.</li>
-        <li><strong>Pallavaram - Thoraipakkam Radial Road:</strong> The vital arterial link between GST Road and OMR, surrounded by healthcare hubs and educational universities.</li>
-        <li><strong>Guduvanchery - Kilambakkam Bus Terminus Zone:</strong> With the KCBT terminus fully operational, south Chennai connectivity has received an exponential upgrade.</li>
-      </ul>
-
-      <h2>Key Checklist for Suburban Land & Flat Buyers</h2>
-      <p>Before committing to an investment in emerging suburbs, ensure your chosen development meets these critical parameters:</p>
-      <ol>
-        <li>Verify CMDA or DTCP planning approvals with unequivocal sanction orders.</li>
-        <li>Ensure verified RERA registration status on the official TNRERA portal.</li>
-        <li>Check water table sustainability and storm water drainage infrastructure.</li>
-        <li>Assess builder track record on timely handover and construction quality.</li>
-      </ol>
-
-      <p>At Omsritara Developers, all our ongoing apartment complexes and plotted developments in Chennai are 100% CMDA & DTCP approved with crystal-clear legal documentation and world-class gated community infrastructure.</p>
-    `,
-    author: "Rajan Sundaram",
-    category: "Market Trends",
-    readTime: "4 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-03-12T10:00:00.000Z",
-    updatedAt: "2026-03-12T10:00:00.000Z",
-  },
-  {
-    _id: "blog-gated-community-amenities",
-    title: "Top Gated Community Amenities Chennai Homebuyers Demand Today",
-    image: "/assets/about-gallery2.png",
-    subtittle:
-      "Modern homebuyers want more than just four walls. Explore the clubhouse innovations, co-working lounges, and wellness sanctuaries shaping luxury projects.",
-    content: `
-      <h2>The Evolution of Modern Community Living</h2>
-      <p>Today's discerning Chennai homeowner prioritizes holistic lifestyle balance. A residential project is no longer evaluated merely by square footage—amenity ecosystem, community spaces, and eco-friendly infrastructure determine long-term satisfaction and property value.</p>
-      
-      <blockquote>"A well-curated gated community clubhouse and sports infrastructure enhances rental yields by up to 25% and ensures sustained resale demand."</blockquote>
-
-      <h2>Must-Have Amenities in Luxury Developments</h2>
-      <ul>
-        <li><strong>Integrated Co-Working Spaces:</strong> High-speed Wi-Fi lounges and private meeting pods tailored for hybrid work professionals.</li>
-        <li><strong>Wellness Sanctuaries:</strong> Fully-equipped fitness clubs, temperature-regulated swimming pools, and serene yoga meditation decks.</li>
-        <li><strong>Children's Development Zones:</strong> Dedicated multi-sport turf courts, skate parks, and safe toddler play spaces.</li>
-        <li><strong>Senior Citizen Parks:</strong> Fragrant reflexology pathways, shaded gazebos, and barrier-free wheelchair access.</li>
-      </ul>
-    `,
-    author: "Priya Lakshmi",
-    category: "Luxury Living",
-    readTime: "5 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-03-08T10:00:00.000Z",
-    updatedAt: "2026-03-08T10:00:00.000Z",
-  },
-  {
-    _id: "blog-cmda-dtcp-approvals-guide",
-    title: "Understanding CMDA & DTCP Approvals Before Buying Your Dream Flat",
-    image: "/assets/about-gallery3.png",
-    subtittle:
-      "A step-by-step buyer's checklist to verify planning permits, RERA registrations, encumbrance certificates, and clear title legalities.",
-    content: `
-      <h2>Why Statutory Approvals Matter More Than Ever</h2>
-      <p>Investing in real estate is one of the largest financial decisions of a lifetime. Ensuring that your property possesses valid statutory sanctions from the Chennai Metropolitan Development Authority (CMDA) or Directorate of Town and Country Planning (DTCP) is non-negotiable.</p>
-
-      <h2>Key Legal Documents to Verify</h2>
-      <ul>
-        <li><strong>CMDA/DTCP Sanction Plan:</strong> Ensures the building layout strictly complies with Floor Space Index (FSI) and setback norms.</li>
-        <li><strong>TNRERA Registration Number:</strong> Guarantees regulatory transparency and builder accountability under the Real Estate Regulation Act.</li>
-        <li><strong>Parent Documents & 30-Year Encumbrance Certificate (EC):</strong> Confirms unambiguous, unbroken ownership title free from commercial encumbrances.</li>
-        <li><strong>Completion Certificate (CC) & Occupancy Certificate (OC):</strong> Confirms the building was constructed in full compliance with the approved plan.</li>
-      </ul>
-    `,
-    author: "K. Venkatesh",
-    category: "Buyer Guide",
-    readTime: "6 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-02-28T10:00:00.000Z",
-    updatedAt: "2026-02-28T10:00:00.000Z",
-  },
-  {
-    _id: "blog-ecr-vs-omr-lifestyle",
-    title: "East Coast Road vs OMR: Which Chennai Location Fits Your Lifestyle?",
-    image: "/assets/Myans_Luxury_Villas_1.jpg",
-    subtittle:
-      "Comparing the tranquil coastal luxury of ECR with the bustling tech-centric convenience of OMR for your next home investment.",
-    content: `
-      <h2>The Great Chennai Dilemma: Coastal Serenity or Tech Boulevard?</h2>
-      <p>Choosing between East Coast Road (ECR) and Old Mahabalipuram Road (OMR) is one of the most common dilemmas facing premium homebuyers and real estate investors in Chennai. While they run parallel to each other, their lifestyles and growth drivers offer distinct advantages.</p>
-      
-      <blockquote>"ECR offers serene coastal exclusivity and low-density luxury, while OMR delivers unmatched rental yields, arterial IT infrastructure, and urban connectivity."</blockquote>
-
-      <h2>ECR Highlights: Coastal Luxury Living</h2>
-      <ul>
-        <li><strong>Low Rise & Villa Communities:</strong> Strict coastal regulation zones (CRZ) preserve open landscapes, fresh air, and sea breezes.</li>
-        <li><strong>Weekend Rejuvenation:</strong> Immediate access to beach clubs, luxury resorts, and high-end dining destinations.</li>
-        <li><strong>Scenic Highway Expansion:</strong> Ongoing widening of ECR into a 4-lane expressway ensures smooth commute times.</li>
-      </ul>
-
-      <h2>OMR Highlights: High-Yield IT Corridor</h2>
-      <ul>
-        <li><strong>Work-Life Proximity:</strong> Walking or short driving distance to major IT parks including Tidel Park, Ascendas, and ELCOT SEZ.</li>
-        <li><strong>Chennai Metro Phase 2:</strong> Line 3 corridor along OMR promises rapid commute to central Chennai.</li>
-        <li><strong>Exceptional Rental Demand:</strong> Constant influx of tech professionals ensures strong rental yields and minimal vacancies.</li>
-      </ul>
-    `,
-    author: "Anand Natarajan",
-    category: "Neighborhoods",
-    readTime: "5 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-02-20T10:00:00.000Z",
-    updatedAt: "2026-02-20T10:00:00.000Z",
-  },
-  {
-    _id: "blog-interior-natural-light",
-    title: "Maximizing Natural Light & Cross Ventilation in Modern Apartments",
-    image: "/assets/featured-grid1.jpg",
-    subtittle:
-      "Discover architectural principles that create healthier, energy-efficient residences with generous ceiling heights and smart window orientation.",
-    content: `
-      <h2>The Health & Wellness Power of Daylighting</h2>
-      <p>In contemporary apartment architecture, daylighting and natural cross-ventilation have transitioned from aesthetic choices to fundamental health necessities. Proper airflow reduces reliance on artificial cooling, lowers electricity costs, and dramatically enhances circadian wellness.</p>
-
-      <h2>Core Architectural Strategies</h2>
-      <ul>
-        <li><strong>North-South Window Orientation:</strong> Captures indirect daylight without excessive thermal heat gain typical of Chennai afternoons.</li>
-        <li><strong>Dual-Aspect Living Rooms:</strong> Balconies positioned on opposite elevations allow refreshing sea breezes to circulate continuously.</li>
-        <li><strong>Higher Floor-to-Ceiling Clearances:</strong> Ceiling heights of 10 feet or more facilitate natural heat dissipation and create an expansive sense of luxury.</li>
-      </ul>
-    `,
-    author: "Priya Lakshmi",
-    category: "Architecture",
-    readTime: "3 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-02-14T10:00:00.000Z",
-    updatedAt: "2026-02-14T10:00:00.000Z",
-  },
-  {
-    _id: "blog-first-time-buyer-checklist",
-    title: "The Ultimate Checklist for First-Time Homebuyers in Chennai",
-    image: "/assets/about-gallery1.png",
-    subtittle:
-      "From financial budgeting and home loan pre-approvals to inspecting construction quality, here is everything you must know.",
-    content: `
-      <h2>Navigating Your First Home Purchase with Confidence</h2>
-      <p>Buying your very first home in Chennai is an exhilarating milestone. By methodically verifying paperwork, budgeting for registration overheads, and assessing structural quality, you safeguard your hard-earned capital for decades.</p>
-
-      <h2>5 Crucial Steps for First-Time Buyers</h2>
-      <ol>
-        <li><strong>Get Pre-Approved for Home Loans:</strong> Know your true budget and EMI eligibility before shortlisting properties.</li>
-        <li><strong>Budget for Stamp Duty & Registration:</strong> In Tamil Nadu, factor in ~9% to 11% for stamp duty and registration fees over the agreement value.</li>
-        <li><strong>Verify CMDA / DTCP Sanctions:</strong> Never purchase an unapproved layout or a building deviating from sanctioned plans.</li>
-        <li><strong>Inspect Amenities & Maintenance Corpus:</strong> Inquire about monthly maintenance charges and water supply infrastructure.</li>
-        <li><strong>Review Builder Track Record:</strong> Choose reputed developers with a proven history of on-time project handovers.</li>
-      </ol>
-    `,
-    author: "Rajan Sundaram",
-    category: "Buyer Guide",
-    readTime: "7 min read",
-    status: "active",
-    isDeleted: false,
-    createdAt: "2026-02-05T10:00:00.000Z",
-    updatedAt: "2026-02-05T10:00:00.000Z",
-  },
-];
-
 function slugify(text?: string) {
   return (text || "")
     .toLowerCase()
@@ -223,93 +38,155 @@ function slugify(text?: string) {
     .replace(/\s+/g, "-");
 }
 
+function getSafeImageUrl(url?: string): string {
+  if (!url) return "/assets/about-gallery1.png";
+  let safe = url.trim();
+  if (safe.startsWith("http://api.omsritaradevelopers.in")) {
+    safe = safe.replace(
+      "http://api.omsritaradevelopers.in",
+      "https://api.omsritaradevelopers.in"
+    );
+  }
+  if (safe.includes("localhost:5000")) {
+    safe = safe.replace(
+      /https?:\/\/localhost:5000/g,
+      "https://api.omsritaradevelopers.in"
+    );
+  }
+  return safe;
+}
+
+function getReadTime(content?: string, explicitTime?: string): string {
+  if (explicitTime && explicitTime.trim()) return explicitTime;
+  if (!content) return "3 min read";
+  const clean = content.replace(/<[^>]*>?/gm, "").trim();
+  const words = clean.split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.ceil(words / 180));
+  return `${minutes} min read`;
+}
+
+export const dynamic = "force-dynamic";
+
+async function fetchBlogByIdOrSlug(idOrSlug: string): Promise<BlogPost | null> {
+  const rawId = typeof idOrSlug === "string" ? idOrSlug : "";
+  const decodedId = decodeURIComponent(rawId).trim().toLowerCase();
+
+  // 1. Try direct ID fetch from API
+  try {
+    const res = await axios.get(
+      `https://api.omsritaradevelopers.in/blog/${rawId}`,
+      {
+        timeout: 10000,
+      }
+    );
+    if (
+      res?.data?.result &&
+      res.data.result.status === "active" &&
+      !res.data.result.isDeleted
+    ) {
+      return res.data.result;
+    }
+  } catch (error) {
+    // Continue to slug/list search below
+  }
+
+  // 2. Search entire blog list by ID, lowercase ID, or title slug
+  try {
+    const listRes = await axios.get("https://api.omsritaradevelopers.in/blog", {
+      timeout: 10000,
+    });
+    const list: BlogPost[] = Array.isArray(listRes?.data?.result)
+      ? listRes.data.result
+      : [];
+
+    const matched = list.find(
+      (b) =>
+        b &&
+        b.status === "active" &&
+        !b.isDeleted &&
+        (b._id === rawId ||
+          b._id.toLowerCase() === decodedId ||
+          slugify(b.title) === decodedId ||
+          slugify(b.title) === rawId.toLowerCase())
+    );
+
+    if (matched) return matched;
+  } catch (error) {
+    console.error("Error fetching blog list fallback:", error);
+  }
+
+  return null;
+}
+
+async function fetchDynamicRelatedPosts(currentId: string): Promise<BlogPost[]> {
+  try {
+    const res = await axios.get("https://api.omsritaradevelopers.in/blog", {
+      timeout: 10000,
+    });
+    const list: BlogPost[] = Array.isArray(res?.data?.result)
+      ? res.data.result
+      : [];
+
+    return list
+      .filter(
+        (b) =>
+          b &&
+          b.status === "active" &&
+          !b.isDeleted &&
+          b._id !== currentId
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+      .slice(0, 4);
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const post = await fetchBlogByIdOrSlug(id);
+
+  if (!post) {
+    return {
+      title: "Blog Article | Omsritara Developers",
+    };
+  }
+
+  const safeImg = getSafeImageUrl(post.image);
+
+  return {
+    title: `${post.title} | Omsritara Developers Blog`,
+    description: post.subtittle || post.title,
+    openGraph: {
+      title: post.title,
+      description: post.subtittle || post.title,
+      images: [safeImg],
+    },
+  };
+}
+
 export default async function BlogDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const rawId = typeof id === "string" ? id : "";
-  const decodedId = decodeURIComponent(rawId).trim().toLowerCase();
-
-  let post: BlogPost | null = null;
-
-  // 1. Try fetching specific blog from API with safe timeout
-  try {
-    const response = await fetch(
-      `https://api.omsritaradevelopers.in/blog/${rawId}`,
-      {
-        cache: "no-store",
-        signal: AbortSignal.timeout(8000),
-      }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      if (
-        data.result &&
-        data.result.status === "active" &&
-        !data.result.isDeleted
-      ) {
-        post = data.result;
-      }
-    }
-  } catch (error) {
-    // Handled below
-  }
-
-  // 2. If not found or API failed, search full blog list from API
-  if (!post) {
-    try {
-      const listRes = await fetch("https://api.omsritaradevelopers.in/blog", {
-        cache: "no-store",
-        signal: AbortSignal.timeout(8000),
-      });
-      if (listRes.ok) {
-        const listData = await listRes.json();
-        const activeList: BlogPost[] = Array.isArray(listData.result)
-          ? listData.result.filter(
-              (b: BlogPost) => b.status === "active" && !b.isDeleted
-            )
-          : [];
-        post =
-          activeList.find(
-            (b) =>
-              b._id === rawId ||
-              b._id.toLowerCase() === decodedId ||
-              slugify(b.title) === decodedId ||
-              slugify(b.title) === rawId.toLowerCase()
-          ) || null;
-      }
-    } catch (error) {
-      // Handled below
-    }
-  }
-
-  // 3. If still not found, check local fallback articles
-  if (!post) {
-    post =
-      FALLBACK_BLOGS.find(
-        (b) =>
-          b._id === rawId ||
-          b._id.toLowerCase() === decodedId ||
-          slugify(b.title) === decodedId ||
-          slugify(b.title) === rawId.toLowerCase()
-      ) || null;
-  }
+  const post = await fetchBlogByIdOrSlug(id);
 
   if (!post) {
     notFound();
   }
 
-  // Clean image URL: replace any accidental localhost references with production API host
-  let displayImage = post.image || "/assets/about-gallery1.png";
-  if (displayImage.includes("localhost:5000")) {
-    displayImage = displayImage.replace(
-      /https?:\/\/localhost:5000/g,
-      "https://api.omsritaradevelopers.in"
-    );
-  }
+  const displayImage = getSafeImageUrl(post.image);
+  const readingTime = getReadTime(post.content, post.readTime);
+  const categoryName = post.category || "Property Insights";
 
   const formattedDate = new Date(post.createdAt).toLocaleDateString("en-IN", {
     day: "2-digit",
@@ -317,11 +194,19 @@ export default async function BlogDetailPage({
     year: "numeric",
   });
 
-  const categoryName = post.category || "Property Insights";
-  const readingTime = post.readTime || "5 min read";
+  // Dynamic related posts from the real API
+  const relatedPosts = await fetchDynamicRelatedPosts(post._id);
 
-  // Related posts for sidebar
-  const relatedPosts = FALLBACK_BLOGS.filter((b) => b._id !== post?._id).slice(0, 3);
+  // Check if content is HTML or plain text
+  const isHtml = /<[a-z][\s\S]*>/i.test(post.content || "");
+
+  // If plain text, break into readable paragraphs
+  const plainTextParagraphs = !isHtml
+    ? (post.content || "")
+        .split(/\n\s*\n|\n/)
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0)
+    : [];
 
   return (
     <div className="bg-[#fafafa] min-h-screen font-sans">
@@ -381,7 +266,7 @@ export default async function BlogDetailPage({
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 bg-gray-50 px-3.5 py-1.5 rounded-full border border-gray-100 font-medium text-gray-700">
                   <User size={15} className="text-[#9b0000]" />
-                  <span>{post.author}</span>
+                  <span>{post.author || "Omsritara"}</span>
                 </div>
 
                 <div className="flex items-center gap-2 bg-gray-50 px-3.5 py-1.5 rounded-full border border-gray-100">
@@ -396,98 +281,111 @@ export default async function BlogDetailPage({
               </div>
             </div>
 
-            {/* Lead Summary Callout */}
-            <div className="my-8 p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-red-50/80 via-amber-50/50 to-white border-l-4 border-[#9b0000] text-gray-900 text-lg sm:text-xl leading-relaxed font-medium shadow-xs">
-              {post.subtittle}
-            </div>
+            {/* Lead Subtitle / Excerpt Callout */}
+            {post.subtittle && post.subtittle.trim().length > 0 && (
+              <div className="my-8 p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-red-50/80 via-amber-50/50 to-white border-l-4 border-[#9b0000] text-gray-900 text-lg sm:text-xl leading-relaxed font-medium shadow-xs">
+                {post.subtittle}
+              </div>
+            )}
 
-            {/* Featured Image - Balanced Height Constraint */}
-            <div className="relative aspect-[16/9] max-h-[440px] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-md mb-10">
+            {/* Featured Image */}
+            <div className="relative aspect-[16/9] max-h-[460px] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-md mb-10">
               <Image
                 src={displayImage}
                 alt={post.title}
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 800px"
                 className="object-cover"
               />
             </div>
 
-            {/* Article Content with Elevated Typography */}
-            <article
-              className="
-                blog-content
-                text-[17px]
-                sm:text-[18px]
-                leading-8
-                text-gray-800
-                [&_h2]:text-2xl
-                sm:[&_h2]:text-3xl
-                [&_h2]:font-bold
-                [&_h2]:font-serif
-                [&_h2]:text-gray-900
-                [&_h2]:mt-10
-                [&_h2]:mb-4
-                [&_h2]:pt-2
+            {/* Article Content */}
+            {isHtml ? (
+              <article
+                className="
+                  blog-content
+                  text-[17px]
+                  sm:text-[18px]
+                  leading-8
+                  text-gray-800
+                  [&_h2]:text-2xl
+                  sm:[&_h2]:text-3xl
+                  [&_h2]:font-bold
+                  [&_h2]:font-serif
+                  [&_h2]:text-gray-900
+                  [&_h2]:mt-10
+                  [&_h2]:mb-4
+                  [&_h2]:pt-2
 
-                [&_h3]:text-xl
-                sm:[&_h3]:text-2xl
-                [&_h3]:font-bold
-                [&_h3]:text-gray-900
-                [&_h3]:mt-8
-                [&_h3]:mb-3
+                  [&_h3]:text-xl
+                  sm:[&_h3]:text-2xl
+                  [&_h3]:font-bold
+                  [&_h3]:text-gray-900
+                  [&_h3]:mt-8
+                  [&_h3]:mb-3
 
-                [&_p]:mb-6
-                [&_p]:leading-relaxed
+                  [&_p]:mb-6
+                  [&_p]:leading-relaxed
 
-                [&_strong]:font-bold
-                [&_strong]:text-gray-900
+                  [&_strong]:font-bold
+                  [&_strong]:text-gray-900
 
-                [&_ul]:mb-6
-                [&_ul]:space-y-2.5
-                [&_ul]:list-disc
-                [&_ul]:pl-6
-                [&_ul]:text-gray-700
+                  [&_ul]:mb-6
+                  [&_ul]:space-y-2.5
+                  [&_ul]:list-disc
+                  [&_ul]:pl-6
+                  [&_ul]:text-gray-700
 
-                [&_ol]:mb-6
-                [&_ol]:space-y-2.5
-                [&_ol]:list-decimal
-                [&_ol]:pl-6
-                [&_ol]:text-gray-700
+                  [&_ol]:mb-6
+                  [&_ol]:space-y-2.5
+                  [&_ol]:list-decimal
+                  [&_ol]:pl-6
+                  [&_ol]:text-gray-700
 
-                [&_li]:leading-relaxed
+                  [&_li]:leading-relaxed
 
-                [&_blockquote]:my-8
-                [&_blockquote]:border-l-4
-                [&_blockquote]:border-[#9b0000]
-                [&_blockquote]:bg-gray-50
-                [&_blockquote]:rounded-r-2xl
-                [&_blockquote]:p-6
-                [&_blockquote]:text-gray-900
-                [&_blockquote]:font-serif
-                [&_blockquote]:text-lg
-                [&_blockquote]:italic
-                [&_blockquote]:leading-relaxed
-              "
-              dangerouslySetInnerHTML={{
-                __html: post.content || "",
-              }}
-            />
+                  [&_blockquote]:my-8
+                  [&_blockquote]:border-l-4
+                  [&_blockquote]:border-[#9b0000]
+                  [&_blockquote]:bg-gray-50
+                  [&_blockquote]:rounded-r-2xl
+                  [&_blockquote]:p-6
+                  [&_blockquote]:text-gray-900
+                  [&_blockquote]:font-serif
+                  [&_blockquote]:text-lg
+                  [&_blockquote]:italic
+                  [&_blockquote]:leading-relaxed
+                "
+                dangerouslySetInnerHTML={{
+                  __html: post.content || "",
+                }}
+              />
+            ) : (
+              <article className="blog-content text-[17px] sm:text-[18px] leading-8 text-gray-800 space-y-6">
+                {plainTextParagraphs.map((para, idx) => (
+                  <p key={idx} className="leading-relaxed text-gray-800">
+                    {para}
+                  </p>
+                ))}
+              </article>
+            )}
 
             {/* Author Profile Bio Box */}
             <div className="mt-12 p-6 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
               <div className="w-14 h-14 rounded-2xl bg-[#9b0000] text-white flex items-center justify-center font-serif text-2xl font-bold flex-shrink-0 shadow-md">
-                {post.author.charAt(0)}
+                {(post.author || "O").charAt(0).toUpperCase()}
               </div>
               <div>
                 <span className="text-xs uppercase font-bold tracking-wider text-[#9b0000]">
-                  Published By Author
+                  Published By
                 </span>
                 <h4 className="text-lg font-bold text-gray-900 mt-0.5">
-                  {post.author}
+                  {post.author || "Omsritara Developers"}
                 </h4>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
-                  Real Estate Research & Property Advisory Specialist at Omsritara Developers,
-                  analyzing Chennai market dynamics, RERA compliance, and urban infrastructure developments.
+                  Real Estate Research & Property Advisory Team at Omsritara Developers,
+                  providing Chennai market insights, infrastructure updates, and luxury homebuyer guidance.
                 </p>
               </div>
             </div>
@@ -550,44 +448,55 @@ export default async function BlogDetailPage({
               </div>
             </div>
 
-            {/* Widget 2: Trending / Recent Articles */}
-            <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-              <h4 className="text-base font-bold text-gray-900 font-serif uppercase tracking-wider mb-5 pb-2 border-b border-gray-100 flex items-center gap-2">
-                <Bookmark size={16} className="text-[#9b0000]" />
-                <span>Trending Insights</span>
-              </h4>
+            {/* Widget 2: Dynamic Trending / Recent Articles from API */}
+            {relatedPosts.length > 0 && (
+              <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+                <h4 className="text-base font-bold text-gray-900 font-serif uppercase tracking-wider mb-5 pb-2 border-b border-gray-100 flex items-center gap-2">
+                  <Bookmark size={16} className="text-[#9b0000]" />
+                  <span>Trending Insights</span>
+                </h4>
 
-              <div className="space-y-5">
-                {relatedPosts.map((related) => (
-                  <Link
-                    key={related._id}
-                    href={`/blog/${related._id}`}
-                    className="group flex gap-3.5 items-start"
-                  >
-                    <div className="relative w-18 h-18 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                      <Image
-                        src={related.image || "/assets/about-gallery1.png"}
-                        alt={related.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-108"
-                      />
-                    </div>
+                <div className="space-y-5">
+                  {relatedPosts.map((related) => {
+                    const relatedImg = getSafeImageUrl(related.image);
+                    const relatedReadTime = getReadTime(
+                      related.content,
+                      related.readTime
+                    );
 
-                    <div className="flex-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#9b0000] block mb-1">
-                        {related.category || "Property"}
-                      </span>
-                      <h5 className="text-xs sm:text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#9b0000] transition-colors">
-                        {related.title}
-                      </h5>
-                      <span className="text-[11px] text-gray-400 mt-1 block">
-                        {related.readTime || "4 min read"}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                    return (
+                      <Link
+                        key={related._id}
+                        href={`/blog/${related._id}`}
+                        className="group flex gap-3.5 items-start"
+                      >
+                        <div className="relative w-18 h-18 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+                          <Image
+                            src={relatedImg}
+                            alt={related.title}
+                            fill
+                            sizes="72px"
+                            className="object-cover transition-transform duration-500 group-hover:scale-108"
+                          />
+                        </div>
+
+                        <div className="flex-1">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#9b0000] block mb-1">
+                            {related.category || "Insight"}
+                          </span>
+                          <h5 className="text-xs sm:text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#9b0000] transition-colors">
+                            {related.title}
+                          </h5>
+                          <span className="text-[11px] text-gray-400 mt-1 block">
+                            {relatedReadTime}
+                          </span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Widget 3: Ongoing Projects Banner */}
             <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-center">

@@ -190,7 +190,7 @@ const PropertyCardImage = ({ property }: { property: Property }) => {
 
   return (
     <div
-      className="relative h-64 w-full overflow-hidden cursor-pointer group/img"
+      className="relative h-56 sm:h-60 w-full overflow-hidden cursor-pointer group/img"
       onMouseEnter={() => {
         if (swiperInstance && swiperInstance.autoplay) {
           swiperInstance.autoplay.start();
@@ -222,13 +222,13 @@ const PropertyCardImage = ({ property }: { property: Property }) => {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full bg-gray-100 overflow-hidden">
               <Image
                 src={img}
                 alt={`${property.name} - ${index + 1}`}
                 fill
                 unoptimized
-                className="object-cover transition-transform duration-700 group-hover/img:scale-108"
+                className="object-cover object-center transition-transform duration-700 group-hover/img:scale-105"
               />
             </div>
           </SwiperSlide>

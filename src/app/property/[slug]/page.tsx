@@ -742,58 +742,47 @@ export default function PropertyDetailPage() {
       </section>
 
       <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           <PropertyGallery images={images} />
 
           <div className="border-t border-gray-100">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto]">
-              <div className="p-5 sm:p-7">
-                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
-                  Property Price
-                </p>
+            <div className="p-5 sm:p-7">
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-gray-400">
+                Property Price
+              </p>
 
-                <div className="flex flex-wrap items-end gap-3">
-                  <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                    ₹ {property.price?.toLocaleString("en-IN") || "-"}
-                  </h2>
-
-                  {property.price_per_sqft && (
-                    <span className="pb-1 text-sm text-gray-500">
-                      ₹{" "}
-                      {property.price_per_sqft.toLocaleString("en-IN")} /{" "}
-                      {property.area_unit || "sqft"}
-                    </span>
-                  )}
+              <div className="flex flex-wrap items-end gap-3">
+                <div className="text-3xl font-bold font-sans text-[#9b0000] sm:text-4xl">
+                  ₹ {property.price?.toLocaleString("en-IN") || "-"}
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {property.listing_type && (
-                    <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium capitalize text-gray-700">
-                      {formatText(property.listing_type)}
-                    </span>
-                  )}
-
-                  {property.type?.name && (
-                    <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700">
-                      {property.type.name}
-                    </span>
-                  )}
-
-                  {locationPincode && (
-                    <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700">
-                      PIN {locationPincode}
-                    </span>
-                  )}
-                </div>
+                {property.price_per_sqft && (
+                  <span className="pb-1 text-sm text-gray-500 font-sans">
+                    ₹{" "}
+                    {property.price_per_sqft.toLocaleString("en-IN")} /{" "}
+                    {property.area_unit || "sqft"}
+                  </span>
+                )}
               </div>
 
-              <div className="flex items-center border-t border-gray-100 p-5 lg:border-l lg:border-t-0 sm:p-7">
-                <div className="rounded-xl bg-[#9b0000]/5 px-5 py-4">
-                  <p className="text-xs text-gray-500">Property ID</p>
-                  <p className="mt-1 max-w-[170px] truncate text-sm font-semibold text-gray-800">
-                    {property._id}
-                  </p>
-                </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {property.listing_type && (
+                  <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium capitalize text-gray-700">
+                    {formatText(property.listing_type)}
+                  </span>
+                )}
+
+                {property.type?.name && (
+                  <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700">
+                    {property.type.name}
+                  </span>
+                )}
+
+                {locationPincode && (
+                  <span className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700">
+                    PIN {locationPincode}
+                  </span>
+                )}
               </div>
             </div>
           </div>

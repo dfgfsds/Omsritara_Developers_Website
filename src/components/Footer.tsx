@@ -145,7 +145,6 @@ const Footer = () => {
               { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
               { label: "Ongoing Properties", href: "/properties" },
-              { label: "Landmark Projects", href: "/project" },
               { label: "Property Blog", href: "/blog" },
               { label: "Contact Us", href: "/contact" },
             ].map((link) => (

@@ -19,18 +19,18 @@ function PropertyImageSlider({ images, name }: PropertySliderProps) {
     });
 
     return (
-        <div ref={sliderRef} className="keen-slider h-full w-full">
+        <div ref={sliderRef} className="keen-slider h-full w-full rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden bg-gray-100">
             {validImages.map((img, i) => (
                 <div
                     key={i}
-                    className="keen-slider__slide relative w-full h-64 sm:h-72 md:h-full min-h-[250px]"
+                    className="keen-slider__slide relative w-full h-full min-h-[220px] overflow-hidden"
                 >
                     <Image
                         src={img}
                         alt={`${name}-${i}`}
                         fill
                         unoptimized
-                        className="object-cover rounded-t-xl md:rounded-l-xl md:rounded-tr-none"
+                        className="object-cover object-center"
                     />
                 </div>
             ))}

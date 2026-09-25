@@ -334,7 +334,7 @@ export default function PropertiesPage() {
                     className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col sm:flex-col md:flex-row items-stretch transition hover:shadow-lg"
                   >
                     {/* Image Section */}
-                    <div className="relative w-full md:w-80 h-64 sm:h-72 md:h-auto md:min-h-[270px] flex-shrink-0 overflow-hidden bg-gray-100">
+                    <div className="relative w-full md:w-80 h-56 sm:h-64 md:h-64 flex-shrink-0 overflow-hidden bg-gray-100">
                       <PropertyImageSlider images={property.image_url} name={property.name} />
                       <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-md shadow z-10">
                         For Sale

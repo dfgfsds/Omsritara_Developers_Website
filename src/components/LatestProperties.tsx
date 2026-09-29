@@ -19,8 +19,10 @@ import "swiper/css/effect-fade";
 
 type CategoryFilter = "all" | "apartments" | "villas" | "sale";
 
-function slugify(text: string) {
+function slugify(text?: string) {
+  if (!text) return "";
   return text
+    .toString()
     .toLowerCase()
     .trim()
     .replace(/[^\w\s-]/g, "")
@@ -84,7 +86,7 @@ const PropertyCardImage = ({ property }: { property: PropertyItem }) => {
             <div className="relative w-full h-full bg-gray-100 overflow-hidden">
               <Image
                 src={img}
-                alt={`${property.name} - ${index + 1}`}
+                alt={`${property.name || "Property"} - ${index + 1}`}
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover/img:scale-105"
                 unoptimized
@@ -129,7 +131,7 @@ export default function LatestProperties() {
           ? res.data.result
           : [];
         if (data.length > 0) {
-          const valid = data.filter((item: any) => !item.isDeleted);
+          const valid = data.filter((item: any) => item && !item.isDeleted && item.name);
           if (valid.length > 0) {
             setProperties(valid);
           }
@@ -281,8 +283,8 @@ export default function LatestProperties() {
                     <div className="projtitle p-5 pb-3.5 border-b border-gray-100 flex flex-col gap-1">
                       <div className="flex items-center justify-between gap-2">
                         <h3 className="text-lg font-bold text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors line-clamp-1">
-                          <Link href={`/property/${slugify(property.name)}`}>
-                            {property.name}
+                          <Link href={`/property/${property.name ? slugify(property.name) : property._id}`}>
+                            {property.name || "Featured Property"}
                           </Link>
                         </h3>
 
@@ -346,7 +348,7 @@ export default function LatestProperties() {
 
                       {/* CTA Button */}
                       <Link
-                        href={`/property/${slugify(property.name)}`}
+                        href={`/property/${property.name ? slugify(property.name) : property._id}`}
                         className="w-full relative group/btn overflow-hidden flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#9b0000] hover:bg-[#800000] shadow-sm transition-all duration-300 mt-auto"
                       >
                         <span className="relative z-10 transition-transform duration-300 group-hover/btn:-translate-x-0.5">

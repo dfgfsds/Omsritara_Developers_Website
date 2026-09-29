@@ -33,8 +33,10 @@ import EnquiryForm from "./EnquiryForm";
 import PropertyGallery from "./PropertyGallery";
 import { useParams } from "next/navigation";
 
-function slugify(text: string) {
+function slugify(text?: string) {
+  if (!text) return "";
   return text
+    .toString()
     .toLowerCase()
     .trim()
     .replace(/[^\w\s-]/g, "")

@@ -23,7 +23,7 @@ type FilterType = "all" | "sale" | "rent";
 
 export interface Property {
   _id: string;
-  name: string;
+  name?: string;
   description?: string;
   image_url?: string[];
   listing_type?: string;
@@ -225,7 +225,7 @@ const PropertyCardImage = ({ property }: { property: Property }) => {
             <div className="relative w-full h-full bg-gray-100 overflow-hidden">
               <Image
                 src={img}
-                alt={`${property.name} - ${index + 1}`}
+                alt={`${property.name || "Property"} - ${index + 1}`}
                 fill
                 unoptimized
                 className="object-cover object-center transition-transform duration-700 group-hover/img:scale-105"
@@ -282,7 +282,7 @@ export default function PropertiesPage() {
           : [];
 
         const activeProperties = [...data].filter(
-          (property: Property) => !property?.isDeleted
+          (property: Property) => property && !property?.isDeleted && property?.name
         );
 
         if (activeProperties.length > 0) {
@@ -301,8 +301,10 @@ export default function PropertiesPage() {
     fetchProperties();
   }, []);
 
-  function slugify(text: string) {
+  function slugify(text?: string) {
+    if (!text) return "";
     return text
+      .toString()
       .toLowerCase()
       .trim()
       .replace(/[^\w\s-]/g, "")
@@ -493,8 +495,8 @@ export default function PropertiesPage() {
                   {/* DAC TOP HEADER: Title & Location */}
                   <div className="projtitle p-5 pb-3.5 border-b border-gray-100/80">
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug group-hover:text-[#9b0000] transition-colors">
-                      <Link href={`/property/${slugify(property.name)}`}>
-                        {property.name}
+                      <Link href={`/property/${property.name ? slugify(property.name) : property._id}`}>
+                        {property.name || "Featured Property"}
                       </Link>
                     </h3>
 
@@ -546,7 +548,7 @@ export default function PropertiesPage() {
 
                     {/* DAC Experience the Home CTA Button */}
                     <Link
-                      href={`/property/${slugify(property.name)}`}
+                      href={`/property/${property.name ? slugify(property.name) : property._id}`}
                       className="w-full relative group/btn overflow-hidden flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#9b0000] hover:bg-[#800000] shadow-sm hover:shadow-md transition-all duration-300 mt-auto"
                     >
                       <span className="relative z-10 transition-transform duration-300 group-hover/btn:-translate-x-0.5">

@@ -62,10 +62,10 @@ export default function Home() {
           {/* Action CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/project"
+              href="/properties"
               className="relative inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider text-gray-950 bg-gradient-to-r from-yellow-400 via-yellow-500 to-[#e29717] hover:from-yellow-300 hover:to-yellow-400 shadow-[0_4px_20px_rgba(226,151,23,0.4)] hover:shadow-[0_6px_25px_rgba(226,151,23,0.6)] transition-all duration-300 hover:-translate-y-0.5 group"
             >
-              <span>Explore Projects</span>
+              <span>Explore Properties</span>
               <span className="w-6 h-6 rounded-full bg-black/15 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
                 <ArrowUpRight size={14} className="text-gray-950 stroke-[2.5]" />
               </span>

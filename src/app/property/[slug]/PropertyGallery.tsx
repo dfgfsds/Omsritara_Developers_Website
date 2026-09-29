@@ -53,33 +53,32 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
 
   return (
     <div className="w-full">
-      {/* ================= FULL VIEW MAIN IMAGE (NO SIDE GAPS) ================= */}
+      {/* ================= MAIN PROPERTY IMAGE GALLERY ================= */}
       <div
         onClick={() => setIsLightboxOpen(true)}
-        className="group relative w-full h-[320px] sm:h-[420px] md:h-[500px] lg:h-[560px] overflow-hidden bg-gray-950 cursor-pointer select-none"
+        className="group relative w-full aspect-[16/10] max-h-[460px] overflow-hidden bg-gray-100 cursor-pointer select-none flex items-center justify-center"
       >
-        <Image
+        <img
           src={validImages[activeImg]}
           alt={`Property image ${activeImg + 1}`}
-          fill
-          priority
-          unoptimized
-          sizes="(max-width: 768px) 100vw, 1280px"
-          className="object-cover transition-transform duration-700 group-hover:scale-102"
+          className="w-full h-full object-cover object-center select-none transition-all duration-500 group-hover:scale-[1.01]"
         />
-
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/25 pointer-events-none" />
 
         {/* Counter Badge (Top Left) */}
         <div className="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-semibold shadow-sm">
           {activeImg + 1} / {validImages.length} Photos
         </div>
 
-        {/* Enlarge Hint Badge (Top Right) */}
-        <div className="absolute top-4 right-4 z-20 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-xs font-medium transition group-hover:scale-105 shadow-sm">
-          <Maximize2 size={13} />
-          <span>Full View</span>
+        {/* Action Badges (Top Right) */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+          {/* Enlarge Hint Badge */}
+          <button
+            onClick={() => setIsLightboxOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-black/85 backdrop-blur-md text-white text-xs font-medium transition group-hover:scale-105 shadow-sm cursor-pointer"
+          >
+            <Maximize2 size={13} />
+            <span>Full View</span>
+          </button>
         </div>
 
         {/* Prev / Next Navigation Arrows */}

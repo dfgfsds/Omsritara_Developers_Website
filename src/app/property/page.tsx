@@ -48,8 +48,10 @@ export default function PropertiesPage() {
     slides: { perView: 1, spacing: 5 },
   });
 
-  function slugify(text: string) {
+  function slugify(text?: string) {
+    if (!text) return "";
     return text
+      .toString()
       .toLowerCase()
       .trim()
       .replace(/[^\w\s-]/g, "")
@@ -60,7 +62,8 @@ export default function PropertiesPage() {
     const fetchProperties = async () => {
       try {
         const res = await axios.get("https://api.omsritaradevelopers.in/property");
-        setProperties(res?.data.result);
+        const data = Array.isArray(res?.data?.result) ? res.data.result : [];
+        setProperties(data.filter((p: any) => p && !p.isDeleted && p.name));
       } catch (err) {
         console.error("Error fetching properties:", err);
       } finally {
@@ -334,7 +337,7 @@ export default function PropertiesPage() {
                     className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col sm:flex-col md:flex-row items-stretch transition hover:shadow-lg"
                   >
                     {/* Image Section */}
-                    <div className="relative w-full md:w-80 h-64 sm:h-72 md:h-auto md:min-h-[270px] flex-shrink-0 overflow-hidden bg-gray-100">
+                    <div className="relative w-full md:w-80 h-56 sm:h-64 md:h-64 flex-shrink-0 overflow-hidden bg-gray-100">
                       <PropertyImageSlider images={property.image_url} name={property.name} />
                       <span className="absolute top-3 left-3 bg-blue-500 text-white text-xs px-3 py-1 rounded-md shadow z-10">
                         For Sale
@@ -346,15 +349,15 @@ export default function PropertiesPage() {
                     <div className="flex-1 flex flex-col justify-between p-5">
                       <div>
                         <h2 className="text-xl font-semibold text-gray-800">
-                          {property.name}
+                          {property.name || "Featured Property"}
                         </h2>
                         <p className="text-gray-900 font-bold text-2xl mt-2">
-                          ₹{property.price.toLocaleString("en-IN")}
+                          ₹{property.price ? property.price.toLocaleString("en-IN") : "Price on Request"}
                         </p>
 
                         <div className="flex flex-wrap gap-7 text-gray-600 text-lg mt-3">
                           <span className="flex items-center gap-2">
-                            <Ruler size={22} /> {property.area_size} Sqft
+                            <Ruler size={22} /> {property.area_size || 0} Sqft
                           </span>
                         </div>
                       </div>
@@ -364,10 +367,12 @@ export default function PropertiesPage() {
                       <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <p className="flex items-center gap-2 text-gray-500 text-base">
                           <MapPin size={18} />{" "}
-                          {`${property.location.address}, ${property.location.city}, ${property.location.state}`}
+                          {property.location
+                            ? [property.location.address, property.location.city, property.location.state].filter(Boolean).join(", ")
+                            : "Chennai, Tamil Nadu"}
                         </p>
 
-                        <Link href={`/property/${slugify(property.name)}`}>
+                        <Link href={`/property/${property.name ? slugify(property.name) : property._id}`}>
                           <button
                             type="submit"
                             className="flex justify-center gap-2 items-center shadow-xl text-base sm:text-lg text-amber-50 bg-red-800 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group cursor-pointer"

@@ -50,7 +50,8 @@ const FeaturedProperties = () => {
           ? res.data.result
           : [];
 
-        const sortedData = [...data].sort(
+        const valid = data.filter((item: any) => item && !item.isDeleted && item.name);
+        const sortedData = [...valid].sort(
           (a, b) =>
             new Date(b.createdAt).getTime() -
             new Date(a.createdAt).getTime()
@@ -84,8 +85,10 @@ const FeaturedProperties = () => {
     return () => clearInterval(interval);
   }, [instanceRef, properties]);
 
-  function slugify(text: string) {
+  function slugify(text?: string) {
+    if (!text) return "";
     return text
+      .toString()
       .toLowerCase()
       .trim()
       .replace(/[^\w\s-]/g, "")
@@ -145,9 +148,7 @@ const FeaturedProperties = () => {
                   <div className="p-3 sm:p-4">
                     <div className="flex justify-between items-center gap-2">
                       <Link
-                        href={`/properties/${slugify(
-                          property?.name || "property"
-                        )}`}
+                        href={`/property/${property?.name ? slugify(property.name) : property?._id}`}
                       >
                         <h3 className="text-base sm:text-lg font-semibold hover:underline">
                           {property?.name || "Property"}

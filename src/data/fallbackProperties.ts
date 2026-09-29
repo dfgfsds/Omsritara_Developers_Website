@@ -1,6 +1,6 @@
 export interface PropertyItem {
   _id: string;
-  name: string;
+  name?: string;
   description?: string;
   image_url?: string[];
   listing_type?: string;
